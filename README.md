@@ -1,1 +1,1 @@
-# App-de-Eventos
+# Aplicativo de locação de quadras esportivas
