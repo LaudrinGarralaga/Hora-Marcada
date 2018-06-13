@@ -32,7 +32,7 @@
 <div class='col-sm-12'>
     @if (count($reservas)==0)
     <div class="alert alert-danger">
-        Não há horários com os filtros informados...
+        Nome informado não possui reserva...
     </div>
 
     @endif    
@@ -75,11 +75,10 @@
 
                 </td>
             </tr>
-
             @endforeach        
         </tbody>
     </table>    
     {{ $reservas->links() }}
+    <div class="box-footer"></div>
 </div>
-
 @stop

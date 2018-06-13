@@ -33,7 +33,7 @@
 <div class='col-sm-12'>
     @if (count($permanentes)==0)
     <div class="alert alert-danger">
-        Não há horários com os filtros informados...
+        Nome informado não possui reserva...
     </div>
 
     @endif    
@@ -78,11 +78,10 @@
 
                 </td>
             </tr>
-
             @endforeach        
         </tbody>
     </table>    
     {{ $permanentes->links() }}
+    <div class="box-footer"></div>
 </div>
-
 @stop

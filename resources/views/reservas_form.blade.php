@@ -91,16 +91,15 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="hora">Horário:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                        <input type="text" class="form-control" id="hora"
-                               name="hora" placeholder="Seleciona o horário da reserva"
-                               value="{{$reg->hora or old('hora')}}"
-                               required>
-                    </div>
+                    <label for="horarios_id">Horário:</label>
+                    <select class="form-control" id="hora_id" name="horarios_id">
+                        @foreach ($horarios as $horario)
+                        <option value="{{$horario->id}}"
+                                @if ((isset($reg) && $reg->horarios_id==$horario->id) 
+                                or old('horarios_id') == $horario->id) selected @endif>
+                                {{$horario->hora}}</option>
+                        @endforeach       
+                    </select>
                 </div>
             </div>
             <div class="col-sm-3">
@@ -177,15 +176,15 @@
 <script src="{{asset('../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
 <script>
-    $('#data').datepicker({
-        format: "dd/mm/yyyy",
-        language: "pt-BR",
-        startDate: '+0d',
-        autoclose: true
-    });
-    $(document).ready(function () {
-        $('#telefone').mask('(00)0000-0000');
-    });
+$('#data').datepicker({
+    format: "dd/mm/yyyy",
+    language: "pt-BR",
+    startDate: '+0d',
+    autoclose: true
+});
+$(document).ready(function () {
+    $('#telefone').mask('(00)0000-0000');
+});
 </script>
 @endsection
 

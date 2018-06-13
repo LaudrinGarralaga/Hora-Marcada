@@ -33,7 +33,7 @@
 <div class='col-sm-12'>
     @if (count($opcionais)==0)
     <div class="alert alert-danger">
-        Não há opcionais com o filtro informado...
+        Não há opcionais com a descrição informada...
     </div>
 
     @endif    

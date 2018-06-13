@@ -120,7 +120,7 @@ return [
                     'url' => 'opcionais',
                 ],
                 [
-                    'text' => 'Horarios',
+                    'text' => 'Horários',
                     'icon' => 'clock-o',
                     'url' => 'horarios',
                 ],
@@ -136,7 +136,7 @@ return [
                     'url' => 'opcionaispesq',
                 ],
                 [
-                    'text' => 'Horarios',
+                    'text' => 'Horários',
                     'icon' => 'clock-o',
                     'url' => 'horariospesq',
                 ],

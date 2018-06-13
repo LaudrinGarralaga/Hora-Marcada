@@ -33,7 +33,7 @@
 <div class='col-sm-12'>
     @if (count($horarios)==0)
     <div class="alert alert-danger">
-        Não há horários com o filtro informado...
+        Não há horários com a hora informada...
     </div>
 
     @endif    

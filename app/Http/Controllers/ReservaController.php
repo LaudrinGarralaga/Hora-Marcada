@@ -25,9 +25,9 @@ class ReservaController extends Controller {
 
         $acao = 1;
 
-        //$marcas = Marca::orderBy('nome')->get();
-
-        return view('reservas_form', compact('acao'));
+        $horarios = Horario::orderBy('hora')->get();
+        
+        return view('reservas_form', compact('acao', 'horarios'));
     }
 
     public function store(Request $request) {
@@ -56,9 +56,9 @@ class ReservaController extends Controller {
 
         $acao = 2;
 
-        //$marcas = Marca::orderBy('nome')->get();
-
-        return view('resevas_form', compact('reg', 'acao'));
+        $horarios = Horario::orderBy('hora')->get();
+        
+              return view('resevas_form', compact('reg', 'acao', 'horarios'));
     }
 
     public function update(Request $request, $id) {

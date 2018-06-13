@@ -65,8 +65,8 @@
                 </tbody>
             </table>    
             {{ $permanentes->links() }}
+            <div class="box-footer"></div>
         </div>
-        <div class="box-footer"></div>
     </div>
 </div>
 @stop
