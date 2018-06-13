@@ -94,55 +94,60 @@ return [
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
-        'MARCAR HORÁRIOS',
         [
             'text' => 'Reservar',
-            'icon' => 'calendar',
+            'icon' => 'calendar-plus-o',
             'submenu' => [
                 [
                     'text' => 'Dia',
+                    'icon' => 'calendar',
                     'url' => 'reservas',
                 ],
                 [
                     'text' => 'Permanente',
+                    'icon' => 'calendar',
                     'url' => 'permanentes',
                 ],
             ],
         ],
-        'Cadastros',
         [
             'text' => 'Cadastrar',
-            'icon' => 'calendar',
+            'icon' => 'plus',
             'submenu' => [
                 [
                     'text' => 'Opcionais',
+                    'icon' => 'list',
                     'url' => 'opcionais',
                 ],
                 [
                     'text' => 'Horarios',
+                    'icon' => 'clock-o',
                     'url' => 'horarios',
                 ],
             ],
         ],
-        'Pesquisas',
         [
             'text' => 'Pesquisar',
-            'icon' => 'calendar',
+            'icon' => 'search',
             'submenu' => [
                 [
                     'text' => 'Opcionais',
+                    'icon' => 'list',
                     'url' => 'opcionaispesq',
                 ],
                 [
                     'text' => 'Horarios',
+                    'icon' => 'clock-o',
                     'url' => 'horariospesq',
                 ],
                 [
                     'text' => 'Dia',
+                    'icon' => 'calendar',
                     'url' => 'reservaspesq',
                 ],
                 [
                     'text' => 'Permanente',
+                    'icon' => 'calendar',
                     'url' => 'permanentespesq',
                 ],
             ],
