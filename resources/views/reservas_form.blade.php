@@ -47,7 +47,7 @@
                     </div>
                     <input type="text" class="form-control" id="nome"
                            name="nome" placeholder="Digite o nome do cliente"
-                           value="{{$reg->nome or old('nome')}}"
+                           value="{{$reg1->nome or old('nome')}}"
                            required>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     </div>
                     <input  type="text" class="form-control" id="telefone"  
                             name="telefone" placeholder="Digite o telefone do cliente"
-                            value="{{$reg->telefone or old('telefone')}}"
+                            value="{{$reg1->telefone or old('telefone')}}"
                             required>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                     </div>
                     <input type="email" class="form-control" id="email"
                            name="email" placeholder="Digite o email do cliente"
-                           value="{{$reg->email or old('email')}}"
+                           value="{{$reg1->email or old('email')}}"
                            required>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="horarios_id">Horário:</label>
-                    <select class="form-control" id="hora_id" name="horarios_id">
+                    <select class="form-control" id="horarios_id" name="horarios_id">
                         @foreach ($horarios as $horario)
                         <option value="{{$horario->id}}"
                                 @if ((isset($reg) && $reg->horarios_id==$horario->id) 

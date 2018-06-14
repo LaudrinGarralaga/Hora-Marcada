@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration {
             $table->string('nome', 45);
             $table->string('telefone', 45);
             $table->string('email', 45);
-            $table->smallInteger('pontosAtuais');
+            //$table->smallInteger('pontosAtuais');
         });
     }
 

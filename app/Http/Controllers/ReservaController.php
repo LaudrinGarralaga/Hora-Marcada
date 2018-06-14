@@ -7,6 +7,7 @@ use App\Reserva;
 use App\Horario;
 use App\Cliente;
 use App\User;
+use App\Auth;
 
 class ReservaController extends Controller {
 
@@ -26,20 +27,37 @@ class ReservaController extends Controller {
         $acao = 1;
 
         $horarios = Horario::orderBy('hora')->get();
-        
+
         return view('reservas_form', compact('acao', 'horarios'));
     }
 
     public function store(Request $request) {
 
+
         // obtém os dados do form
+        //$dados = $request->all();
+        //$user = new User;
+        // $users_id = $user->id;
+        // $user ->save();
+        $cliente = new Cliente;
 
-        $dados = $request->all();
+        $cliente->nome = $request->nome;
+        $cliente->telefone = $request->telefone;
+        $cliente->email = $request->email;
+        $cliente->save();
+        $cliente_id = $cliente->id;
 
-        $inc = Reserva::create($dados);
+        $reserva = new Reserva;
+        $reserva->data = $request->data;
+        $reserva->valor = $request->valor;
+        $reserva->horarios_id = $request->horarios_id;
+        $reserva->clientes_id = $cliente_id;
+        $reserva->users_id = \Illuminate\Support\Facades\Auth::id();
 
-        if ($inc) {
+        $reserva->save();
 
+        // $inc = Reserva::create($reserva);
+        if ($reserva && $cliente) {
             return redirect()->route('reservas.index')
                             ->with('status', $request->data . ' Incluído!');
         }
@@ -57,8 +75,8 @@ class ReservaController extends Controller {
         $acao = 2;
 
         $horarios = Horario::orderBy('hora')->get();
-        
-              return view('resevas_form', compact('reg', 'acao', 'horarios'));
+
+        return view('resevas_form', compact('reg', 'acao', 'horarios'));
     }
 
     public function update(Request $request, $id) {

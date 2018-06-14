@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model {
 
-    protected $fillable = array('data', 'compareceu', 'pontos', 'valor', 'bonificacao', 'horarios_id', 'clientes_id', 'users_id');
+    protected $fillable = array('data', 'valor', 'horarios_id', 'clientes_id', 'users_id');
     protected $table = "reservas";
     public $timestamps = false;
 
@@ -24,5 +24,6 @@ class Reserva extends Model {
 
         return $this->belongsTo('App\User');
     }
+    
 
 }
