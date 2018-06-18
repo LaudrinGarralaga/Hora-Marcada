@@ -3,19 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Reserva;
 use App\Horario;
 use App\Cliente;
-use App\User;
-use App\Auth;
 
 class ReservaController extends Controller {
 
     public function index() {
 
-//        $carros = Carro::all();
-
-        $reservas = Reserva::paginate(3);
+        $reservas = Reserva::paginate(10);
 
         return view('reservas_list', compact('reservas'));
     }
@@ -23,41 +21,31 @@ class ReservaController extends Controller {
     public function create() {
 
         // 1: indica inclusão
-
         $acao = 1;
-
+        // obtém os horários e clientes para exibir no form de cadastro
         $horarios = Horario::orderBy('hora')->get();
+        $clientes = Cliente::orderBy('nome')->get();
 
-        return view('reservas_form', compact('acao', 'horarios'));
+        return view('reservas_form', compact('acao', 'horarios', 'clientes'));
     }
 
     public function store(Request $request) {
-
-
-        // obtém os dados do form
-        //$dados = $request->all();
-        //$user = new User;
-        // $users_id = $user->id;
-        // $user ->save();
-        $cliente = new Cliente;
-
-        $cliente->nome = $request->nome;
-        $cliente->telefone = $request->telefone;
-        $cliente->email = $request->email;
-        $cliente->save();
-        $cliente_id = $cliente->id;
-
+       /* $this->validate($request, [
+            'data' => 'required|unique:carros|min:2|max:60',
+            'cor' => 'required|min:4|max:40',
+            'ano' => 'required|numeric|min:1970|max:2020',
+            'preco' => 'required'
+        ]);*/
+        
         $reserva = new Reserva;
         $reserva->data = $request->data;
         $reserva->valor = $request->valor;
         $reserva->horarios_id = $request->horarios_id;
-        $reserva->clientes_id = $cliente_id;
-        $reserva->users_id = \Illuminate\Support\Facades\Auth::id();
-
+        $reserva->clientes_id = $request->clientes_id;
+        $reserva->users_id = Auth::id();
         $reserva->save();
 
-        // $inc = Reserva::create($reserva);
-        if ($reserva && $cliente) {
+        if ($reserva) {
             return redirect()->route('reservas.index')
                             ->with('status', $request->data . ' Incluído!');
         }
@@ -70,30 +58,27 @@ class ReservaController extends Controller {
 
     public function edit($id) {
 
+        // posiciona no registo a ser alterado
         $reg = Reserva::find($id);
-
+        // 2: indica Alteração
         $acao = 2;
-
+        // obtém os horários e clientes para exibir no form de cadastro
         $horarios = Horario::orderBy('hora')->get();
+        $clientes = Cliente::orderBy('nome')->get();
 
-        return view('resevas_form', compact('reg', 'acao', 'horarios'));
+        return view('reservas_form', compact('reg', 'acao', 'horarios', 'clientes'));
     }
 
     public function update(Request $request, $id) {
 
+        // posiciona no registo a ser alterado
+        $reg = Reserva::find($id);
+       
         // obtém os dados do form
-
         $dados = $request->all();
 
-        // posiciona no registo a ser alterado
-
-        $reg = Reserva::find($id);
-
         // realiza a alteração
-
         $alt = $reg->update($dados);
-
-
 
         if ($alt) {
 
@@ -103,19 +88,17 @@ class ReservaController extends Controller {
     }
 
     public function destroy($id) {
-
+        // posiciona no registo a ser alterado
         $res = Reserva::find($id);
 
         if ($res->delete()) {
 
-            return redirect()->route('Reserva.index')
+            return redirect()->route('reservas.index')
                             ->with('status', $res->data . ' Excluído!');
         }
     }
 
     public function pesq() {
-
-//        $carros = Carro::all();
 
         $reservas = Reserva::paginate(3);
 
@@ -142,7 +125,7 @@ class ReservaController extends Controller {
          */
         $reservas = Reserva::where($filtro)
                 ->orderBy('data')
-                ->paginate(3);
+                ->paginate(10);
 
         return view('reserva_pesq', compact('reservas'));
     }

@@ -115,6 +115,11 @@ return [
             'icon' => 'plus',
             'submenu' => [
                 [
+                    'text' => 'Clientes',
+                    'icon' => 'user',
+                    'url' => 'clientes',
+                ],
+                [
                     'text' => 'Opcionais',
                     'icon' => 'list',
                     'url' => 'opcionais',
@@ -130,6 +135,11 @@ return [
             'text' => 'Pesquisar',
             'icon' => 'search',
             'submenu' => [
+                [
+                    'text' => 'Clientes',
+                    'icon' => 'user',
+                    'url' => 'clientespesq',
+                ],
                 [
                     'text' => 'Opcionais',
                     'icon' => 'list',

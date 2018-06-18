@@ -28,8 +28,6 @@
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
                         <th>Horário</th>
                         <th>Data</th>
                         <th>Ações</th>
@@ -39,10 +37,8 @@
 
                     @foreach($reservas as $reserva)
                     <tr>
-                        <td>{{$reserva->nome}}</td>
-                        <td>{{$reserva->telefone}}</td>
-                        <td>{{$reserva->email}}</td>
-                        <td>{{$reserva->hora}}</td>
+                        <td>{{$reserva->cliente->nome}}</td>
+                        <td>{{$reserva->horario->hora}}</td>
                         <td>{{$reserva->data}}</td>
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
@@ -62,9 +58,10 @@
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $reservas->links() }}
+            
             <div class="box-footer"></div>
         </div>
     </div>
+    {{ $reservas->links() }}
 </div>
 @stop
