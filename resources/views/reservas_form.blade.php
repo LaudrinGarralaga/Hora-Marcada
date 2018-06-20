@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Fomulário de Reservas')
+@section('title', 'Cadastro de Reservas')
 
 @section('content_header')
 
@@ -42,17 +42,22 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="clientes_id">Cliente:</label>
-                    <select class="form-control" id="clientes_id" name="clientes_id">
-                        @foreach ($clientes as $cliente)
-                        <option value="{{$cliente->id}}"
-                                @if ((isset($reg) && $reg->clientes_id==$cliente->id) 
-                                or old('clientes_id') == $cliente->id) selected @endif>
-                                {{$cliente->nome}}</option>
-                        @endforeach       
-                    </select>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-user-circle-o"></i>
+                        </div>
+                        <select class="form-control" id="clientes_id" name="clientes_id">
+                            @foreach ($clientes as $cliente)
+                            <option value="{{$cliente->id}}"
+                                    @if ((isset($reg) && $reg->clientes_id==$cliente->id) 
+                                    or old('clientes_id') == $cliente->id) selected @endif>
+                                    {{$cliente->nome}}</option>
+                            @endforeach       
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="data">Data:</label>
                     <div class="input-group">
@@ -66,64 +71,43 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="horarios_id">Horário:</label>
-                    <select class="form-control" id="horarios_id" name="horarios_id">
-                        @foreach ($horarios as $horario)
-                        <option value="{{$horario->id}}"
-                                @if ((isset($reg) && $reg->horarios_id==$horario->id) 
-                                or old('horarios_id') == $horario->id) selected @endif>
-                                {{$horario->hora}}</option>
-                        @endforeach       
-                    </select>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <select class="form-control" id="horarios_id" name="horarios_id">
+                            @foreach ($horarios as $horario)
+                            <option value="{{$horario->id}}"
+                                    @if ((isset($reg) && $reg->horarios_id==$horario->id) 
+                                    or old('horarios_id') == $horario->id) selected @endif>
+                                    {{$horario->hora}}</option>
+                            @endforeach       
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group">
-                    <label>Opcional 1</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
+                    <label>Opcionais:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                        </div>
+                        <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
+                            @foreach ($opcionais as $opcional)
+                            <option value="{{$opcional->id}}"
+                                    @if ((isset($reg) && $reg->$opcionais_id==$opcional->id) 
+                                    or old('$opcionais_id') == $opcional->id) selected @endif>
+                                    {{$opcional->descricao}}</option>
+                            @endforeach   
+                        </select>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcional 2</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcional 3</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcional 4</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="valor">Valor total:</label>
                     <div class="input-group">
@@ -135,16 +119,6 @@
                                value="{{$reg->valor or old('valor')}}"
                                required>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcionais</label>
-                    <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
-                        <option value="Mustang">Mustang</option>
-                        <option value="Ketchup">Ketchup</option>
-                        <option value="Relish">Relish</option>
-                    </select>
                 </div>
             </div>
             <div class="col-sm-12">

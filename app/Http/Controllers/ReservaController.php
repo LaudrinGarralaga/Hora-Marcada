@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Reserva;
 use App\Horario;
 use App\Cliente;
+use App\Opcional;
 
 class ReservaController extends Controller {
 
@@ -25,18 +26,19 @@ class ReservaController extends Controller {
         // obtém os horários e clientes para exibir no form de cadastro
         $horarios = Horario::orderBy('hora')->get();
         $clientes = Cliente::orderBy('nome')->get();
+        $opcionais = Opcional::orderBy('descricao')->get();
 
-        return view('reservas_form', compact('acao', 'horarios', 'clientes'));
+        return view('reservas_form', compact('acao', 'horarios', 'clientes', 'opcionais'));
     }
 
     public function store(Request $request) {
-       /* $this->validate($request, [
-            'data' => 'required|unique:carros|min:2|max:60',
-            'cor' => 'required|min:4|max:40',
-            'ano' => 'required|numeric|min:1970|max:2020',
-            'preco' => 'required'
-        ]);*/
-        
+        /* $this->validate($request, [
+          'data' => 'required|unique:carros|min:2|max:60',
+          'cor' => 'required|min:4|max:40',
+          'ano' => 'required|numeric|min:1970|max:2020',
+          'preco' => 'required'
+          ]); */
+
         $reserva = new Reserva;
         $reserva->data = $request->data;
         $reserva->valor = $request->valor;
@@ -65,15 +67,16 @@ class ReservaController extends Controller {
         // obtém os horários e clientes para exibir no form de cadastro
         $horarios = Horario::orderBy('hora')->get();
         $clientes = Cliente::orderBy('nome')->get();
+        $opcionais = Opcional::orderBy('descricao')->get();
 
-        return view('reservas_form', compact('reg', 'acao', 'horarios', 'clientes'));
+        return view('reservas_form', compact('reg', 'acao', 'horarios', 'clientes','opcionais'));
     }
 
     public function update(Request $request, $id) {
 
         // posiciona no registo a ser alterado
         $reg = Reserva::find($id);
-       
+
         // obtém os dados do form
         $dados = $request->all();
 

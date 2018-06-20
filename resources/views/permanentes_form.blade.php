@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Fomulário de Reservas de Permanentes')
+@section('title', 'Cadastro de Permanentes')
 
 @section('content_header')
 
@@ -8,7 +8,7 @@
     @if ($acao == 1)
     <h2> Reservar horário permanente </h2>
     @else
-    <h2> Alteração de reservas permanentes </h2>
+    <h2> Alteração de reserva permanente </h2>
     @endif
 </div>
 
@@ -40,40 +40,22 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="form-group">
-                <label for="nome">Nome do cliente:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-user-circle-o"></i>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="clientes_id">Cliente:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-user-circle-o"></i>
+                        </div>
+                        <select class="form-control" id="clientes_id" name="clientes_id">
+                            @foreach ($clientes as $cliente)
+                            <option value="{{$cliente->id}}"
+                                    @if ((isset($reg) && $reg->clientes_id==$cliente->id) 
+                                    or old('clientes_id') == $cliente->id) selected @endif>
+                                    {{$cliente->nome}}</option>
+                            @endforeach       
+                        </select>
                     </div>
-                    <input type="text" class="form-control" id="nome"
-                           name="nome" placeholder="Digite o nome do cliente"
-                           value="{{$reg->nome or old('nome')}}"
-                           required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="telefone">Telefone:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-phone"></i>
-                    </div>
-                    <input type="tel" class="form-control" id="telefone"
-                           name="telefone" placeholder="Digite o telefone do cliente"
-                           value="{{$reg->telefone or old('telefone')}}"
-                           required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-envelope"></i>
-                    </div>
-                    <input type="email" class="form-control" id="email"
-                           name="email" placeholder="Digite o email do cliente"
-                           value="{{$reg->email or old('email')}}"
-                           required>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -104,102 +86,95 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="hora">Horário:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-clock-o"></i>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="horarios_id">Horário:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <select class="form-control" id="horarios_id" name="horarios_id">
+                            @foreach ($horarios as $horario)
+                            <option value="{{$horario->id}}"
+                                    @if ((isset($reg) && $reg->horarios_id==$horario->id) 
+                                    or old('horarios_id') == $horario->id) selected @endif>
+                                    {{$horario->hora}}</option>
+                            @endforeach       
+                        </select>
                     </div>
-                    <input type="text" class="form-control" id="hora"
-                           name="hora" placeholder="Seleciona o horário da reserva"
-                           value="{{$reg->hora or old('hora')}}"
-                           required>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-6">
                 <div class="form-group">
-                    <label>Opcional 1</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcional 2</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcional 3</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label>Opcional 4</label>
-                    <select class="form-control">
-                        <option>Bola</option>
-                        <option>Churrasquira</option>
-                        <option>Colete</option>
-                        <option>Rede de volei</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="valor">Valor total:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-usd"></i>
+                    <label>Opcionais:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="glyphicon glyphicon-th-list"></i>
+                        </div>
+                        <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
+                            @foreach ($opcionais as $opcional)
+                            <option value="{{$opcional->id}}"
+                                    @if ((isset($reg) && $reg->$opcionais_id==$opcional->id) 
+                                    or old('$opcionais_id') == $opcional->id) selected @endif>
+                                    {{$opcional->descricao}}</option>
+                            @endforeach   
+                        </select>
                     </div>
-                    <input type="number" class="form-control" id="valor"
-                           name="valor" 
-                           value="{{$reg->valor or old('valor')}}"
-                           required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>        
-            <button type="reset" class="btn btn-warning">Limpar</button>  
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="valor">Valor total:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-usd"></i>
+                        </div>
+                        <input type="text" class="form-control" id="valor"
+                               name="valor" 
+                               value="{{$reg->valor or old('valor')}}"
+                               required>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Enviar</button>        
+                <button type="reset" class="btn btn-warning">Limpar</button>  
+            </div>
         </form>    
     </form>
 </div>
 @endsection
 
 @section('js')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="{{ asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')}}"></script>
+<link href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')}}" rel="stylesheet" >
+<script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
+<link href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css')}}" rel="stylesheet">
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js')}}"></script>
+
+
+<link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script> 
+<script src="{{asset('js/bootstrap-select.min.js')}}"></script> 
 <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}" charset="UTF-8"></script>
 <script src="{{asset('../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
 <script>
-    $('#dataInicial').datepicker({
-        format: "dd/mm/yyyy",
-        language: "pt-BR",
-        startDate: '+0d',
-        autoclose: true
-    });
-    $('#dataFinal').datepicker({
-        format: "dd/mm/yyyy",
-        language: "pt-BR",
-        startDate: '+0d',
-        autoclose: true
-    });
+$('#dataInicial').datepicker({
+    format: "dd/mm/yyyy",
+    language: "pt-BR",
+    startDate: '+0d',
+    autoclose: true
+});
+$('#dataFinal').datepicker({
+    format: "dd/mm/yyyy",
+    language: "pt-BR",
+    startDate: '+0d',
+    autoclose: true
+});
+$(document).ready(function () {
+    $('.selectpicker').selectpicker();
+
+});
 </script>
 @endsection

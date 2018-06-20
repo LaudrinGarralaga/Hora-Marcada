@@ -15,6 +15,11 @@ class Reserva extends Model {
         return $this->belongsTo('App\Horario');
     }
 
+    public function opcional() {
+
+        return $this->belongsTo('App\opcional');
+    }
+
     public function cliente() {
 
         return $this->belongsTo('App\Cliente');
@@ -24,6 +29,5 @@ class Reserva extends Model {
 
         return $this->belongsTo('App\User');
     }
-    
 
 }

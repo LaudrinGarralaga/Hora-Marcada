@@ -6,9 +6,9 @@
 
 <div class='col-sm-11'>
     @if ($acao == 1)
-    <h2> Cadastro de Opcionais </h2>
+    <h2> Cadastro de opcional </h2>
     @else
-    <h2> Alterar Opcionais </h2>
+    <h2> Alteração de opcional </h2>
     @endif
 </div>
 
@@ -37,17 +37,21 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="form-group">
-                <label for="descricao">Descrição:</label>
-                <div class="input-group">
-                    <div class="input-group-addon">
-                        <i class="fa fa-info"></i>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-info"></i>
+                        </div>
+                        <input type="text" class="form-control" id="descricao"
+                               name="descricao" placeholder="Digite o nome do opcional"
+                               value="{{$reg->descricao or old('descricao')}}"
+                               required>
                     </div>
-                    <input type="text" class="form-control" id="descricao"
-                           name="descricao" placeholder="Digite o nome do opcional"
-                           value="{{$reg->descricao or old('descricao')}}"
-                           required>
                 </div>
+            </div>
+            <div class="col-sm-12">
                 <div class="form-group">
                     <label for="valor">Valor:</label>
                     <div class="input-group">
@@ -60,6 +64,8 @@
                                required>
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Enviar</button>        
                 <button type="reset" class="btn btn-warning">Limpar</button>
             </div>

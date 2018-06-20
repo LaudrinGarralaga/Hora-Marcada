@@ -29,8 +29,6 @@
                 <thead>
                     <tr>
                         <th>Cliente</th>
-                        <th>Telefone</th>
-                        <th>Email</th>
                         <th>Horário</th>
                         <th>Data Inicial</th>
                         <th>Data Final</th>
@@ -40,10 +38,8 @@
                 <tbody>
                     @foreach($permanentes as $permanente)
                     <tr>
-                        <td>{{$permanente->nome}}</td>
-                        <td>{{$permanente->telefone}}</td>
-                        <td>{{$permanente->email}}</td>
-                        <td>{{$permanente->hora}}</td>
+                        <td>{{$permanente->cliente->nome}}</td>
+                        <td>{{$permanente->horario->hora}}</td>
                         <td>{{$permanente->dataIncial}}</td>
                         <td>{{$permanente->dataFinal}}</td>
                         <td>

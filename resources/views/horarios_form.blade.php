@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastro do Opcionais')
+@section('title', 'Cadastro de Horários')
 
 @section('content_header')
 
 <div class='col-sm-11'>
     @if ($acao == 1)
-    <h2> Reservar Horário </h2>
+    <h2> Cadastro de horário </h2>
     @else
-    <h2> Alterar Horários </h2>
+    <h2> Alteração de horário </h2>
     @endif
 </div>
 

@@ -14,15 +14,18 @@ class CreatePermanentesTable extends Migration {
     public function up() {
         Schema::create('permanentes', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('dataInicial');
-            $table->date('dataFinal');
-            $table->unsignedInteger('horarios_id');
-            $table->unsignedInteger('clientes_id');
+            $table->string('dataInicial');
+            $table->string('dataFinal');
+            $table->string('valor');
+            $table->unsignedInteger('horarios_id')->unsigned();
+            $table->unsignedInteger('clientes_id')->unsigned();
+            $table->unsignedInteger('users_id')->unsigned();
         });
 
         Schema::table('permanentes', function (Blueprint $table) {
             $table->foreign('horarios_id')->references('id')->on('horarios');
             $table->foreign('clientes_id')->references('id')->on('clientes');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

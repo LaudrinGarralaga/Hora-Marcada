@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Permanente;
 use App\Horario;
 use App\Cliente;
+use App\Opcional;
 
 class PermanenteController extends Controller {
 
@@ -24,20 +26,27 @@ class PermanenteController extends Controller {
 
         $acao = 1;
 
-        //$marcas = Marca::orderBy('nome')->get();
+        $horarios = Horario::orderBy('hora')->get();
+        $clientes = Cliente::orderBy('nome')->get();
+        $opcionais = Opcional::orderBy('descricao')->get();
 
-        return view('permanentes_form', compact('acao'));
+        return view('permanentes_form', compact('acao', 'horarios', 'clientes', 'opcionais'));
     }
 
     public function store(Request $request) {
 
         // obtém os dados do form
 
-        $dados = $request->all();
+        $permanente = new Permanente;
+        $permanente->dataInicial = $request->dataInicial;
+        $permanente->dataFinal = $request->dataFinal;
+        $permanente->valor = $request->valor;
+        $permanente->horarios_id = $request->horarios_id;
+        $permanente->clientes_id = $request->clientes_id;
+        $permanente->users_id = Auth::id();
+        $permanente->save();
 
-        $inc = Permanente::create($dados);
-
-        if ($inc) {
+        if ($permanente) {
 
             return redirect()->route('permanentes.index')
                             ->with('status', $request->data . ' Incluído!');
@@ -55,9 +64,12 @@ class PermanenteController extends Controller {
 
         $acao = 2;
 
-        //$marcas = Marca::orderBy('nome')->get();
+        // obtém os horários e clientes para exibir no form de cadastro
+        $horarios = Horario::orderBy('hora')->get();
+        $clientes = Cliente::orderBy('nome')->get();
+        $opcionais = Opcional::orderBy('descricao')->get();
 
-        return view('permanentes_form', compact('reg', 'acao'));
+        return view('permanentes_form', compact('reg', 'acao', 'horarios', 'clientes', 'opcionais'));
     }
 
     public function update(Request $request, $id) {

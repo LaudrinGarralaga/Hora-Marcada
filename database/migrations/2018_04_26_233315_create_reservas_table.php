@@ -15,10 +15,10 @@ class CreateReservasTable extends Migration {
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('data', 20);
-            //$table->boolean('compareceu');
-           // $table->smallInteger('pontos');
+            $table->boolean('compareceu')->nullable();
+            $table->smallInteger('pontos')->nullable();
             $table->decimal('valor', 9, 2);
-           // $table->boolean('bonificacao');
+            $table->boolean('bonificacao')->nullable();
             $table->unsignedInteger('horarios_id');
             $table->unsignedInteger('clientes_id');
             $table->unsignedInteger('users_id');

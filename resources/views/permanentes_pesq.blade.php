@@ -37,51 +37,55 @@
     </div>
 
     @endif    
+    <div class="box">
+        <div class="box-header"></div>
+        <div class="box-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Horário</th>
+                        <th>Data Inicial</th>
+                        <th>Data Final</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Código</th>
-                <th>Cliente</th>
-                <th>Telefone</th>
-                <th>Email</th>
-                <th>Horário</th>
-                <th>Data Inicial</th>
-                <th>Data Final</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
+                <tbody>
+                    @foreach($permanentes as $permanente)
+                    <tr>
+                        <td style="text-align: center">{{$permanente->id}}</td>
+                        <td>{{$permanente->nome}}</td>
+                        <td>{{$permanente->telefone}}</td>
+                        <td>{{$permanente->email}}</td>
+                        <td>{{$permanente->horario}}</td>
+                        <td>{{$permanente->dataInicial}}</td>
+                        <td>{{$permanente->dataFinal}}</td>
+                        <td>
+                            <a href="{{route('permanentes.edit', $permanente->id)}}" 
+                               class="btn btn-warning" 
+                               role="button">Alterar</a> &nbsp;&nbsp;
+                            <form style="display: inline-block"
+                                  method="post"
+                                  action="{{route('permanentes.destroy', $permanente->id)}}"
+                                  onsubmit="return confirm('Confirma Exclusão?')">
+                                {{method_field('delete')}}
+                                {{csrf_field()}}
+                                <button type="submit"
+                                        class="btn btn-danger"> Excluir </button>
+                            </form> &nbsp;&nbsp;
 
-        <tbody>
-            @foreach($permanentes as $permanente)
-            <tr>
-                <td style="text-align: center">{{$permanente->id}}</td>
-                <td>{{$permanente->nome}}</td>
-                <td>{{$permanente->telefone}}</td>
-                <td>{{$permanente->email}}</td>
-                <td>{{$permanente->horario}}</td>
-                <td>{{$permanente->dataInicial}}</td>
-                <td>{{$permanente->dataFinal}}</td>
-                <td>
-                    <a href="{{route('permanentes.edit', $permanente->id)}}" 
-                       class="btn btn-warning" 
-                       role="button">Alterar</a> &nbsp;&nbsp;
-                    <form style="display: inline-block"
-                          method="post"
-                          action="{{route('permanentes.destroy', $permanente->id)}}"
-                          onsubmit="return confirm('Confirma Exclusão?')">
-                        {{method_field('delete')}}
-                        {{csrf_field()}}
-                        <button type="submit"
-                                class="btn btn-danger"> Excluir </button>
-                    </form> &nbsp;&nbsp;
-
-                </td>
-            </tr>
-            @endforeach        
-        </tbody>
-    </table>    
-    {{ $permanentes->links() }}
-    <div class="box-footer"></div>
+                        </td>
+                    </tr>
+                    @endforeach        
+                </tbody>
+            </table>    
+            {{ $permanentes->links() }}
+            <div class="box-footer"></div>
+        </div>
+    </div>
 </div>
 @stop
