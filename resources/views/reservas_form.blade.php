@@ -123,34 +123,50 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-3">
                 <div class="form-group">
                     <label for="valor">Valor total:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
-                        <input type="number" class="form-control" id="valor"
+                        <input type="text" class="form-control" id="valor"
                                name="valor" 
                                value="{{$reg->valor or old('valor')}}"
                                required>
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>        
-            <button type="reset" class="btn btn-warning">Limpar</button>  
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <label>Opcionais</label>
+                    <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
+                        <option value="Mustang">Mustang</option>
+                        <option value="Ketchup">Ketchup</option>
+                        <option value="Relish">Relish</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary">Enviar</button>        
+                <button type="reset" class="btn btn-warning">Limpar</button>  
+            </div>
         </form>    
     </form>
 </div>
 @endsection
 
 @section('js')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')}}"></script>
+<link href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')}}" rel="stylesheet" >
+<script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
+<link href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css')}}" rel="stylesheet">
+<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js')}}"></script>
+
 
 <link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script> 
+<script src="{{asset('js/bootstrap-select.min.js')}}"></script> 
 <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}" charset="UTF-8"></script>
 <script src="{{asset('../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
@@ -163,6 +179,10 @@ $('#data').datepicker({
 });
 $(document).ready(function () {
     $('#telefone').mask('(00)0000-0000');
+});
+$(document).ready(function () {
+    $('.selectpicker').selectpicker();
+
 });
 </script>
 @endsection

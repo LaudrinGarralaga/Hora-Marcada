@@ -37,8 +37,8 @@
 
                     @foreach($reservas as $reserva)
                     <tr>
-                        <td>{{$reserva->cliente->nome}}</td>
-                        <td>{{$reserva->horario->hora}}</td>
+                        <td>{{$reserva->cliente}}</td>
+                        <td>{{$reserva->horario}}</td>
                         <td>{{$reserva->data}}</td>
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
