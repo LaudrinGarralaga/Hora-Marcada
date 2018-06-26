@@ -12,17 +12,17 @@ class Permanente extends Model {
 
     public function horario() {
 
-        return $this->belongsTo('App\horario');
+        return $this->belongsTo('App\Horario');
     }
     
     public function opcional() {
 
-        return $this->belongsTo('App\opcional');
+        return $this->belongsTo('App\Opcional');
     }
 
     public function cliente() {
 
-        return $this->belongsTo('App\cliente');
+        return $this->belongsTo('App\Cliente');
     }
 
     public function User() {

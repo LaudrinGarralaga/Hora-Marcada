@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/resources/views/permanentes_list.blade.php</file>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/app/Permanente.php</file>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/database/factories/ModelFactory.php</file>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/public/index.php</file>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/app/Cliente.php</file>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/app/Http/Controllers/PermanenteController.php</file>
+            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/database/migrations/2014_10_12_000000_create_users_table.php</file>
+        </group>
     </open-files>
 </project-private>

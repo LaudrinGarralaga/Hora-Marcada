@@ -26,11 +26,11 @@ class PermanenteController extends Controller {
 
         $acao = 1;
 
-        $horarios = Horario::orderBy('hora')->get();
-        $clientes = Cliente::orderBy('nome')->get();
+        $horario = Horario::orderBy('hora')->get();
+        $cliente = Cliente::orderBy('nome')->get();
         $opcionais = Opcional::orderBy('descricao')->get();
 
-        return view('permanentes_form', compact('acao', 'horarios', 'clientes', 'opcionais'));
+        return view('permanentes_form', compact('acao', 'horario', 'cliente', 'opcionais'));
     }
 
     public function store(Request $request) {

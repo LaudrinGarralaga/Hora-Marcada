@@ -38,9 +38,9 @@
                 <tbody>
                     @foreach($permanentes as $permanente)
                     <tr>
-                        <td>{{$permanente->cliente->nome}}</td>
-                        <td>{{$permanente->horario->hora}}</td>
-                        <td>{{$permanente->dataIncial}}</td>
+                        <td>{{$permanente->cliente->}}</td>
+                        <td>{{$permanente->hora}}</td>
+                        <td>{{$permanente->dataInicial}}</td>
                         <td>{{$permanente->dataFinal}}</td>
                         <td>
                             <a href="{{route('permanentes.edit', $permanente->id)}}" 
