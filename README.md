@@ -26,6 +26,6 @@
   
   Para acessar o sistema acesse o link a baixo, caso seja um novo usuário basta se registrar.
   
- - [Hora Marada](http://horamarcada.xyz/)
+ - [Hora Marada](http://horamarcada.ga/)
   
   
