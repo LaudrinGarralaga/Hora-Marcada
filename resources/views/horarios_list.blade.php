@@ -5,9 +5,9 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Horários </h2>
+    <h2> Lista de Horários </h2>
 </div>
-@stop
+@endsection
 
 @section('content')
 <div class='col-sm-1'>
@@ -28,7 +28,7 @@
                 <thead>
                     <tr>
                         <th>Hora</th>
-                        <th>Valor</th>
+                        <th>Valor R$</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -50,18 +50,18 @@
                                 {{csrf_field()}}
                                 <button type="submit"
                                         class="btn btn-danger"> Excluir </button>
-                            </form> &nbsp;&nbsp;
+                            </form> 
                         </td>
                     </tr>
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $horarios->links() }}
             <div class="box-footer"></div>
+            {{ $horarios->links() }}
         </div>
     </div>
 </div>
-@stop
+@endsection
 
 
 

@@ -42,23 +42,23 @@
             {{ csrf_field() }}
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="clientes_id">Cliente:</label>
+                    <label for="cliente_id">Cliente:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-user-circle-o"></i>
                         </div>
-                        <select class="form-control" id="clientes_id" name="clientes_id">
+                        <select class="form-control" id="cliente_id" name="cliente_id">
                             @foreach ($clientes as $cliente)
                             <option value="{{$cliente->id}}"
-                                    @if ((isset($reg) && $reg->clientes_id==$cliente->id) 
-                                    or old('clientes_id') == $cliente->id) selected @endif>
+                                    @if ((isset($reg) && $reg->cliente_id==$cliente->id) 
+                                    or old('cliente_id') == $cliente->id) selected @endif>
                                     {{$cliente->nome}}</option>
                             @endforeach       
                         </select>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="dataInicial">Data Inicial:</label>
                     <div class="input-group">
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="dataFinal">Data Final:</label>
                     <div class="input-group">
@@ -86,51 +86,34 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="horarios_id">Horário:</label>
+                    <label for="horario_id">Horário:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
                         </div>
-                        <select class="form-control" id="horarios_id" name="horarios_id">
+                        <select class="form-control" id="horario_id" name="horario_id">
                             @foreach ($horarios as $horario)
                             <option value="{{$horario->id}}"
-                                    @if ((isset($reg) && $reg->horarios_id==$horario->id) 
-                                    or old('horarios_id') == $horario->id) selected @endif>
+                                    @if ((isset($reg) && $reg->horario_id==$horario->id) 
+                                    or old('horario_id') == $horario->id) selected @endif>
                                     {{$horario->hora}}</option>
                             @endforeach       
                         </select>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Opcionais:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                        </div>
-                        <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
-                            @foreach ($opcionais as $opcional)
-                            <option value="{{$opcional->id}}"
-                                    @if ((isset($reg) && $reg->$opcionais_id==$opcional->id) 
-                                    or old('$opcionais_id') == $opcional->id) selected @endif>
-                                    {{$opcional->descricao}}</option>
-                            @endforeach   
-                        </select>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="valor">Valor total:</label>
+                    <label for="valor">Valor:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
                         <input type="text" class="form-control" id="valor"
-                               name="valor" 
+                               name="valor" placeholder="Digite o valor da reserva"
                                value="{{$reg->valor or old('valor')}}"
                                required>
                     </div>
@@ -164,12 +147,14 @@ $('#dataInicial').datepicker({
     format: "dd/mm/yyyy",
     language: "pt-BR",
     startDate: '+0d',
+    orientation: "bottom",
     autoclose: true
 });
 $('#dataFinal').datepicker({
     format: "dd/mm/yyyy",
     language: "pt-BR",
     startDate: '+0d',
+    orientation: "bottom",
     autoclose: true
 });
 $(document).ready(function () {

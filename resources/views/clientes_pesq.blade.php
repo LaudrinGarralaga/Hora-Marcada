@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Pesquisa de Clientes </h2>
+    <h2> Pesquisa de clientes </h2>
 </div>
 
 <div class='col-sm-1'>
@@ -43,7 +43,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Telefone</th>
@@ -54,7 +53,6 @@
                 <tbody>
                     @foreach($clientes as $cliente)
                     <tr>
-                        <td style="text-align: center">{{$cliente->id}}</td>
                         <td>{{$cliente->nome}}</td>
                         <td>{{$cliente->email}}</td>
                         <td>{{$cliente->telefone}}</td>
@@ -78,8 +76,8 @@
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $clientes->links() }}
             <div class="box-footer"></div>
+            {{ $clientes->links() }}
         </div>
     </div>
 </div>

@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Pesquisa de Opcionais </h2>
+    <h2> Pesquisa de opcionais </h2>
 </div>
 
 <div class='col-sm-1'>
@@ -44,9 +44,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Descrição</th>
-                        <th>Valor</th>
+                        <th>Valor R$</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -54,7 +53,6 @@
                 <tbody>
                     @foreach($opcionais as $opcional)
                     <tr>
-                        <td style="text-align: center">{{$opcional->id}}</td>
                         <td>{{$opcional->descricao}}</td>
                         <td>{{$opcional->valor}}</td>
                         <td>
@@ -72,12 +70,11 @@
                             </form> &nbsp;&nbsp;
                         </td>
                     </tr>
-
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $opcionais->links() }}
             <div class="box-footer"></div>
+            {{ $opcionais->links() }}
         </div>
     </div>
 </div>

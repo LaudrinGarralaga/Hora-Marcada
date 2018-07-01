@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Opcional extends Model {
 
-    protected $fillable = array('descricao', 'valor');
-    protected $table = "opcionais";
+    Protected $fillable = array('descricao', 'valor');
     public $timestamps = false;
 
 }

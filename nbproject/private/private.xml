@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/resources/views/permanentes_list.blade.php</file>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/app/Permanente.php</file>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/database/factories/ModelFactory.php</file>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/public/index.php</file>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/app/Cliente.php</file>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/app/Http/Controllers/PermanenteController.php</file>
-            <file>file:/C:/xampp/htdocs/cpte.Laudrin/Hora-Marcada/database/migrations/2014_10_12_000000_create_users_table.php</file>
+            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/horarios_pesq.blade.php</file>
+            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/reservas_pesq.blade.php</file>
+            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/public/.htaccess</file>
+            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/opcionais_pesq.blade.php</file>
+            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/permanentes_pesq.blade.php</file>
+            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/clientes_pesq.blade.php</file>
         </group>
     </open-files>
 </project-private>

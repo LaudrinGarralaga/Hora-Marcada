@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class="col-sm-11">
-    <h2> Reservas </h2>
+    <h2> Lista de reservas </h2>
 </div>
 @stop
 
@@ -37,8 +37,8 @@
 
                     @foreach($reservas as $reserva)
                     <tr>
-                        <td>{{$reserva->cliente}}</td>
-                        <td>{{$reserva->horario}}</td>
+                        <td>{{$reserva->cliente->nome}}</td>
+                        <td>{{$reserva->horario->hora}}</td>
                         <td>{{$reserva->data}}</td>
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
@@ -52,16 +52,15 @@
                                 {{csrf_field()}}
                                 <button type="submit"
                                         class="btn btn-danger"> Excluir </button>
-                            </form> &nbsp;&nbsp;
+                            </form> 
                         </td>
                     </tr>
                     @endforeach        
                 </tbody>
             </table>    
-            
             <div class="box-footer"></div>
+            {{ $reservas->links() }}
         </div>
     </div>
-    {{ $reservas->links() }}
 </div>
 @stop

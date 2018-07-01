@@ -7,7 +7,5 @@
 @stop
 
 @section('content')
-
 <h4>Seja bem vido ao Hora Marcada, aqui você gerencia sua quadra esportiva.</h4>
-
 @stop

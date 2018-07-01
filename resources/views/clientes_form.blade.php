@@ -6,9 +6,9 @@
 
 <div class='col-sm-11'>
     @if ($acao == 1)
-    <h2> Cadastro cliente </h2>
+    <h2> Cadastro de cliente </h2>
     @else
-    <h2> Alterar dados do cliente </h2>
+    <h2> Alteração de cliente </h2>
     @endif
 </div>
 <div class='col-sm-1'>
@@ -75,8 +75,7 @@
                         </div>
                         <input type="email" class="form-control" id="email"
                                name="email" placeholder="Digite o email do cliente"
-                               value="{{$reg->email or old('email')}}"
-                               required>
+                               value="{{$reg->email or old('email')}}">
                     </div>
                 </div>
             </div>
@@ -87,5 +86,31 @@
         </form>    
     </form>
 </div>
+@endsection
+
+@section('js')
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
+<script src="{{asset('view-source:https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js')}}"></script>
+<script src="{{asset('js/jquery.maskedinput.js')}}"></script> 
+
+<script>
+$(document).ready(function () {
+    jQuery("#telefone")
+            .mask("(99) 9999-9999?9")
+            .focusout(function (event) {
+                var target, phone, element;
+                target = (event.currentTarget) ? event.currentTarget : event.srcElement;
+                phone = target.value.replace(/\D/g, '');
+                element = $(target);
+                element.unmask();
+                if (phone.length > 10) {
+                    element.mask("(99) 99999-999?9");
+                } else {
+                    element.mask("(99) 9999-9999?9");
+                }
+            });
+
+});
+</script>
 @endsection
 

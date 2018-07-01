@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Opcionais </h2>
+    <h2> Lista de Opcionais </h2>
 </div>
 @stop
 
@@ -24,12 +24,11 @@
     <div class="box">
         <div class="box-header"></div>
         <div class="box-body">
-
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Descrição</th>
-                        <th>Valor</th>
+                        <th>Valor R$</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -51,14 +50,14 @@
                                 {{csrf_field()}}
                                 <button type="submit"
                                         class="btn btn-danger"> Excluir </button>
-                            </form> &nbsp;&nbsp;
+                            </form>
                         </td>
                     </tr>
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $opcionais->links() }}
             <div class="box-footer"></div>
+            {{ $opcionais->links() }}
         </div>
     </div>
 </div>

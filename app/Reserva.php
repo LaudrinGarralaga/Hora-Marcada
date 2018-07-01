@@ -6,27 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model {
 
-    protected $fillable = array('data', 'valor', 'horarios_id', 'clientes_id', 'users_id');
-    protected $table = "reservas";
+    protected $fillable = array('data', 'compareceu', 'pontos', 'valor', 'bonificacao', 'horario_id', 'cliente_id', 'user_id');
     public $timestamps = false;
 
-    public function horario() {
-
+    public function Horario() {
         return $this->belongsTo('App\Horario');
     }
 
-    public function opcional() {
-
-        return $this->belongsTo('App\opcional');
+    public function Opcional() {
+        return $this->belongsTo('App\Opcional');
     }
 
-    public function cliente() {
-
+    public function Cliente() {
         return $this->belongsTo('App\Cliente');
     }
 
     public function User() {
-
         return $this->belongsTo('App\User');
     }
 

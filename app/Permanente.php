@@ -6,27 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permanente extends Model {
 
-    protected $fillable = array('dataInicial', 'dataFinal', 'valor', 'horarios_id', 'clientes_id', 'users_id');
-    protected $table = "permanentes";
+    protected $fillable = array('dataInicial', 'dataFinal', 'valor', 'horario_id', 'cliente_id', 'user_id');
     public $timestamps = false;
 
-    public function horario() {
-
+    public function Horario() {
         return $this->belongsTo('App\Horario');
     }
-    
-    public function opcional() {
 
+    public function Opcional() {
         return $this->belongsTo('App\Opcional');
     }
 
-    public function cliente() {
-
+    public function Cliente() {
         return $this->belongsTo('App\Cliente');
     }
 
     public function User() {
-
         return $this->belongsTo('App\User');
     }
 

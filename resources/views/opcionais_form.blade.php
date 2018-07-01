@@ -58,7 +58,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
-                        <input type="number" class="form-control" id="valor"
+                        <input type="text" class="form-control" id="valor"
                                name="valor" placeholder="Digite a valor do opcional"
                                value="{{$reg->valor or old('valor')}}"
                                required>
@@ -71,5 +71,6 @@
             </div>
         </form>    
     </form>
-</div>    
+</div>
+
 @stop

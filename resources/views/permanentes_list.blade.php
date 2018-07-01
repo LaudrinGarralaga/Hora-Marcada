@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Reservas permanentes </h2>
+    <h2> Lista de permanentes </h2>
 </div>
 
 @stop
@@ -38,8 +38,8 @@
                 <tbody>
                     @foreach($permanentes as $permanente)
                     <tr>
-                        <td>{{$permanente->cliente->}}</td>
-                        <td>{{$permanente->hora}}</td>
+                        <td>{{$permanente->cliente->nome}}</td>
+                        <td>{{$permanente->horario->hora}}</td>
                         <td>{{$permanente->dataInicial}}</td>
                         <td>{{$permanente->dataFinal}}</td>
                         <td>
@@ -60,8 +60,8 @@
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $permanentes->links() }}
             <div class="box-footer"></div>
+            {{ $permanentes->links() }}
         </div>
     </div>
 </div>

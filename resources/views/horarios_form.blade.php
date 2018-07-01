@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="valor">Valors:</label>
+                        <label for="valor">Valor:</label>
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <i class="fa fa-usd"></i>
@@ -73,3 +73,15 @@
 </div>
 
 @stop
+
+@section('js')
+ 
+<script src="{{asset('/js/jquery.mask.min.js')}}"></script> 
+
+<script>
+
+$(document).ready(function () {
+    $('#hora').mask("99:99 - 99:99" );
+});
+</script>
+@endsection

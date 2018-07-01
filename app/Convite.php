@@ -6,23 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Convite extends Model {
 
-    protected $fillable = array('convidados_id', 'reservas_id', 'clientes_id');
-    protected $table = "convites";
+    protected $fillable = array('convidado_id', 'reserva_id', 'cliente_id');
     public $timestamps = false;
 
-    public function convidado() {
-
-        return $this->belongsTo('App\convidado');
+    public function Convidado() {
+        return $this->belongsTo('App\Convidado');
     }
 
-    public function reserva() {
-
-        return $this->belongsTo('App\reserva');
+    public function Reserva() {
+        return $this->belongsTo('App\Reserva');
     }
 
-    public function clliente() {
-
-        return $this->belongsTo('App\cliente');
+    public function Cliente() {
+        return $this->belongsTo('App\Cliente');
     }
 
 }

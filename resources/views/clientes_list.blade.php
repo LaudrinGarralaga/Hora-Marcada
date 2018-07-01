@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Clientes </h2>
+    <h2> Lista de Clientes </h2>
 </div>
 @stop
 
@@ -57,8 +57,8 @@
                     @endforeach
                 </tbody>
             </table>    
-            {{ $clientes->links() }}      
             <div class="box-footer"></div>
+            {{ $clientes->links() }}      
         </div>
     </div>
 </div>

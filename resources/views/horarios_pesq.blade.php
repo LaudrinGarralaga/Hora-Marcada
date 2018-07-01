@@ -5,7 +5,7 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    <h2> Pesquisa de Horários </h2>
+    <h2> Pesquisa de horários </h2>
 </div>
 
 <div class='col-sm-1'>
@@ -43,9 +43,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Código</th>
                         <th>Hora</th>
-                        <th>Valor</th>
+                        <th>Valor R$</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -53,7 +52,6 @@
                 <tbody>
                     @foreach($horarios as $horario)
                     <tr>
-                        <td style="text-align: center">{{$horario->id}}</td>
                         <td>{{$horario->hora}}</td>
                         <td>{{$horario->valor}}</td>
                         <td>
@@ -76,12 +74,22 @@
                     @endforeach        
                 </tbody>
             </table>    
-            {{ $horarios->links() }}
             <div class="box-footer"></div>
+            {{ $horarios->links() }}
         </div>
     </div>
 </div>
-
 @stop
+
+@section('js')
+<script src="{{asset('/js/jquery.mask.min.js')}}"></script> 
+
+<script>
+
+                                      $(document).ready(function () {
+                                          $('#hora').mask("99:99 - 99:99");
+                                      });
+</script>
+@endsection
 
 

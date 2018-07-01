@@ -49,8 +49,8 @@
                         <select class="form-control" id="clientes_id" name="clientes_id">
                             @foreach ($clientes as $cliente)
                             <option value="{{$cliente->id}}"
-                                    @if ((isset($reg) && $reg->clientes_id==$cliente->id) 
-                                    or old('clientes_id') == $cliente->id) selected @endif>
+                                    @if ((isset($reg) && $reg->cliente_id==$cliente->id) 
+                                    or old('cliente_id') == $cliente->id) selected @endif>
                                     {{$cliente->nome}}</option>
                             @endforeach       
                         </select>
@@ -81,41 +81,24 @@
                         <select class="form-control" id="horarios_id" name="horarios_id">
                             @foreach ($horarios as $horario)
                             <option value="{{$horario->id}}"
-                                    @if ((isset($reg) && $reg->horarios_id==$horario->id) 
-                                    or old('horarios_id') == $horario->id) selected @endif>
+                                    @if ((isset($reg) && $reg->horario_id==$horario->id) 
+                                    or old('horario_id') == $horario->id) selected @endif>
                                     {{$horario->hora}}</option>
                             @endforeach       
                         </select>
                     </div>
                 </div>
             </div>
+
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label>Opcionais:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="glyphicon glyphicon-th-list"></i>
-                        </div>
-                        <select name="framework" id="framework" class="form-control selectpicker" data-live-search="true" multiple>
-                            @foreach ($opcionais as $opcional)
-                            <option value="{{$opcional->id}}"
-                                    @if ((isset($reg) && $reg->$opcionais_id==$opcional->id) 
-                                    or old('$opcionais_id') == $opcional->id) selected @endif>
-                                    {{$opcional->descricao}}</option>
-                            @endforeach   
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group">
-                    <label for="valor">Valor total:</label>
+                    <label for="valor">Valor:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
                         <input type="text" class="form-control" id="valor"
-                               name="valor" 
+                               name="valor" placeholder="Digite o valor da reserva"
                                value="{{$reg->valor or old('valor')}}"
                                required>
                     </div>
@@ -134,26 +117,21 @@
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')}}"></script>
 <link href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')}}" rel="stylesheet" >
 <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
-<link href="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css')}}" rel="stylesheet">
-<script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js')}}"></script>
-
 
 <link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
-<script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script> 
-<script src="{{asset('js/bootstrap-select.min.js')}}"></script> 
+<script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>  
 <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}" charset="UTF-8"></script>
-<script src="{{asset('../../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+
 
 <script>
 $('#data').datepicker({
     format: "dd/mm/yyyy",
     language: "pt-BR",
     startDate: '+0d',
+    orientation: "bottom",
     autoclose: true
 });
-$(document).ready(function () {
-    $('#telefone').mask('(00)0000-0000');
-});
+
 $(document).ready(function () {
     $('.selectpicker').selectpicker();
 
