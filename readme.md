@@ -1,5 +1,5 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
+<<<<<<< HEAD:readme.md
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
@@ -58,3 +58,35 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+![logo](http://sisdia.abmes.org.br/images/logo/5000_Logo.jpg)
+# **Hora Marcada - Aplicativo e sistema web para locação de uma quadra esportiva** 
+## **Desenvolvedor do projeto** 
+  
+  - Láudrin Rei Garralaga  
+  
+## **E-mail para contato** 
+
+   - laudrin.garralaga@outlook.com   
+ 
+ ## **Objetivo** 
+ 
+ O projeto que atualmente se encontra em desenvolvimento tem como o ojetivo a criação de um aplicativo/Sistema Web capaz de realizar a locação de uma quadra esportiva, permitindo que o locatário possa convidar seus amigos através do mesmo.
+ 
+ ## **Tecnologias utilizadas** 
+ 
+  - [PHP 7.0](http://www.php.net/)
+  - [MySQL 5.6](https://www.mysql.com/)
+  - [Laravel 5.4](https://laravel.com/)
+  - [Composer 1.4.2](https://getcomposer.org/)
+  - [Java/android](https://developer.android.com/studio/index.html?hl=pt-br)
+  
+  
+  ## **Acesso ao Sistema**
+  
+  Para acessar o sistema acesse o link a baixo, caso seja um novo usuário basta se registrar.
+  
+ - [Hora Marada](http://horamarcada.ga/)
+  
+  
+>>>>>>> 16a79bd036c1c235ac756f7eae7a62aba05ee725:README.md
