@@ -25,5 +25,5 @@
   
   Para acessar o sistema acesse o link a baixo, caso seja um novo usuário basta se registrar.
   
- - [Hora Marada](http://horamarcada.ga/)
+ - [Hora Marcada](http://horamarcada.ga/)
 
