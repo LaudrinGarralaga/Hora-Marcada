@@ -3,12 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/horarios_pesq.blade.php</file>
-            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/reservas_pesq.blade.php</file>
-            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/public/.htaccess</file>
-            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/opcionais_pesq.blade.php</file>
-            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/permanentes_pesq.blade.php</file>
-            <file>file:/C:/xampp/htdocs/SIS-HoraMarcada/resources/views/clientes_pesq.blade.php</file>
+            <file>file:/C:/xampp/htdocs/Hora-Marcada/resources/views/reservas_form.blade.php</file>
         </group>
     </open-files>
 </project-private>

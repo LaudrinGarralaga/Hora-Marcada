@@ -16,7 +16,7 @@
        role="button">Voltar</a>
 </div>
 
-@endsection
+@stop
 
 @section('content')
 <div class='col-sm-12'>
@@ -111,17 +111,13 @@
         </form>    
     </form>
 </div>
-@endsection
+@stop
 
 @section('js')
-<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js')}}"></script>
-<link href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')}}" rel="stylesheet" >
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
-
-<link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>  
 <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}" charset="UTF-8"></script>
-
 
 <script>
 $('#data').datepicker({
@@ -131,12 +127,28 @@ $('#data').datepicker({
     orientation: "bottom",
     autoclose: true
 });
-
-$(document).ready(function () {
-    $('.selectpicker').selectpicker();
-
-});
 </script>
-@endsection
+<script>
+    $(document).ready(function () {
+        $('#horarios_id').click(function () {
+            $.ajax({
+                url: 'http://localhost/ws/' +
+                        'function.php?horarios_id=' + $('#horarios_id').val() +
+                        '&formato=json',
+                dataType: 'json',
+
+                success: function (data) {
+                    $('#valor').val(data.valor);
+                }
+            });
+        });
+    });
+</script>
+@stop
+
+@section('css')
+<link href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')}}" rel="stylesheet"/>
+<link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
+@stop
 
 
