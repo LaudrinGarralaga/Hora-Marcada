@@ -9,7 +9,7 @@ class ConvidadoController extends Controller {
 
     public function index() {
 
-        $convidados = Convidado::paginate(3);
+        $convidados = Convidado::All();
         return view('convidados_list', compact('convidados'));
     }
 
@@ -60,35 +60,6 @@ class ConvidadoController extends Controller {
             return redirect()->route('convidados.index')
                             ->with('status', $conv->nome . ' Excluído!');
         }
-    }
-
-    public function pesq() {
-
-        $convidados = Convidado::paginate(3);
-        return view('convidados_pesq', compact('convidados'));
-    }
-
-    public function filtros(Request $request) {
-        $nome = $request->nome;
-
-        $filtro = array();
-        if (!empty($nome)) {
-            array_push($filtro, array('nome', 'like', '%' . $nome . '%'));
-        }
-
-        $convidados = Convidado::where($filtro)
-                ->orderBy('nome')
-                ->paginate(3);
-        return view('convidados_pesq', compact('convidados'));
-    }
-
-    public function filtros2(Request $request) {
-        $nome = $request->nome;
-
-        $convidados = Convidado::where('nome', 'like', '%' . $nome . '%')
-                ->orderBy('nome')
-                ->paginate(3);
-        return view('convidados_pesq', compact('convidados'));
     }
 
 }

@@ -103,11 +103,7 @@ return [
                     'icon' => 'calendar',
                     'url' => 'reservas',
                 ],
-                [
-                    'text' => 'Permanente',
-                    'icon' => 'calendar',
-                    'url' => 'permanentes',
-                ],
+
             ],
         ],
         [
@@ -129,39 +125,14 @@ return [
                     'icon' => 'clock-o',
                     'url' => 'horarios',
                 ],
-            ],
-        ],
-        [
-            'text' => 'Pesquisar',
-            'icon' => 'search',
-            'submenu' => [
                 [
-                    'text' => 'Clientes',
-                    'icon' => 'user',
-                    'url' => 'clientespesq',
-                ],
-                [
-                    'text' => 'Opcionais',
-                    'icon' => 'list',
-                    'url' => 'opcionaispesq',
-                ],
-                [
-                    'text' => 'Horários',
-                    'icon' => 'clock-o',
-                    'url' => 'horariospesq',
-                ],
-                [
-                    'text' => 'Dia',
-                    'icon' => 'calendar',
-                    'url' => 'reservaspesq',
-                ],
-                [
-                    'text' => 'Permanente',
-                    'icon' => 'calendar',
-                    'url' => 'permanentespesq',
+                    'text' => 'Quadras',
+                    'icon' => 'square',
+                    'url' => 'quadras',
                 ],
             ],
         ],
+
     ],
     /*
       |--------------------------------------------------------------------------

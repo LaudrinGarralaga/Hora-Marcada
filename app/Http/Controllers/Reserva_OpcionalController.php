@@ -11,7 +11,7 @@ class Reserva_OpcionalController extends Controller {
 
     public function index() {
 
-        $reservaOpc = Reserva_Opcional::paginate(3);
+        $reservaOpc = Reserva_Opcional::All();;
         return view('reservaOpc_list', compact('reservaOpc'));
     }
 
@@ -62,35 +62,6 @@ class Reserva_OpcionalController extends Controller {
             return redirect()->route('reservaOpc.index')
                             ->with('status', $per->data . ' Excluído!');
         }
-    }
-
-    public function pesq() {
-
-        $reservaOpc = Reserva_Opcional::paginate(3);
-        return view('reservaOpc_pesq', compact('reservaOpc'));
-    }
-
-    public function filtros(Request $request) {
-        $data = $request->data;
-
-        $filtro = array();
-        if (!empty($data)) {
-            array_push($filtro, array('data', 'like', '%' . $data . '%'));
-        }
-
-        $reservaOpc = Reserva_Opcional::where($filtro)
-                ->orderBy('data')
-                ->paginate(3);
-        return view('reservaOpc_pesq', compact('reservaOpc'));
-    }
-
-    public function filtros2(Request $request) {
-        $data = $request->data;
-
-        $reservaOpc = Reserva_Opcional::where('data', 'like', '%' . $data . '%')
-                ->orderBy('data')
-                ->paginate(3);
-        return view('reservaOpc_pesq', compact('reservaOpc'));
     }
 
 }

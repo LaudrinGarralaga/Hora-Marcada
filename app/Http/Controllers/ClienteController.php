@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use App\Http\Requests\ClienteStoreUpdateFormRequest;
 
 class ClienteController extends Controller {
 
     public function index() {
 
-        $clientes = Cliente::paginate(5);
+        $clientes = Cliente::All();
         return view('clientes_list', compact('clientes'));
     }
 
@@ -20,19 +21,17 @@ class ClienteController extends Controller {
         return view('clientes_form', compact('acao'));
     }
 
-    public function store(Request $request) {
-        $this->validate($request, [
-            'nome' => 'required|unique:clientes|min:3|max:45',
-            'telefone' => 'required|unique:clientes',
-            'email' => 'unique:clientes'
-        ]);
+    public function store(ClienteStoreUpdateFormRequest $request) {
+        
 
         // obtém os dados do form
         $dados = $request->all();
         $inc = Cliente::create($dados);
         if ($inc) {
             return redirect()->route('clientes.index')
-                            ->with('status', $request->nome . ' Castrado(a)!');
+                            ->with('success', $request->nome . ' Castrado(a) com sucesso!');
+        } else {
+            return redirect()->back->with('error', 'Falha ao cadastrar!');
         }
     }
 
@@ -47,11 +46,7 @@ class ClienteController extends Controller {
         return view('clientes_form', compact('reg', 'acao'));
     }
 
-    public function update(Request $request, $id) {
-        $this->validate($request, [
-            'nome' => 'required|min:3|max:45',
-            'telefone' => 'required'
-        ]);
+    public function update(ClienteStoreUpdateFormRequest $request, $id) {
 
         // obtém os dados do form
         $dados = $request->all();
@@ -61,7 +56,9 @@ class ClienteController extends Controller {
         $alt = $reg->update($dados);
         if ($alt) {
             return redirect()->route('clientes.index')
-                            ->with('status', $request->nome . ' Alterado(a)!');
+                            ->with('success', $request->nome . ' Alterado(a) com sucesso!');
+        } else {
+            return redirect()->back->with('error', 'Falha ao alterar!');
         }
     }
 
@@ -69,37 +66,11 @@ class ClienteController extends Controller {
         $cli = Cliente::find($id);
         if ($cli->delete()) {
             return redirect()->route('clientes.index')
-                            ->with('status', $cli->nome . ' Excluído(a)!');
+            ->with('success', $cli->nome . ' Excluído(a) com sucesso!');
+        } else {
+           return redirect()->back->with('error', 'Falha ao alterar!');
         }
-    }
-
-    public function pesq() {
-
-        $clientes = Cliente::paginate(5);
-        return view('clientes_pesq', compact('clientes'));
-    }
-
-    public function filtros(Request $request) {
-        $nome = $request->nome;
-
-        $filtro = array();
-        if (!empty($nome)) {
-            array_push($filtro, array('nome', 'like', '%' . $nome . '%'));
-        }
-
-        $clientes = Cliente::where($filtro)
-                ->orderBy('nome')
-                ->paginate(5);
-        return view('clientes_pesq', compact('clientes'));
-    }
-
-    public function filtros2(Request $request) {
-        $nome = $request->nome;
-
-        $clientes = Cliente::where('nome', 'like', '%' . $nome . '%')
-                ->orderBy('nome')
-                ->paginate(5);
-        return view('clientes_pesq', compact('clientes'));
+            
     }
 
 }

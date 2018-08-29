@@ -4,19 +4,18 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHorariosTable extends Migration {
-
+class CreateQuadrasTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-        Schema::create('horarios', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('quadras', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hora', 45)->unique();
-            $table->decimal('valor', 9, 2);
-            //$table->timestamps();
+            $table->string('tipo', 45)->unique();
         });
     }
 
@@ -25,8 +24,8 @@ class CreateHorariosTable extends Migration {
      *
      * @return void
      */
-    public function down() {
-        Schema::dropIfExists('horarios');
+    public function down()
+    {
+        Schema::dropIfExists('quadras');
     }
-
 }

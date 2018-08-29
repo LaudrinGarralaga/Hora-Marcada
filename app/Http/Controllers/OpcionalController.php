@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Opcional;
+use App\Http\Requests\OpcionalStoreUpdateFormRequest;
 
 class OpcionalController extends Controller {
 
     public function index() {
 
-        $opcionais = Opcional::paginate(5);
+        $opcionais = Opcional::All();
         return view('opcionais_list', compact('opcionais'));
     }
 
@@ -20,19 +21,18 @@ class OpcionalController extends Controller {
         return view('opcionais_form', compact('acao'));
     }
 
-    public function store(Request $request) {
-        $this->validate($request, [
-            'descricao' => 'required|unique:opcionals|min:4|max:45',
-            'valor' => 'required'
-        ]);
+    public function store(OpcionalStoreUpdateFormRequest $request) {
 
         // obtém os dados do form
         $dados = $request->all();
         $inc = Opcional::create($dados);
         if ($inc) {
             return redirect()->route('opcionais.index')
-                            ->with('status', $request->descricao . ' Incluído(a)!');
+                            ->with('success', $request->descricao . ' Castrado(a) com sucesso!');
+        } else {
+            return redirect()->back->with('error', 'Falha ao cadastrar!');
         }
+        
     }
 
     public function show($id) {
@@ -46,11 +46,7 @@ class OpcionalController extends Controller {
         return view('opcionais_form', compact('reg', 'acao'));
     }
 
-    public function update(Request $request, $id) {
-        $this->validate($request, [
-            'descricao' => 'required|min:4|max:45',
-            'valor' => 'required'
-        ]);
+    public function update(OpcionalStoreUpdateFormRequest $request, $id) {
 
         // obtém os dados do form
         $dados = $request->all();
@@ -60,7 +56,9 @@ class OpcionalController extends Controller {
         $alt = $reg->update($dados);
         if ($alt) {
             return redirect()->route('opcionais.index')
-                            ->with('status', $request->descricao . ' Alterado(a)!');
+                            ->with('success', $request->descricao . ' Alterado(a) com sucesso!');
+        } else {
+            return redirect()->back->with('error', 'Falha ao alterar!');
         }
     }
 
@@ -68,37 +66,10 @@ class OpcionalController extends Controller {
         $reg = Opcional::find($id);
         if ($reg->delete()) {
             return redirect()->route('opcionais.index')
-                            ->with('status', $reg->descricao . ' Excluído(a)!');
+            ->with('success', $reg->descricao . ' Excluído(a) com sucesso!');
+        } else {
+           return redirect()->back->with('error', 'Falha ao alterar!');
         }
-    }
-
-    public function pesq() {
-
-        $opcionais = Opcional::paginate(5);
-        return view('opcionais_pesq', compact('opcionais'));
-    }
-
-    public function filtros(Request $request) {
-        $descricao = $request->descricao;
-
-        $filtro = array();
-        if (!empty($descricao)) {
-            array_push($filtro, array('descricao', 'like', '%' . $descricao . '%'));
-        }
-
-        $opcionais = Opcional::where($filtro)
-                ->orderBy('descricao')
-                ->paginate(5);
-        return view('opcionais_pesq', compact('opcionais'));
-    }
-
-    public function filtros2(Request $request) {
-        $descricao = $request->descricao;
-
-        $opcionais = Opcional::where('descricao', 'like', '%' . $descricao . '%')
-                ->orderBy('nome')
-                ->paginate(5);
-        return view('opcionais_pesq', compact('opcionais'));
     }
 
 }

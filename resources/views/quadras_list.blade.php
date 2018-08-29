@@ -1,14 +1,14 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Clientes')
+@section('title', 'Lista de Quadras')
 
 @section('content_header')
 
 <div class="bred">
     <a href="{{route('home')}}" class="bred">Home ></a>
-    <a href="#" class="bred">Lista de Clientes</a>
-    <a href="{{route('clientes.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 800px"><i class="fa fa-plus"></i> Novo Cliente</a> 
+    <a href="#" class="bred">Lista de Quadras</a>
+    <a href="{{route('quadras.create')}}" class="btn btn-primary" 
+        role="button" style="margin-left: 800px"><i class="fa fa-plus"></i> Nova Quadra</a> 
 </div>
 @stop
 
@@ -18,7 +18,7 @@
 
 <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Lista de clientes</h3>
+            <h3 class="box-title">Lista de quadras</h3>
         </div>
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -39,24 +39,20 @@
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Email</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Telefone</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Tipo</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($clientes as $cliente) 
+                                        @foreach ($quadras as $quadra) 
                                             <tr>
-                                                <td> {{$cliente->nome}} </td>
-                                                <td> {{$cliente->email}} </td>
-                                                <td> {{$cliente->telefone}} </td>
-                                                <td> <a href='{{route('clientes.edit', $cliente->id)}}'
+                                                <td> {{$quadra->tipo}} </td>
+                                                    <td> <a href='{{route('quadras.edit', $quadra->id)}}'
                                                         class='btn btn-warning' 
                                                         role='button'><i class="fa fa-pencil"></i> Alterar </a>
                                                     <form style="display: inline-block"
                                                           method="post"
-                                                          action="{{route('clientes.destroy', $cliente->id)}}"
+                                                          action="{{route('quadras.destroy', $quadra->id)}}"
                                                           onsubmit="return confirm('Confirma Exclusão?')">
                                                         {{ method_field('delete') }}
                                                         {{ csrf_field() }}
@@ -70,9 +66,7 @@
                                     </tbody>
                                     <tfoot>
                                        <tr>
-                                         <th rowspan="1" colspan="1">Nome</th>
-                                         <th rowspan="1" colspan="1">Email</th>
-                                         <th rowspan="1" colspan="1">Telefone</th>
+                                         <th rowspan="1" colspan="1">Tipo</th>
                                          <th rowspan="1" colspan="1">Ações</th>
                                         </tr> 
                                     </tfoot>

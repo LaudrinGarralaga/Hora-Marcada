@@ -10,7 +10,7 @@ use App\Cliente;
 class ReservaController extends Controller {
 
     public function index() {
-        $reservas = Reserva::paginate(5);
+        $reservas = Reserva::All();
         return view('reservas_list', compact('reservas'));
     }
 
@@ -80,35 +80,6 @@ class ReservaController extends Controller {
             return redirect()->route('reservas.index')
                             ->with('status', $res->data . ' Excluído!');
         }
-    }
-
-    public function pesq() {
-        $reservas = Reserva::paginate(5);
-        return view('reservas_pesq', compact('reservas'));
-    }
-
-    public function filtros(Request $request) {
-
-        $data = $request->data;
-
-        $filtro = array();
-        if (!empty($data)) {
-            array_push($filtro, array('data', 'like', '%' . $data . '%'));
-        }
-
-        $reservas = Reserva::where($filtro)
-                ->orderBy('data')
-                ->paginate(5);
-        return view('reservas_pesq', compact('reservas'));
-    }
-
-    public function filtros2(Request $request) {
-        $data = $request->data;
-
-        $reservas = Reserva::where('data', 'like', '%' . $data . '%')
-                ->orderBy('data')
-                ->paginate(5);
-        return view('reservas_pesq', compact('reservas'));
     }
 
 }

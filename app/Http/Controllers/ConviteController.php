@@ -12,7 +12,7 @@ class ConviteController extends Controller {
 
     public function index() {
 
-        $convites = Convite::paginate(3);
+        $convites = Convite::All();
         return view('convites_list', compact('convites'));
     }
 
@@ -63,35 +63,6 @@ class ConviteController extends Controller {
             return redirect()->route('convites.index')
                             ->with('status', $con->nome . ' Excluído!');
         }
-    }
-
-    public function pesq() {
-
-        $convites = Convite::paginate(3);
-        return view('convites_pesq', compact('convites'));
-    }
-
-    public function filtros(Request $request) {
-        $nome = $request->nome;
-
-        $filtro = array();
-        if (!empty($nome)) {
-            array_push($filtro, array('nome', 'like', '%' . $nome . '%'));
-        }
-
-        $convites = Convite::where($filtro)
-                ->orderBy('nome')
-                ->paginate(3);
-        return view('convites_pesq', compact('convites'));
-    }
-
-    public function filtros2(Request $request) {
-        $nome = $request->nome;
-
-        $convites = Convite::where('nome', 'like', '%' . $nome . '%')
-                ->orderBy('nome')
-                ->paginate(3);
-        return view('convites_pesq', compact('convites'));
     }
 
 }

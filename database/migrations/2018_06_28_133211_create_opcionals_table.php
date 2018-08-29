@@ -14,7 +14,7 @@ class CreateOpcionalsTable extends Migration {
     public function up() {
         Schema::create('opcionals', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('descricao', 45);
+            $table->string('descricao', 45)->unique();
             $table->decimal('valor', 9, 2);
             //$table->timestamps();
         });

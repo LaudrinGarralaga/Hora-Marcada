@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
+use App\Reserva;
+use App\Horario;
+use App\Opcional;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalClientes = Cliente::count();
+        $totalReservas = Reserva::count();
+        $totalHorarios = Horario::count();
+        $totalOpcionais = Opcional::count();
+        return view('home', compact('totalClientes', 'totalReservas', 'totalHorarios', 'totalOpcionais', 'reservas'));
     }
 }

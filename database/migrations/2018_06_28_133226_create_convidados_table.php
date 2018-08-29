@@ -16,7 +16,7 @@ class CreateConvidadosTable extends Migration {
             $table->increments('id');
             $table->string('nome', 45);
             $table->string('telefone', 45);
-            $table->string('email', 45);
+            $table->string('email', 45)->nullable();
             //$table->timestamps();
         });
     }
