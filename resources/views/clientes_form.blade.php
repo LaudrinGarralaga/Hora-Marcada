@@ -51,7 +51,7 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="col-sm-12">
+            <div class="col-sm-8">
                 <div class="form-group">
                     <label for="nome">Nome do cliente:</label>
                     <div class="input-group">
@@ -87,6 +87,19 @@
                         <input type="email" class="form-control" id="email"
                                name="email" placeholder="Digite o email do cliente"
                                value="{{$reg->email or old('email')}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="pontos">Pontos:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calculator"></i>
+                        </div>
+                        <input type="number" class="form-control" id="pontos"
+                               name="pontos" placeholder="Pontos do cliente"
+                               value="{{$reg->pontos or old('pontos')}}" min="0" max="10">
                     </div>
                 </div>
             </div>

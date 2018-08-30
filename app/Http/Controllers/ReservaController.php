@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Reserva;
 use App\Horario;
 use App\Cliente;
+use App\Quadra;
 
 class ReservaController extends Controller {
 
@@ -20,22 +21,19 @@ class ReservaController extends Controller {
         // obtém os horários e clientes para exibir no form de cadastro
         $horarios = Horario::orderBy('hora')->get();
         $clientes = Cliente::orderBy('nome')->get();
+        $quadras = Quadra::orderBy('tipo')->get();
         // $opcionais = Opcional::orderBy('descricao')->get();
-        return view('reservas_form', compact('acao', 'horarios', 'clientes'));
+        return view('reservas_form', compact('acao', 'horarios', 'clientes', 'quadras'));
     }
 
     public function store(Request $request) {
-        $this->validate($request, [
-            'data' => 'required',
-            'horarios_id' => 'required',
-            'valor' => 'required',
-            'clientes_id' => 'required'
-        ]);
+        
         $reserva = new Reserva;
         $reserva->data = $request->data;
         $reserva->valor = $request->valor;
         $reserva->horario_id = $request->horarios_id;
         $reserva->cliente_id = $request->clientes_id;
+        $reserva->quadra_id = $request->quadra_id;
         $reserva->user_id = \Illuminate\Support\Facades\Auth::id();
         $reserva->save();
         if ($reserva) {
@@ -56,8 +54,9 @@ class ReservaController extends Controller {
         // obtém os horários e clientes para exibir no form de cadastro
         $horarios = Horario::orderBy('hora')->get();
         $clientes = Cliente::orderBy('nome')->get();
+        $quadras = Quadra::orderBy('tipo')->get();
         //$opcionais = Opcional::orderBy('descricao')->get();
-        return view('reservas_form', compact('reg', 'acao', 'horarios', 'clientes'));
+        return view('reservas_form', compact('reg', 'acao', 'horarios', 'clientes', 'quadras'));
     }
 
     public function update(Request $request, $id) {

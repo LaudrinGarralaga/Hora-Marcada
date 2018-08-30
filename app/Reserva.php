@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva extends Model {
 
-    protected $fillable = array('data', 'compareceu', 'pontos', 'valor', 'bonificacao', 'horario_id', 'cliente_id', 'user_id');
+    protected $fillable = array('data', 'compareceu', 'pontos', 'valor', 'bonificacao', 'horario_id', 'cliente_id', 'user_id', 'quadra_id');
     public $timestamps = false;
 
     public function Horario() {
@@ -19,6 +19,10 @@ class Reserva extends Model {
 
     public function Cliente() {
         return $this->belongsTo('App\Cliente');
+    }
+
+    public function Quadra() {
+        return $this->belongsTo('App\Quadra');
     }
 
     public function User() {

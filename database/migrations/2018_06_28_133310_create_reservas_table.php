@@ -22,6 +22,7 @@ class CreateReservasTable extends Migration {
             $table->unsignedInteger('horario_id');
             $table->unsignedInteger('cliente_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('quadra_id');
             //$table->timestamps();
         });
 
@@ -29,6 +30,7 @@ class CreateReservasTable extends Migration {
             $table->foreign('horario_id')->references('id')->on('horarios');
             $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('quadra_id')->references('id')->on('quadras');
         });
     }
 

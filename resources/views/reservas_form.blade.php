@@ -5,16 +5,26 @@
 @section('content_header')
 
 <div class='col-sm-11'>
-    @if ($acao == 1)
-    <h2> Reservar horário </h2>
-    @else
-    <h2> Alteração de reserva </h2>
-    @endif
-</div>
-<div class='col-sm-1'>
-    <a href="{{route('reservas.index')}}" class="btn btn-primary" 
-       role="button">Voltar</a>
-</div>
+        @if ($acao == 1)
+        <div class="bred">
+            <a href="{{route('home')}}" class="bred">Home ></a>
+            <a href="{{route('reservas.index')}}" class="bred">Lista de Reservas ></a>
+            <a href="#" class="bred">Cadastro de Reservas </a>
+        </div>
+        <h2> Cadastro de reserva </h2>
+        @else
+        <div class="bred">
+            <a href="{{route('home')}}" class="bred">Home ></a>
+            <a href="{{route('reservas.index')}}" class="bred">Lista de Reservas ></a>
+            <a href="#" class="bred">Alteração de Reservas </a>
+        </div>
+        <h2> Alteração de reserva </h2>
+        @endif
+    </div>
+    <div class='col-sm-1'>
+        <a href="{{route('reservas.index')}}" class="btn btn-primary" 
+           role="button"><i class="fa fa-arrow-left"></i> Voltar</a>
+    </div>
 
 @stop
 
@@ -32,9 +42,12 @@
 
 
     @if ($acao == 1)
-    <div class="box box-primary"></div>
+    <div class="box box-primary">
+            <div class="box-body">
     <form method="post" action="{{route('reservas.store')}}">
         @else
+        <div class="box box-primary">
+                <div class="box-body">
         <form method="post" action="{{route('reservas.update', $reg->id)}}">
             {!! method_field('put') !!}
             @endif
@@ -46,7 +59,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-user-circle-o"></i>
                         </div>
-                        <select class="form-control" id="clientes_id" name="clientes_id">
+                        <select class="custom-select form-control form-control-sm" id="clientes_id" name="clientes_id">
                             @foreach ($clientes as $cliente)
                             <option value="{{$cliente->id}}"
                                     @if ((isset($reg) && $reg->cliente_id==$cliente->id) 
@@ -57,6 +70,24 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="quadra_id">Quadra:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <select class="form-control" id="quadra_id" name="quadra_id">
+                                @foreach ($quadras as $quadra)
+                                <option value="{{$quadra->id}}"
+                                        @if ((isset($reg) && $reg->quadra_id==$quadra->id) 
+                                        or old('quadra_id') == $quadra->id) selected @endif>
+                                        {{$quadra->tipo}}</option>
+                                @endforeach       
+                            </select>
+                        </div>
+                    </div>
+                </div>
             <div class="col-sm-4">
                 <div class="form-group">
                     <label for="data">Data:</label>
@@ -98,15 +129,15 @@
                             <i class="fa fa-usd"></i>
                         </div>
                         <input type="text" class="form-control" id="valor"
-                               name="valor" placeholder="Digite o valor da reserva"
+                               name="valor" placeholder="Valor da reserva"
                                value="{{$reg->valor or old('valor')}}"
                                required>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary">Enviar</button>        
-                <button type="reset" class="btn btn-warning">Limpar</button>  
+                <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Salvar</button>        
+                <button type="reset" class="btn btn-warning"><i class="fa fa-eraser"></i> Limpar</button>  
             </div>
         </form>    
     </form>
@@ -128,26 +159,10 @@ $('#data').datepicker({
     autoclose: true
 });
 </script>
-<script>
-    $(document).ready(function () {
-        $('#horarios_id').click(function () {
-            $.ajax({
-                url: 'http://localhost/ws/' +
-                        'function.php?horarios_id=' + $('#horarios_id').val() +
-                        '&formato=json',
-                dataType: 'json',
 
-                success: function (data) {
-                    $('#valor').val(data.valor);
-                }
-            });
-        });
-    });
-</script>
 @stop
 
 @section('css')
-<link href="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')}}" rel="stylesheet"/>
 <link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
 @stop
 

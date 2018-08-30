@@ -4,19 +4,19 @@
 
 @section('content_header')
 
-<div class='col-sm-11'>
+    <div class='col-sm-11'>
         @if ($acao == 1)
         <div class="bred">
             <a href="{{route('home')}}" class="bred">Home ></a>
             <a href="{{route('opcionais.index')}}" class="bred">Lista de Opcionais ></a>
-            <a href="#" class="bred">Cadastro de Opcional </a>
+            <a href="#" class="bred">Cadastro de Opcionais </a>
         </div>
         <h2> Cadastro de opcional </h2>
         @else
         <div class="bred">
             <a href="{{route('home')}}" class="bred">Home ></a>
             <a href="{{route('opcionais.index')}}" class="bred">Lista de Opcionais ></a>
-            <a href="#" class="bred">Alteração de Opcional </a>
+            <a href="#" class="bred">Alteração de Opcionais </a>
         </div>
         <h2> Alteração de opcional </h2>
         @endif
