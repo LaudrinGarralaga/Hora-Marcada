@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Hora Marcada')
 
 @section('content_header')
 <h2>Software Hora Marcada</h2>

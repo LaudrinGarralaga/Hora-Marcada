@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-<div class='col-sm-11'>
+    <div class='col-sm-11'>
         @if ($acao == 1)
         <div class="bred">
             <a href="{{route('home')}}" class="bred">Home ></a>

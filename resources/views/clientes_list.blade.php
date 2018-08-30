@@ -54,18 +54,35 @@
                                                 <td> <a href='{{route('clientes.edit', $cliente->id)}}'
                                                         class='btn btn-warning' 
                                                         role='button'><i class="fa fa-pencil"></i> Alterar </a>
-                                                    <form style="display: inline-block"
-                                                          method="post"
-                                                          action="{{route('clientes.destroy', $cliente->id)}}"
-                                                          onsubmit="return confirm('Confirma Exclusão?')">
-                                                        {{ method_field('delete') }}
-                                                        {{ csrf_field() }}
-                                                        <button type="submit"
-                                                                class="btn btn-danger"><i class="fa fa-trash"></i> Excluir </button>
-                                                    </form>              
+                                                        <button class="btn btn-danger" data-catid={{$cliente->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Delete</button>           
                         
                                                 </td>
                                             </tr>
+                                            <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                                    <div class="modal-dialog" role="document">
+                                                      <div class="modal-content">
+                                                        <div class="modal-header">
+                                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                          <h4 class="modal-title text-center" id="myModalLabel">Confirmar Exclusão</h4>
+                                                        </div>
+                                                        <form action="{{route('clientes.destroy', $cliente->id)}}" method="post">
+                                                                {{method_field('delete')}}
+                                                                {{csrf_field()}}
+                                                            <div class="modal-body">
+                                                                  <p class="text-center">
+                                                                      Tem certeza que deseja excluir o registro?
+                                                                  </p>
+                                                                    <input type="hidden" name="category_id" id="cat_id" value="">
+                                                  
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-times"></i> Não, Cancelar</button>
+                                                              <button type="submit" class="btn btn-warning"><i class="fa fa-check"></i> Sim, Deletar</button>
+                                                            </div>
+                                                        </form>
+                                                      </div>
+                                                    </div>
+                                            </div>
                                          @endforeach
                                     </tbody>
                                     <tfoot>

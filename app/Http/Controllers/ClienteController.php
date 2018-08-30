@@ -63,7 +63,7 @@ class ClienteController extends Controller {
     }
 
     public function destroy($id) {
-        $cli = Cliente::find($id);
+    $cli = Cliente::find($id);
         if ($cli->delete()) {
             return redirect()->route('clientes.index')
             ->with('success', $cli->nome . ' Excluído(a) com sucesso!');
