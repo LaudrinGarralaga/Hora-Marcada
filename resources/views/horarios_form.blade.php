@@ -51,8 +51,8 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="box-body">
-                <div class="form-group">
+            
+                <div class="col-sm-12">
                     <div class="form-group">
                         <label for="hora">Hora:</label>
                         <div class="input-group">
@@ -64,6 +64,7 @@
                                    value="{{$reg->hora or old('hora')}}">
                         </div>
                     </div>
+                
                     <div class="form-group">
                         <label for="valor">Valor:</label>
                         <div class="input-group">
@@ -84,7 +85,6 @@
     </form>
 </div>
 </div>
-
 @stop
 
 @section('js')
