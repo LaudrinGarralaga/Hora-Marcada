@@ -17,56 +17,37 @@
 @include('includes.alerts')
    
 <div class="box">
-    <div class="box-header">
-        <h3 class="box-title">Lista de Reservas</h3>
-    </div>
-<<<<<<< HEAD
-    <div class="box-body">
-        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="dataTables_length" id="example1_length">
-                        
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div id="example1_filter" class="dataTables_filter">
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                        <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                                <thead>
-                                    <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Cliente</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Quadra</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Valor</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-=======
-    @endif    
-    <div class="box">
-        <div class="box-header"></div>
+        <div class="box-header">
+            <h3 class="box-title">Lista de Reservas</h3>
+        </div>
         <div class="box-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Quadra</th>
-                        <th>Horário</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-
->>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
+            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="dataTables_length" id="example1_length">
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div id="example1_filter" class="dataTables_filter">
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Cliente</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Quadra</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Valor</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
+                                        </tr>
+                                    </thead>
+        <tbody>
                     @foreach($reservas as $reserva)
                     <tr>
                         <td>{{$reserva->cliente->nome}}</td>
@@ -77,11 +58,7 @@
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
                                class="btn btn-warning" 
-<<<<<<< HEAD
                                role="button">Alterar</a>
-=======
-                               role="button">Alterar</a> &nbsp;&nbsp;
->>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
                                <button class="btn btn-danger" data-catid={{$reserva->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Delete</button> 
                         </td>
                     </tr>
@@ -112,7 +89,6 @@
                     </div>
                     @endforeach        
                 </tbody>
-<<<<<<< HEAD
                 <tfoot>
                     <tr>
                       <th rowspan="1" colspan="1">Cliente</th>
@@ -134,16 +110,8 @@
  </div>
  <div class="col-sm-7">
  </div>
-=======
-            </table>    
-            <div class="box-footer"></div>
-           
-        </div>
-    </div>
->>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
 </div>
-</div>
-</div>
+
 
 </div>
 
