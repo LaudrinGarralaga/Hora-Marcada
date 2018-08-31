@@ -20,6 +20,7 @@
     <div class="box-header">
         <h3 class="box-title">Lista de Reservas</h3>
     </div>
+<<<<<<< HEAD
     <div class="box-body">
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
             <div class="row">
@@ -48,6 +49,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+=======
+    @endif    
+    <div class="box">
+        <div class="box-header"></div>
+        <div class="box-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Quadra</th>
+                        <th>Horário</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+>>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
                     @foreach($reservas as $reserva)
                     <tr>
                         <td>{{$reserva->cliente->nome}}</td>
@@ -58,7 +77,11 @@
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
                                class="btn btn-warning" 
+<<<<<<< HEAD
                                role="button">Alterar</a>
+=======
+                               role="button">Alterar</a> &nbsp;&nbsp;
+>>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
                                <button class="btn btn-danger" data-catid={{$reserva->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Delete</button> 
                         </td>
                     </tr>
@@ -89,6 +112,7 @@
                     </div>
                     @endforeach        
                 </tbody>
+<<<<<<< HEAD
                 <tfoot>
                     <tr>
                       <th rowspan="1" colspan="1">Cliente</th>
@@ -110,6 +134,13 @@
  </div>
  <div class="col-sm-7">
  </div>
+=======
+            </table>    
+            <div class="box-footer"></div>
+           
+        </div>
+    </div>
+>>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
 </div>
 </div>
 </div>

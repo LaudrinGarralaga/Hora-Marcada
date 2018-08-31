@@ -16,7 +16,11 @@
 
 @include('includes.alerts')
 
+<<<<<<< HEAD
  
+=======
+<div class="col-sm-12">   
+>>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Lista de Horários</h3>
@@ -106,6 +110,10 @@
              </div>
          </div>
 </div>
+<<<<<<< HEAD
+=======
+ </div>
+>>>>>>> 644fd32cb67f70c43c6529fb1c13547d7552ee3b
     
  @stop
  
