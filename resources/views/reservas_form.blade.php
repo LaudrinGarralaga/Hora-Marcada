@@ -30,15 +30,7 @@
 
 @section('content')
 <div class='col-sm-12'>
-    @if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif        
+    @include('includes.alerts')        
 
 
     @if ($acao == 1)
@@ -75,7 +67,7 @@
                         <label for="quadra_id">Quadra:</label>
                         <div class="input-group">
                             <div class="input-group-addon">
-                                <i class="fa fa-clock-o"></i>
+                                <i class="fa fa-square"></i>
                             </div>
                             <select class="form-control" id="quadra_id" name="quadra_id">
                                 @foreach ($quadras as $quadra)
@@ -135,6 +127,51 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-4">
+                <div class="form-group"> 
+                    <label for="status">Status:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-info"></i>
+                        </div>
+                        <select class="form-control" id="combustivel" name="status">
+                            <option value="concluído" 
+                        @if ((isset($reg) && $reg->status=="concluído") 
+                            or old('status')) selected @endif>
+                                                Concluído</option>
+                                        <option value="reservado"
+                        @if ((isset($reg) && $reg->status=="reservado") 
+                            or old('status')) selected @endif>                        
+                                                Reservado</option>
+                                        <option value="cancelado"
+                        @if ((isset($reg) && $reg->status=="cancelado") 
+                            or old('status')) selected @endif>
+                                                Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                    <div class="form-group"> 
+                        <label for="permanente">Permanente:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-question"></i>
+                            </div>
+                            <select class="form-control" id="permanente" name="permanente">
+                                <option value="sim" 
+                            @if ((isset($reg) && $reg->permanente=="sim") 
+                                or old('permanente')) selected @endif>
+                                                    Sim</option>
+                                            <option value="nao"
+                            @if ((isset($reg) && $reg->permanente=="não") 
+                                or old('permanente')) selected @endif>                        
+                                                    Não</option>
+                                            
+                            </select>
+                        </div>
+                    </div>
+                </div>
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Salvar</button>        
                 <button type="reset" class="btn btn-warning"><i class="fa fa-eraser"></i> Limpar</button>  

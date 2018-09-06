@@ -19,6 +19,8 @@ class CreateReservasTable extends Migration {
             $table->smallInteger('pontos')->nullable();
             $table->decimal('valor', 9, 2);
             $table->boolean('bonificacao')->nullable();
+            $table->enum('status',['reservado', 'cancelado', 'concluido']);
+            $table->enum('permanente',['sim', 'nao']);
             $table->unsignedInteger('horario_id');
             $table->unsignedInteger('cliente_id');
             $table->unsignedInteger('user_id');

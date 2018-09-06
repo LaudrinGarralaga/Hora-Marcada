@@ -8,14 +8,16 @@
     <a href="{{route('home')}}" class="bred">Home ></a>
     <a href="#" class="bred">Lista de Clientes</a>
     <a href="{{route('clientes.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 800px"><i class="fa fa-plus"></i> Novo Cliente</a> 
+        role="button" style="margin-left: 950px"><i class="fa fa-plus"></i> Novo Cliente</a> 
+    <a href="{{URL::TO('getPDFClientes')}}" class="btn btn-success" id="imprimirPDF"
+        role="button"><i class="fa fa-print"></i> Imprimir PDF</a>          
 </div>
 @stop
 
 @section('content')
 
 @include('includes.alerts')
-
+ 
 <div class="box">
         <div class="box-header">
             <h3 class="box-title">Lista de Clientes</h3>
@@ -56,7 +58,7 @@
                                                 <td> <a href='{{route('clientes.edit', $cliente->id)}}'
                                                         class='btn btn-warning' 
                                                         role='button'><i class="fa fa-pencil"></i> Alterar </a>
-                                                        <button class="btn btn-danger" data-catid={{$cliente->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Delete</button>           
+                                                        <button class="btn btn-danger" data-catid={{$cliente->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Deletar</button>           
                         
                                                 </td>
                                             </tr>

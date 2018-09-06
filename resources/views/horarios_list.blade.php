@@ -8,7 +8,9 @@
     <a href="{{route('home')}}" class="bred">Home ></a>
     <a href="#" class="bred">Lista de Horários</a>
     <a href="{{route('horarios.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 800px"><i class="fa fa-plus"></i> Novo Horário</a> 
+        role="button" style="margin-left: 950px"><i class="fa fa-plus"></i> Novo Horário</a>
+    <a href="{{URL::TO('getPDFHorarios')}}" class="btn btn-success" id="imprimirPDF"
+        role="button"><i class="fa fa-print"></i> Imprimir PDF</a> 
 </div>
 @stop
 
@@ -53,7 +55,7 @@
                                             <a href="{{route('horarios.edit', $horario->id)}}" 
                                             class="btn btn-warning" 
                                             role="button"><i class="fa fa-pencil"></i> Alterar</a>
-                                            <button class="btn btn-danger" data-catid={{$horario->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Delete</button> 
+                                            <button class="btn btn-danger" data-catid={{$horario->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Deletar</button> 
                                         </td>
                                     </tr>
                                     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

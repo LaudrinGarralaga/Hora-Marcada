@@ -5,16 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Opcional;
 use App\Http\Requests\OpcionalStoreUpdateFormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class OpcionalController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $opcionais = Opcional::All();
         return view('opcionais_list', compact('opcionais'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // 1: indica inclusão
         $acao = 1;
 
@@ -40,6 +50,11 @@ class OpcionalController extends Controller {
     }
 
     public function edit($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $reg = Opcional::find($id);
         $acao = 2;
 

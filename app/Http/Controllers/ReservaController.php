@@ -3,19 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Reserva;
 use App\Horario;
 use App\Cliente;
 use App\Quadra;
+use Illuminate\Support\Facades\Auth;
 
 class ReservaController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $reservas = Reserva::All();
         return view('reservas_list', compact('reservas'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // 1: indica inclusão
         $acao = 1;
         // obtém os horários e clientes para exibir no form de cadastro
@@ -27,18 +39,40 @@ class ReservaController extends Controller {
     }
 
     public function store(Request $request) {
+
+        $data = $request->data;
+        $quadra = $request->quadra_id;
+        $horario = $request->horarios_id;
+        //dd($quadra);
+
+        $dados2 = DB::table('reservas')->where('data', '=', $data)
+                ->where(function ($query) use ($horario) {
+                    $query->where('horario_id', '=', $horario);
+                })
+                ->where(function ($query) use ($quadra) {
+                    $query->where('quadra_id', '=', $quadra);
+                })
+                ->count();
+
+       // dd($dados2);
+
+        if ($dados2 >= 1){
+            return redirect()->back()
+                    ->with('error', 'Reserva não disponível!');
+        } else {
         
-        $reserva = new Reserva;
-        $reserva->data = $request->data;
-        $reserva->valor = $request->valor;
-        $reserva->horario_id = $request->horarios_id;
-        $reserva->cliente_id = $request->clientes_id;
-        $reserva->quadra_id = $request->quadra_id;
-        $reserva->user_id = \Illuminate\Support\Facades\Auth::id();
-        $reserva->save();
-        if ($reserva) {
-            return redirect()->route('reservas.index')
-                            ->with('status', $request->data . ' Incluído!');
+            $reserva = new Reserva;
+            $reserva->data = $request->data;
+            $reserva->valor = $request->valor;
+            $reserva->horario_id = $request->horarios_id;
+            $reserva->cliente_id = $request->clientes_id;
+            $reserva->quadra_id = $request->quadra_id;
+            $reserva->user_id = \Illuminate\Support\Facades\Auth::id();
+            $reserva->save();
+            if ($reserva) {
+                return redirect()->route('reservas.index')
+                                ->with('success', $request->data . ' Incluído!');
+            }
         }
     }
 
@@ -47,6 +81,11 @@ class ReservaController extends Controller {
     }
 
     public function edit($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+        
         // posiciona no registo a ser alterado
         $reg = Reserva::find($id);
         // 2: indica Alteração

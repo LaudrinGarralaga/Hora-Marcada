@@ -38,3 +38,10 @@ Route::resource('reservas_opcionais', 'Reserva_OpcionalController');
 //Rotas Quadras
 Route::resource('quadras', 'QuadraController');
 
+Route::get('/getPDFClientes', 'PDFController@getPDFClientes');
+Route::get('/getPDFHorarios', 'PDFController@getPDFHorarios');
+Route::get('/getPDFQuadras', 'PDFController@getPDFQuadras');
+Route::get('/getPDFOpcionais', 'PDFController@getPDFOpcionais');
+Route::get('/getPDFReservas', 'PDFController@getPDFReservas');
+
+

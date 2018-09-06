@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Quadra;
 use App\Http\Requests\QuadraStoreUpdateFormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class QuadraController extends Controller
 {
   
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $quadras = Quadra::All();
         return view('quadras_list', compact('quadras'));
     }
@@ -18,6 +23,10 @@ class QuadraController extends Controller
    
     public function create()
     {
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
        // 1: indica inclusão
        $acao = 1;
 
@@ -44,6 +53,10 @@ class QuadraController extends Controller
 
     public function edit($id)
     {
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+        
         $reg = Quadra::find($id);
         $acao = 2;
 

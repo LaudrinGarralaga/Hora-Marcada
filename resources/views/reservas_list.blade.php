@@ -9,6 +9,8 @@
     <a href="#" class="bred">Lista de Reservas</a>
     <a href="{{route('reservas.create')}}" class="btn btn-primary" 
         role="button" style="margin-left: 800px"><i class="fa fa-plus"></i> Nova Reserva</a> 
+    <a href="{{URL::TO('getPDFReservas')}}" class="btn btn-success" id="imprimirPDF"
+        role="button"><i class="fa fa-print"></i> Imprimir PDF</a>        
 </div>
 @stop
 
@@ -44,6 +46,8 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Valor</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Permanente</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                         </tr>
                                     </thead>
@@ -55,11 +59,13 @@
                         <td>{{$reserva->data}}</td>
                         <td>{{$reserva->horario->hora}}</td>
                         <td>{{$reserva->valor}}</td>
+                        <td>{{$reserva->status}}</td>
+                        <td>{{$reserva->permanente}}</td>
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
                                class="btn btn-warning" 
-                               role="button">Alterar</a>
-                               <button class="btn btn-danger" data-catid={{$reserva->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Delete</button> 
+                               role="button"><i class="fa fa-pencil"></i> Alterar</a>
+                               <button class="btn btn-danger" data-catid={{$reserva->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Deletar</button> 
                         </td>
                     </tr>
                     <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -96,6 +102,8 @@
                       <th rowspan="1" colspan="1">Data</th>
                       <th rowspan="1" colspan="1">Horário</th>
                       <th rowspan="1" colspan="1">Valor</th>
+                      <th rowspan="1" colspan="1">Status</th>
+                      <th rowspan="1" colspan="1">Permanente</th>
                       <th rowspan="1" colspan="1">Ações</th>
                      </tr> 
                  </tfoot>

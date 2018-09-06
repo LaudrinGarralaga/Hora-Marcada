@@ -7,6 +7,7 @@ use App\Cliente;
 use App\Reserva;
 use App\Horario;
 use App\Opcional;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

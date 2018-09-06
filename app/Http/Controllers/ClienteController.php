@@ -5,16 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cliente;
 use App\Http\Requests\ClienteStoreUpdateFormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $clientes = Cliente::All();
         return view('clientes_list', compact('clientes'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // 1: indica inclusão
         $acao = 1;
 
@@ -40,6 +50,11 @@ class ClienteController extends Controller {
     }
 
     public function edit($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $reg = Cliente::find($id);
         $acao = 2;
 

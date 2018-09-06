@@ -5,16 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Horario;
 use App\Http\Requests\HorarioStoreUpdateFormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class HorarioController extends Controller {
 
     public function index() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
 
         $horarios = Horario::All();
         return view('horarios_list', compact('horarios'));
     }
 
     public function create() {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         // 1: indica inclusão
         $acao = 1;
 
@@ -40,6 +50,11 @@ class HorarioController extends Controller {
     }
 
     public function edit($id) {
+
+        if (!Auth::check()) {
+            return redirect('/');
+        }
+
         $reg = Horario::find($id);
         $acao = 2;
 
