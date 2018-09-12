@@ -15,14 +15,12 @@
         <caption><h1>Lista de Quadras</h1></caption>
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Tipo</th>
             </tr>
         </thead>
         <tbody>
             @foreach($customers as $customer)
             <tr>
-                <td>{{$customer->id}}</td>
                 <td>{{$customer->tipo}}</td>
             </tr>
             @endforeach

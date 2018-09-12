@@ -15,7 +15,6 @@
         <caption><h1>Lista de Horários</h1></caption>
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Horário</th>
                 <th>Valor</th>
             </tr>
@@ -23,7 +22,6 @@
         <tbody>
             @foreach($customers as $customer)
             <tr>
-                <td>{{$customer->id}}</td>
                 <td>{{$customer->hora}}</td>
                 <td>{{$customer->valor}}</td>
             </tr>

@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-<h4 style="text-align: center">Seja bem vido ao Hora Marcada, aqui você gerencia sua quadra esportiva.</h4>&nbsp;
+<h4 style="text-align: center">Seja bem vindo ao Hora Marcada, aqui você gerencia sua quadra esportiva.</h4>&nbsp;
 
 <div class="row">
     <div class="col-lg-3 col-xs-6">

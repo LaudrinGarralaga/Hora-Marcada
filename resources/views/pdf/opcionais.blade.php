@@ -15,7 +15,6 @@
         <caption><h1>Lista de Opcionais</h1></caption>
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Descrição</th>
                 <th>Valor</th>
             </tr>
@@ -23,7 +22,6 @@
         <tbody>
             @foreach($customers as $customer)
             <tr>
-                <td>{{$customer->id}}</td>
                 <td>{{$customer->descricao}}</td>
                 <td>{{$customer->valor}}</td>
             </tr>

@@ -44,4 +44,7 @@ Route::get('/getPDFQuadras', 'PDFController@getPDFQuadras');
 Route::get('/getPDFOpcionais', 'PDFController@getPDFOpcionais');
 Route::get('/getPDFReservas', 'PDFController@getPDFReservas');
 
+    
+
+
 

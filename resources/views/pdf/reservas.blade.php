@@ -15,7 +15,6 @@
         <caption><h1>Lista de Reservas</h1></caption>
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Cliente</th>
                 <th>Data</th>
                 <th>Horário</th>
@@ -28,7 +27,6 @@
         <tbody>
             @foreach($customers as $customer)
             <tr>
-                <td>{{$customer->id}}</td>
                 <td>{{$customer->cliente->nome}}</td>
                 <td>{{$customer->data}}</td>
                 <td>{{$customer->horario->hora}}</td>

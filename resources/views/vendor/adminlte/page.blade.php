@@ -22,8 +22,8 @@
             <nav class="navbar navbar-static-top">
                 <div class="container">
                     <div class="navbar-header">
-                        <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" class="navbar-brand">
-                            {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+                        <a href="{{ url(config('adminlte.dashboard_url', 'home')) }}" >
+                            <img src="{{ url('imagens/logo2.png') }}" style="width: 100px">
                         </a>
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
                             <i class="fa fa-bars"></i>
@@ -57,25 +57,61 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
-                        <li>
-                            @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
-                                <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                        <li class="dropdown user user-menu">
+                                <!-- Menu Toggle Button -->
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  <!-- The user image in the navbar-->
+                                  @if (auth()->user()->image)
+                                    <img src="{{url('storage/users/'.auth()->user()->image)}}" class="user-image" alt="User Image">
+                                  @else
+                                    <img src="{{url('imagens/imagem.png')}}" class="user-image" alt="User Image" style="height: 30px; width: 40px" >
+                                  @endif
+                                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                  <span class="hidden-xs"> {{ Auth::user()->name }}</span>
                                 </a>
-                            @else
-                                <a href="#"
-                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                                >
-                                    <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
-                                </a>
-                                <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
-                                    @if(config('adminlte.logout_method'))
-                                        {{ method_field(config('adminlte.logout_method')) }}
-                                    @endif
-                                    {{ csrf_field() }}
-                                </form>
-                            @endif
-                        </li>
+                                <ul class="dropdown-menu">
+                                  <!-- The user image in the menu -->
+                                  <li class="user-header">
+                                      @if (auth()->user()->image)
+                                        <img src="{{url('storage/users/'.auth()->user()->image)}}" class="user-image" alt="User Image">
+                                      @else
+                                        <img src="{{url('imagens/imagem.png')}}" class="user-image" alt="User Image" style=" width:100px;
+                                        height:100px">
+                                      @endif
+                    
+                                    <p>
+                                        {{ Auth::user()->name }} - Administrador do sistema
+                                    </p>
+                                  </li>
+                                  <!-- Menu Body -->
+                                  <li class="user-body">
+                                    <div class="row">
+                                      <div class="col-xs-6 text-center">
+                                        <a href="#">Meu Perfil</a>
+                                      </div>
+                                
+                                      <div class="col-xs-6 text-center">
+                                        @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
+                                            <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
+                                                <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                            </a>
+                                        @else
+                                            <a href="#"
+                                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                            >
+                                                <i class="fa fa-fw fa-power-off"></i> {{ trans('adminlte::adminlte.log_out') }}
+                                            </a>
+                                            <form id="logout-form" action="{{ url(config('adminlte.logout_url', 'auth/logout')) }}" method="POST" style="display: none;">
+                                                @if(config('adminlte.logout_method'))
+                                                    {{ method_field(config('adminlte.logout_method')) }}
+                                                @endif
+                                                {{ csrf_field() }}
+                                            </form>
+                                        @endif
+                                      </div>
+                                    </div>
+                                    <!-- /.row -->
+                                  </li>
                     </ul>
                 </div>
                 @if(config('adminlte.layout') == 'top-nav')

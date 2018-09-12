@@ -34,4 +34,5 @@ class HomeController extends Controller
         $totalOpcionais = Opcional::count();
         return view('home', compact('totalClientes', 'totalReservas', 'totalHorarios', 'totalOpcionais', 'reservas'));
     }
+
 }

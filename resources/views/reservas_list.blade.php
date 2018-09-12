@@ -8,7 +8,7 @@
     <a href="{{route('home')}}" class="bred">Home ></a>
     <a href="#" class="bred">Lista de Reservas</a>
     <a href="{{route('reservas.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 800px"><i class="fa fa-plus"></i> Nova Reserva</a> 
+        role="button" style="margin-left: 676px"><i class="fa fa-plus"></i> Nova Reserva</a> 
     <a href="{{URL::TO('getPDFReservas')}}" class="btn btn-success" id="imprimirPDF"
         role="button"><i class="fa fa-print"></i> Imprimir PDF</a>        
 </div>
@@ -59,8 +59,8 @@
                         <td>{{$reserva->data}}</td>
                         <td>{{$reserva->horario->hora}}</td>
                         <td>{{$reserva->valor}}</td>
-                        <td>{{$reserva->status}}</td>
-                        <td>{{$reserva->permanente}}</td>
+                        <td><span class="label label-primary"> {{$reserva->status}}</span></td>
+                        <td><span class="label label-danger"> {{$reserva->permanente}}</span></td></td>
                         <td>
                             <a href="{{route('reservas.edit', $reserva->id)}}" 
                                class="btn btn-warning" 

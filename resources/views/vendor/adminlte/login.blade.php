@@ -43,7 +43,7 @@
                 <span for="captcha" class=" control-label">Captcha</span>
                 {!! Recaptcha::render() !!}
                 @if ($errors->has('g-recaptcha-response'))
-                <span class="help-block">
+                <span class="form-control">
                     <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
                 </span>
                 @endif

@@ -8,19 +8,19 @@
         <caption><h1>Lista de Clientes</h1></caption>
         <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th>Nome</th>
                 <th>Telefone</th>
                 <th>Email</th>
+                <th>Pontos</th>
             </tr>
         </thead>
         <tbody>
             @foreach($customers as $customer)
             <tr>
-                <td>{{$customer->id}}</td>
                 <td>{{$customer->nome}}</td>
                 <td>{{$customer->telefone}}</td>
                 <td>{{$customer->email}}</td>
+                <td>{{$customer->pontos}}</td>
             </tr>
             @endforeach
         </tbody>

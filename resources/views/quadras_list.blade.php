@@ -8,7 +8,7 @@
     <a href="{{route('home')}}" class="bred">Home ></a>
     <a href="#" class="bred">Lista de Quadras</a>
     <a href="{{route('quadras.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 950px"><i class="fa fa-plus"></i> Nova Quadra</a>
+        role="button" style="margin-left: 690px"><i class="fa fa-plus"></i> Nova Quadra</a>
     <a href="{{URL::TO('getPDFQuadras')}}" class="btn btn-success" id="imprimirPDF"
         role="button"><i class="fa fa-print"></i> Imprimir PDF</a> 
 </div>
