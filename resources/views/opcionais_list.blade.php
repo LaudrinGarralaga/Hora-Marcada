@@ -50,8 +50,8 @@
                                 <tbody>
                     @foreach($opcionais as $opcional)
                     <tr>
-                        <td>{{$opcional->descricao}}</td>
-                        <td>{{$opcional->valor}}</td>
+                        <td>{{$opcional->nome}}</td>
+                        <td>{{$opcional->preco}}</td>
                         <td>
                             <a href="{{route('opcionais.edit', $opcional->id)}}" 
                                class="btn btn-warning" 

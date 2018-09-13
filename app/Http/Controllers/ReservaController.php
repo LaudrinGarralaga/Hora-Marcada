@@ -31,7 +31,7 @@ class ReservaController extends Controller {
         // 1: indica inclusão
         $acao = 1;
         // obtém os horários e clientes para exibir no form de cadastro
-        $horarios = Horario::orderBy('hora')->get();
+        $horarios = Horario::orderBy('horario')->get();
         $clientes = Cliente::orderBy('nome')->get();
         $quadras = Quadra::orderBy('tipo')->get();
         // $opcionais = Opcional::orderBy('descricao')->get();
@@ -63,10 +63,12 @@ class ReservaController extends Controller {
         
             $reserva = new Reserva;
             $reserva->data = $request->data;
-            $reserva->valor = $request->valor;
-            $reserva->horario_id = $request->horarios_id;
+            $reserva->valor = $request->inPreco;
+            $reserva->horario_id = $request->selHorario;
             $reserva->cliente_id = $request->clientes_id;
             $reserva->quadra_id = $request->quadra_id;
+            $reserva->permanente = $request->permanente;
+            $reserva->status = $request->status;
             $reserva->user_id = \Illuminate\Support\Facades\Auth::id();
             $reserva->save();
             if ($reserva) {
@@ -91,7 +93,7 @@ class ReservaController extends Controller {
         // 2: indica Alteração
         $acao = 2;
         // obtém os horários e clientes para exibir no form de cadastro
-        $horarios = Horario::orderBy('hora')->get();
+        $horarios = Horario::orderBy('horario')->get();
         $clientes = Cliente::orderBy('nome')->get();
         $quadras = Quadra::orderBy('tipo')->get();
         //$opcionais = Opcional::orderBy('descricao')->get();

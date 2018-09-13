@@ -96,19 +96,26 @@
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="horarios_id">Horário:</label>
+                    <label for="selHorario">Horário:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
                         </div>
-                        <select class="form-control" id="horarios_id" name="horarios_id">
-                            @foreach ($horarios as $horario)
-                            <option value="{{$horario->id}}"
-                                    @if ((isset($reg) && $reg->horario_id==$horario->id) 
-                                    or old('horario_id') == $horario->id) selected @endif>
-                                    {{$horario->hora}}</option>
-                            @endforeach       
+                        <select class="form-control" id="selHorario" name="selHorario">
+                        <option value="">Selecione o horário</option>  
                         </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="selOp">Opcionais (ctrl para vários)</label>
+                    <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-list"></i>
+                                    </div>
+                      <select class="custom-select mb-3" id="selOp" multiple size=5 style="width: 284px"></select>
                     </div>
                 </div>
             </div>
@@ -120,8 +127,8 @@
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
-                        <input type="text" class="form-control" id="valor"
-                               name="valor" placeholder="Valor da reserva"
+                        <input type="text" class="form-control" id="inPreco"
+                               name="inPreco" placeholder="Valor da reserva"
                                value="{{$reg->valor or old('valor')}}"
                                required>
                     </div>
@@ -134,7 +141,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-info"></i>
                         </div>
-                        <select class="form-control" id="combustivel" name="status">
+                        <select class="form-control" id="status" name="status">
                             <option value="concluído" 
                         @if ((isset($reg) && $reg->status=="concluído") 
                             or old('status')) selected @endif>
@@ -194,6 +201,86 @@ $('#data').datepicker({
     startDate: '+0d',
     orientation: "bottom",
     autoclose: true
+});
+
+
+
+var selHorario = document.getElementById("selHorario");
+var inPreco = document.getElementById("inPreco");
+var selOp = document.getElementById("selOp");
+
+var precos = [];
+var opcionais = [];
+
+function carregarHorarios() {
+
+  var url = "http://localhost/ws/lista_horarios.php";
+
+  fetch(url)
+    .then(resp => resp.json())
+    .then(function (data) {
+      for (var d of data) {
+        var option = document.createElement("option");
+        option.value = d.id;
+        option.text = d.horario;
+        selHorario.appendChild(option);
+        precos.push({ id: d.id, horario: d.horario, preco: d.preco });
+      }
+    });
+}
+window.addEventListener("load", carregarHorarios);
+
+function obterValor() {
+  // alert(selHorario.value);
+  var preco;
+  if (selHorario.value == "") {
+    preco = 0;
+  } else {
+    for (var p of precos) {
+      if (selHorario.value == p.id) {
+        preco = p.preco;
+        break;
+      }
+    }
+  }
+  return Number(preco);
+}
+selHorario.addEventListener("change", function () {
+ //inPreco.value = obterValor().toFixed(2);
+inPreco.value = (obterValor() + verOp()).toFixed(2);
+
+});
+
+function carregarOpcionais() {
+
+  var url = "http://localhost/ws/lista_opcionais.php";
+
+  fetch(url)
+    .then(resp => resp.json())
+    .then(function (data) {
+      for (var d of data) {
+        var option = document.createElement("option");
+        option.value = d.id;
+        option.text = d.nome;
+        selOp.add(option);
+        opcionais.push({ id: d.id, nome: d.nome, preco: d.preco });
+      }
+    });
+}
+window.addEventListener("load", carregarOpcionais);
+
+function verOp() {
+  var total = 0;
+  for (var i = 0; i < selOp.length; i++) {
+    if (selOp[i].selected) {
+      total = total + Number(opcionais[i].preco);
+    }
+  }
+  return total;
+}
+
+selOp.addEventListener("change", function () {
+  inPreco.value = (obterValor() + verOp()).toFixed(2);
 });
 </script>
 

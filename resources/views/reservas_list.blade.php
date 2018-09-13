@@ -57,7 +57,7 @@
                         <td>{{$reserva->cliente->nome}}</td>
                         <td>{{$reserva->quadra->tipo}}</td>
                         <td>{{$reserva->data}}</td>
-                        <td>{{$reserva->horario->hora}}</td>
+                        <td>{{$reserva->horario->horario}}</td>
                         <td>{{$reserva->valor}}</td>
                         <td><span class="label label-primary"> {{$reserva->status}}</span></td>
                         <td><span class="label label-danger"> {{$reserva->permanente}}</span></td></td>
