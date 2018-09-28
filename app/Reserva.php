@@ -4,32 +4,39 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Reserva extends Model {
+class Reserva extends Model
+{
 
-    protected $fillable = array('data', 'compareceu', 'pontos', 'valor', 'bonificacao', 'status', 'permanente', 'horario_id', 'cliente_id', 'user_id', 'quadra_id');
+    protected $fillable = array('data', 'semana', 'preco', 'status', 'permanente', 'horario_id', 'cliente_id', 'user_id', 'quadra_id');
     public $timestamps = false;
 
-    public function Horario() {
+    public function Horario()
+    {
         return $this->belongsTo('App\Horario');
     }
 
-    public function Opcional() {
+    public function Opcional()
+    {
         return $this->belongsTo('App\Opcional');
     }
 
-    public function Cliente() {
+    public function Cliente()
+    {
         return $this->belongsTo('App\Cliente');
     }
 
-    public function Quadra() {
+    public function Quadra()
+    {
         return $this->belongsTo('App\Quadra');
     }
 
-    public function User() {
+    public function User()
+    {
         return $this->belongsTo('App\User');
     }
 
-    public function status(){
+    public function status()
+    {
 
         $statusAvaliable = [
             'reservado' => 'Reservado',
@@ -40,7 +47,8 @@ class Reserva extends Model {
         return $statusAvaliable;
     }
 
-    public function permanente(){
+    public function permanente()
+    {
 
         $permanenteAvaliable = [
             'sim' => 'Sim',

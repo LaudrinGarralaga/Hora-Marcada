@@ -25,7 +25,7 @@ return [
       | variant, used for the mini side bar. Make it 3 letters or so
       |
      */
-    'logo' => '<b>Hora</b>Marcada',
+    'logo' => '<b>Hora</b> Marcada',
     'logo_mini' => '<b>H</b>M',
     /*
       |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ return [
       | ligth variant: blue-light, purple-light, purple-light, etc.
       |
      */
-    'skin' => 'blue',
+    'skin' => 'blue-light',
     /*
       |--------------------------------------------------------------------------
       | Layout
@@ -48,7 +48,7 @@ return [
       | removes the sidebar and places your menu in the top navbar
       |
      */
-    'layout' => 'top-nav',
+    'layout' => 'fixed',
     /*
       |--------------------------------------------------------------------------
       | Collapse Sidebar
@@ -90,9 +90,9 @@ return [
     'menu' => [
         'MENU',
         [
-            'text' => 'Blog',
-            'url' => 'admin/blog',
-            'can' => 'manage-blog',
+            'text' => 'Início',
+            'icon' => 'home',
+            'url' => 'home',
         ],
         [
             'text' => 'Reservar',
@@ -132,7 +132,16 @@ return [
                 ],
             ],
         ],
-
+        [
+            'text' => 'Disponibilidade de horários',
+            'icon' => 'search',
+            'url'  => 'disponibilidade',
+        ],
+        [
+            'text' => 'Relatórios',
+            'icon' => 'print',
+            'url'  => 'relatorios',
+        ],
     ],
     /*
       |--------------------------------------------------------------------------

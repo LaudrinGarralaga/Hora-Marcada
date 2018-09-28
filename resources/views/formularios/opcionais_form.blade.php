@@ -3,28 +3,19 @@
 @section('title', 'Cadastro do Opcionais')
 
 @section('content_header')
-
-    <div class='col-sm-11'>
-        @if ($acao == 1)
-        <div class="bred">
-            <a href="{{route('home')}}" class="bred">Home ></a>
-            <a href="{{route('opcionais.index')}}" class="bred">Lista de Opcionais ></a>
-            <a href="#" class="bred">Cadastro de Opcionais </a>
+@if ($acao == 1)
+        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+            <div class="bred">
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Opcional</p> 
+            </div>
         </div>
-        <h2> Cadastro de opcional </h2>
-        @else
-        <div class="bred">
-            <a href="{{route('home')}}" class="bred">Home ></a>
-            <a href="{{route('opcionais.index')}}" class="bred">Lista de Opcionais ></a>
-            <a href="#" class="bred">Alteração de Opcionais </a>
+    @else
+        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+            <div class="bred">
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Opcional</p> 
+            </div>
         </div>
-        <h2> Alteração de opcional </h2>
-        @endif
-    </div>
-    <div class='col-sm-1'>
-        <a href="{{route('opcionais.index')}}" class="btn btn-primary" 
-           role="button"><i class="fa fa-arrow-left"></i> Voltar</a>
-    </div>
+    @endif
 @stop
 
 @section('content')
@@ -52,29 +43,29 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="descricao">Descrição:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-info"></i>
                         </div>
-                        <input type="text" class="form-control" id="descricao"
-                               name="descricao" placeholder="Digite o nome do opcional"
-                               value="{{$reg->descricao or old('descricao')}}">
+                        <input type="text" class="form-control" id="nome"
+                               name="nome" placeholder="Digite o nome do opcional"
+                               value="{{$reg->nome or old('nome')}}">
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <div class="form-group">
                     <label for="valor">Valor:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
-                        <input type="text" class="form-control" id="valor"
-                               name="valor" placeholder="Digite a valor do opcional"
-                               value="{{$reg->valor or old('valor')}}">
+                        <input type="number" class="form-control" id="preco"
+                               name="preco" placeholder="Digite a valor do opcional"
+                               value="{{$reg->preco or old('preco')}}">
                     </div>
                 </div>
             </div>

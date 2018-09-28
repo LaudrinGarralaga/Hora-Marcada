@@ -4,35 +4,26 @@
 
 @section('content_header')
 
-<div class='col-sm-11'>
-        @if ($acao == 1)
-        <div class="bred">
-            <a href="{{route('home')}}" class="bred">Home ></a>
-            <a href="{{route('reservas.index')}}" class="bred">Lista de Reservas ></a>
-            <a href="#" class="bred">Cadastro de Reservas </a>
+    @if ($acao == 1)
+        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+            <div class="bred">
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Reserva</p> 
+            </div>
         </div>
-        <h2> Cadastro de reserva </h2>
-        @else
-        <div class="bred">
-            <a href="{{route('home')}}" class="bred">Home ></a>
-            <a href="{{route('reservas.index')}}" class="bred">Lista de Reservas ></a>
-            <a href="#" class="bred">Alteração de Reservas </a>
+    @else
+        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+            <div class="bred">
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Reserva</p> 
+            </div>
         </div>
-        <h2> Alteração de reserva </h2>
-        @endif
-    </div>
-    <div class='col-sm-1'>
-        <a href="{{route('reservas.index')}}" class="btn btn-primary" 
-           role="button"><i class="fa fa-arrow-left"></i> Voltar</a>
-    </div>
-
+    @endif
+   
 @stop
 
 @section('content')
-<div class='col-sm-12'>
-    @include('includes.alerts')        
-
-
+<div class='col-sm-12'>     
+    @include('includes.alerts')  
+    
     @if ($acao == 1)
     <div class="box box-primary">
             <div class="box-body">
@@ -51,7 +42,7 @@
                         <div class="input-group-addon">
                             <i class="fa fa-user-circle-o"></i>
                         </div>
-                        <select class="custom-select form-control form-control-sm" id="clientes_id" name="clientes_id">
+                        <select class="custom-select form-control form-control-sm" id="cliente_id" name="cliente_id">
                             @foreach ($clientes as $cliente)
                             <option value="{{$cliente->id}}"
                                     @if ((isset($reg) && $reg->cliente_id==$cliente->id) 
@@ -94,15 +85,16 @@
                     </div>
                 </div>
             </div>
+    
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="selHorario">Horário:</label>
+                    <label for="horario_id">Horário:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-clock-o"></i>
                         </div>
-                        <select class="form-control" id="selHorario" name="selHorario">
-                        <option value="">Selecione o horário</option>  
+                        <select class="form-control" id="horario_id" name="horario_id">
+                            
                         </select>
                     </div>
                 </div>
@@ -115,21 +107,21 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-list"></i>
                                     </div>
-                      <select class="custom-select mb-3" id="selOp" multiple size=5 style="width: 284px"></select>
+                      <select class="custom-select mb-3" id="selOp" multiple size=3 style="width: 284px"></select>
                     </div>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="valor">Valor:</label>
+                    <label for="Preco">Valor:</label>
                     <div class="input-group">
                         <div class="input-group-addon">
                             <i class="fa fa-usd"></i>
                         </div>
-                        <input type="text" class="form-control" id="inPreco"
-                               name="inPreco" placeholder="Valor da reserva"
-                               value="{{$reg->valor or old('valor')}}"
+                        <input type="text" class="form-control" id="Preco"
+                               name="Preco" placeholder="Valor da reserva"
+                               value="{{$reg->preco or old('preco')}}"
                                required>
                     </div>
                 </div>
@@ -170,7 +162,7 @@
                             @if ((isset($reg) && $reg->permanente=="sim") 
                                 or old('permanente')) selected @endif>
                                                     Sim</option>
-                                            <option value="nao"
+                                            <option value="não"
                             @if ((isset($reg) && $reg->permanente=="não") 
                                 or old('permanente')) selected @endif>                        
                                                     Não</option>
@@ -195,18 +187,16 @@
 <script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}" charset="UTF-8"></script>
 
 <script>
-$('#data').datepicker({
-    format: "dd/mm/yyyy",
+$('#data').datepicker({     
+    format: "DD yyyy/mm/dd",
     language: "pt-BR",
-    startDate: '+0d',
+    //startDate: '+0d',
     orientation: "bottom",
-    autoclose: true
+    autoclose: true,
 });
 
-
-
-var selHorario = document.getElementById("selHorario");
-var inPreco = document.getElementById("inPreco");
+var horario_id = document.getElementById("horario_id");
+var Preco = document.getElementById("Preco");
 var selOp = document.getElementById("selOp");
 
 var precos = [];
@@ -214,7 +204,7 @@ var opcionais = [];
 
 function carregarHorarios() {
 
-  var url = "http://localhost/ws/lista_horarios.php";
+  var url = "http://localhost/WebServiceTCC/SisWeb/lista_horarios.php";
 
   fetch(url)
     .then(resp => resp.json())
@@ -223,7 +213,7 @@ function carregarHorarios() {
         var option = document.createElement("option");
         option.value = d.id;
         option.text = d.horario;
-        selHorario.appendChild(option);
+        horario_id.appendChild(option);
         precos.push({ id: d.id, horario: d.horario, preco: d.preco });
       }
     });
@@ -231,13 +221,13 @@ function carregarHorarios() {
 window.addEventListener("load", carregarHorarios);
 
 function obterValor() {
-  // alert(selHorario.value);
+  // alert(horario_id.value);
   var preco;
-  if (selHorario.value == "") {
+  if (horario_id.value == "") {
     preco = 0;
   } else {
     for (var p of precos) {
-      if (selHorario.value == p.id) {
+      if (horario_id.value == p.id) {
         preco = p.preco;
         break;
       }
@@ -245,15 +235,15 @@ function obterValor() {
   }
   return Number(preco);
 }
-selHorario.addEventListener("change", function () {
- //inPreco.value = obterValor().toFixed(2);
-inPreco.value = (obterValor() + verOp()).toFixed(2);
+horario_id.addEventListener("change", function () {
+ //Preco.value = obterValor().toFixed(2);
+Preco.value = (obterValor() + verOp()).toFixed(2);
 
 });
 
 function carregarOpcionais() {
 
-  var url = "http://localhost/ws/lista_opcionais.php";
+  var url = "http://localhost/WebServiceTCC/SisWeb/lista_opcionais.php";
 
   fetch(url)
     .then(resp => resp.json())
@@ -280,7 +270,7 @@ function verOp() {
 }
 
 selOp.addEventListener("change", function () {
-  inPreco.value = (obterValor() + verOp()).toFixed(2);
+  Preco.value = (obterValor() + verOp()).toFixed(2);
 });
 </script>
 

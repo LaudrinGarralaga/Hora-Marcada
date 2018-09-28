@@ -4,27 +4,19 @@
 
 @section('content_header')
 
-<div class='col-sm-11'>
-        @if ($acao == 1)
-        <div class="bred">
-            <a href="{{route('home')}}" class="bred">Home ></a>
-            <a href="{{route('quadras.index')}}" class="bred">Lista de Quadras ></a>
-            <a href="#" class="bred">Cadastro de Quadras </a>
+@if ($acao == 1)
+        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+            <div class="bred">
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Quadra</p> 
+            </div>
         </div>
-        <h2> Cadastro de quadra </h2>
-        @else
-        <div class="bred">
-            <a href="{{route('home')}}" class="bred">Home ></a>
-            <a href="{{route('quadras.index')}}" class="bred">Lista de Quadras ></a>
-            <a href="#" class="bred">Alteração de Quadras </a>
+    @else
+        <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+            <div class="bred">
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Quadra</p> 
+            </div>
         </div>
-        <h2> Alteração de quadra </h2>
-        @endif
-    </div>
-    <div class='col-sm-1'>
-        <a href="{{route('quadras.index')}}" class="btn btn-primary" 
-           role="button"><i class="fa fa-arrow-left"></i> Voltar</a>
-    </div>
+    @endif
     
 @stop
     

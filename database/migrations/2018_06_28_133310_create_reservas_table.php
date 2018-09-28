@@ -15,10 +15,7 @@ class CreateReservasTable extends Migration {
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('data', 20);
-            $table->boolean('compareceu')->nullable();
-            $table->smallInteger('pontos')->nullable();
             $table->decimal('valor', 9, 2);
-            $table->boolean('bonificacao')->nullable();
             $table->enum('status',['reservado', 'cancelado', 'concluido']);
             $table->enum('permanente',['sim', 'nao']);
             $table->unsignedInteger('horario_id');

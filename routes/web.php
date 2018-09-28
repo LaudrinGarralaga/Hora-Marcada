@@ -26,6 +26,8 @@ Route::resource('clientes', 'ClienteController');
 //Rotas Convidados
 Route::resource('convidados', 'ConvidadoController');
 
+Route::get('clientes/{id}', 'Clientes@controller@Deletar');
+
 //Rotas Convites
 Route::resource('convites', 'ConviteController');
 
@@ -43,8 +45,14 @@ Route::get('/getPDFHorarios', 'PDFController@getPDFHorarios');
 Route::get('/getPDFQuadras', 'PDFController@getPDFQuadras');
 Route::get('/getPDFOpcionais', 'PDFController@getPDFOpcionais');
 Route::get('/getPDFReservas', 'PDFController@getPDFReservas');
-
     
+Route::get('detalhes-reserva/{id}', 'HomeController@detalhesReservas')->name('detalhes.reserva');
 
+Route::get('reservar-horario/{id}', 'HomeController@reservar')->name('reservar.horario');
 
+Route::get('disponibilidade', 'HomeController@pesquisa');
+
+Route::post('horarios-filtro', 'HomeController@filtro')->name('horarios.filtro');
+        
+Route::resource('relatorios', 'PDFController');
 

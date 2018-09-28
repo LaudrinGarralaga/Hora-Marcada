@@ -29,9 +29,9 @@
             <tr>
                 <td>{{$customer->cliente->nome}}</td>
                 <td>{{$customer->data}}</td>
-                <td>{{$customer->horario->hora}}</td>
+                <td>{{$customer->horario->horario}}</td>
                 <td>{{$customer->quadra->tipo}}</td>
-                <td>{{$customer->valor}}</td>
+                <td>{{$customer->preco}}</td>
                 <td>{{$customer->status}}</td>
                 <td>{{$customer->permanente}}</td>
             </tr>

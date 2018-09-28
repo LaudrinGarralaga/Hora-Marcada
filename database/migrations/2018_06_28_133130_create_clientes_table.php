@@ -17,6 +17,7 @@ class CreateClientesTable extends Migration {
             $table->string('nome', 45)->unique();
             $table->string('telefone', 45);
             $table->string('email', 45)->nullable();
+            $table->string('senha')->nullable();
             $table->integer('pontos')->default(0);
             // $table->timestamps();
         });

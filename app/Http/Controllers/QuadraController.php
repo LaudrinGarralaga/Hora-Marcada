@@ -2,45 +2,50 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Quadra;
 use App\Http\Requests\QuadraStoreUpdateFormRequest;
+use App\Quadra;
 use Illuminate\Support\Facades\Auth;
 
 class QuadraController extends Controller
 {
-  
+
     public function index()
     {
+        // Verifica se  está logado
         if (!Auth::check()) {
             return redirect('/');
         }
 
+        // Recupera todos as quadras do banco
         $quadras = Quadra::All();
-        return view('quadras_list', compact('quadras'));
+        return view('listas.quadras_list', compact('quadras'));
     }
 
-   
     public function create()
     {
+        // Verifica se  está logado
         if (!Auth::check()) {
             return redirect('/');
         }
 
-       // 1: indica inclusão
-       $acao = 1;
+        // 1: Indica inclusão
+        $acao = 1;
 
-       return view('quadras_form', compact('acao'));
+        return view('formularios.quadras_form', compact('acao'));
     }
 
     public function store(QuadraStoreUpdateFormRequest $request)
     {
-        // obtém os dados do form
+        // Obtém os dados do formulário
         $dados = $request->all();
+
+        // Realiza a inclusão
         $inc = Quadra::create($dados);
+
+        // Exibe uma mensagem de sucesso se gravou os dados no bando senão exibe uma de erro
         if ($inc) {
             return redirect()->route('quadras.index')
-                            ->with('success', $request->tipo . ' Castrado(a) com sucesso!');
+                ->with('success', $request->tipo . ' Castrado(a) com sucesso!');
         } else {
             return redirect()->back->with('error', 'Falha ao cadastrar!');
         }
@@ -53,27 +58,35 @@ class QuadraController extends Controller
 
     public function edit($id)
     {
+        // Verifica se está logado
         if (!Auth::check()) {
             return redirect('/');
         }
-        
+
+        // Posiciona no registo a ser alterado
         $reg = Quadra::find($id);
+
+        // 2: Indica alteração
         $acao = 2;
 
-        return view('quadras_form', compact('reg', 'acao')); 
+        return view('formularios.quadras_form', compact('reg', 'acao'));
     }
 
     public function update(QuadraStoreUpdateFormRequest $request, $id)
     {
-        // obtém os dados do form
+        // Obtém os dados do formulario
         $dados = $request->all();
-        // posiciona no registo a ser alterado
+
+        // Posiciona no registo a ser alterado
         $reg = Quadra::find($id);
-        // realiza a alteração
+
+        // Realiza a alteração
         $alt = $reg->update($dados);
+
+        // Exibe uma mensagem de sucesso se alterou os dados no bando senão exibe uma de erro
         if ($alt) {
             return redirect()->route('quadras.index')
-                            ->with('success', $request->tipo . ' Alterado(a) com sucesso!');
+                ->with('alter', $request->tipo . ' Alterado(a) com sucesso!');
         } else {
             return redirect()->back->with('error', 'Falha ao alterar!');
         }
@@ -81,12 +94,15 @@ class QuadraController extends Controller
 
     public function destroy($id)
     {
+        // Posiciona no registo a ser alterado
         $cli = Quadra::find($id);
+
+        // Exibe uma mensagem se excluiu com sucesso dados, senão exibe uma de erro
         if ($cli->delete()) {
             return redirect()->route('quadras.index')
-            ->with('success', $cli->tipo . ' Excluído(a) com sucesso!');
+                ->with('trash', $cli->tipo . ' Excluído(a) com sucesso!');
         } else {
-           return redirect()->back->with('error', 'Falha ao alterar!');
+            return redirect()->back->with('error', 'Falha ao excluir!');
         }
     }
 }

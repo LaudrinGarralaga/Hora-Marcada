@@ -2,89 +2,109 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Horario;
 use App\Http\Requests\HorarioStoreUpdateFormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class HorarioController extends Controller {
+class HorarioController extends Controller
+{
 
-    public function index() {
-
+    public function index()
+    {
+        // Verifica se  está logado
         if (!Auth::check()) {
             return redirect('/');
         }
 
+        // Recupera todos os horarios do banco
         $horarios = Horario::All();
-        return view('horarios_list', compact('horarios'));
+
+        return view('listas.horarios_list', compact('horarios'));
     }
 
-    public function create() {
-
+    public function create()
+    {
+        // Verifica se  está logado
         if (!Auth::check()) {
             return redirect('/');
         }
 
-        // 1: indica inclusão
+        // 1: Indica inclusão
         $acao = 1;
 
-        return view('horarios_form', compact('acao'));
+        return view('formularios.horarios_form', compact('acao'));
     }
 
-    public function store(HorarioStoreUpdateFormRequest $request) {
+    public function store(HorarioStoreUpdateFormRequest $request)
+    {
 
-        // obtém os dados do form
+        // Obtém os dados do formulário
         $dados = $request->all();
+
+        // Realiza a inclusão
         $inc = Horario::create($dados);
-        
+
+        // Exibe uma mensagem de sucesso se gravou os dados no bando senão exibe uma de erro
         if ($inc) {
             return redirect()->route('horarios.index')
-                            ->with('success', $request->hora . ' Castrado(a) com sucesso!');
+                ->with('success', $request->horario . ' Castrado(a) com sucesso!');
         } else {
             return redirect()->back->with('error', 'Falha ao cadastrar!');
         }
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         //
     }
 
-    public function edit($id) {
-
+    public function edit($id)
+    {
+        // Verifica se está logado
         if (!Auth::check()) {
             return redirect('/');
         }
 
+        // Posiciona no registo a ser alterado
         $reg = Horario::find($id);
+
+        // 2: Indica alteração
         $acao = 2;
 
-        return view('horarios_form', compact('reg', 'acao'));
+        return view('formularios.horarios_form', compact('reg', 'acao'));
     }
 
-    public function update(HorarioStoreUpdateFormRequest $request, $id) {
-        
-        // obtém os dados do form
+    public function update(HorarioStoreUpdateFormRequest $request, $id)
+    {
+        // Obtém os dados do formulario
         $dados = $request->all();
-        // posiciona no registo a ser alterado
+
+        // Posiciona no registo a ser alterado
         $reg = Horario::find($id);
-        // realiza a alteração
+
+        // Realiza a alteração
         $alt = $reg->update($dados);
-       
+
+        // Exibe uma mensagem de sucesso se alterou os dados no bando senão exibe uma de erro
         if ($alt) {
             return redirect()->route('horarios.index')
-                            ->with('success', $request->hora . ' Alterado(a) com sucesso!');
+                ->with('alter', $request->horario . ' Alterado(a) com sucesso!');
         } else {
             return redirect()->back->with('error', 'Falha ao alterar!');
         }
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
+        // Posiciona no registo a ser alterado
         $hor = Horario::find($id);
+
+        // Exibe uma mensagem se excluiu com sucesso dados, senão exibe uma de erro
         if ($hor->delete()) {
             return redirect()->route('horarios.index')
-            ->with('success', $hor->hora . ' Excluído(a) com sucesso!');
+                ->with('trash', $hor->horario . ' Excluído(a) com sucesso!');
         } else {
-           return redirect()->back->with('error', 'Falha ao alterar!');
+            return redirect()->back->with('error', 'Falha ao excluir!');
         }
     }
 

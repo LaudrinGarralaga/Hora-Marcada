@@ -26,8 +26,8 @@ class OpcionalStoreUpdateFormRequest extends FormRequest
     {
         $id = Request::segment(2);
         return [
-            'descricao' => "required|min:4|max:100|unique:opcionals,descricao,{$id},id",
-            'valor' => 'required',
+            'nome' => "required|min:4|max:100|unique:opcionals,nome,{$id},id",
+            'preco' => 'required',
         ];
     }
 }

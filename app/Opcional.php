@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Opcional extends Model {
-
-    Protected $fillable = array('descricao', 'valor');
+class Opcional extends Model
+{
+    protected $fillable = array('nome', 'preco');
     public $timestamps = false;
-
 }

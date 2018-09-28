@@ -3,20 +3,34 @@
 @section('title', 'Lista de Horários')
 
 @section('content_header')
-
-<div class="bred">
-    <a href="{{route('home')}}" class="bred">Home ></a>
-    <a href="#" class="bred">Lista de Horários</a>
+<div class="row" style="background-color: white; margin-top: -15px; height: 55px">
+        <div class="bred">
+            <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Horários</p> 
+        </div>
+    </div>
+    <br>
     <a href="{{route('horarios.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 690px"><i class="fa fa-plus"></i> Novo Horário</a>
-    <a href="{{URL::TO('getPDFHorarios')}}" class="btn btn-success" id="imprimirPDF"
-        role="button"><i class="fa fa-print"></i> Imprimir PDF</a> 
-</div>
+        role="button" style="margin-left: 85%"><i class="fa fa-plus"></i> Novo Horário</a> 
 @stop
 
 @section('content')
 
-@include('includes.alerts')
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{ session('success') }}
+    </div>
+@elseif (session('alter'))
+    <div class="alert alert-info alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{ session('alter') }}
+    </div>
+@elseif (session('trash'))
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    {{ session('trash') }}
+    </div>
+@endif  
 
 <div class="box">
     <div class="box-header">
@@ -49,40 +63,23 @@
                                 <tbody>
                                     @foreach($horarios as $horario)
                                     <tr>
-                                        <td>{{$horario->hora}}</td>
-                                        <td>{{$horario->valor}}</td>
+                                        <td>{{$horario->horario}}</td>
+                                        <td>{{$horario->preco}}</td>
                                         <td>
                                             <a href="{{route('horarios.edit', $horario->id)}}" 
                                             class="btn btn-warning" 
                                             role="button"><i class="fa fa-pencil"></i> Alterar</a>
-                                            <button class="btn btn-danger" data-catid={{$horario->id}} data-toggle="modal" data-target="#delete"><i class="fa fa-trash"></i> Deletar</button> 
+                                            <form style="display: inline-block"
+                                            method="post"
+                                            action="{{route('horarios.destroy', $horario->id)}}"
+                                            onsubmit="return confirm('Confirma Exclusão?')">
+                                            {{ method_field('delete') }}
+                                            {{ csrf_field() }}
+                                            <button type="submit"
+                                                    class="btn btn-danger"><i class="fa fa-trash"></i> Excluir </button>
+                                            </form>  
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                            <div class="modal-dialog" role="document">
-                                              <div class="modal-content">
-                                                <div class="modal-header">
-                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                  <h4 class="modal-title text-center" id="myModalLabel">Confirmar Exclusão</h4>
-                                                </div>
-                                                <form action="{{route('horarios.destroy', $horario->id)}}" method="post">
-                                                        {{method_field('delete')}}
-                                                        {{csrf_field()}}
-                                                    <div class="modal-body">
-                                                          <p class="text-center">
-                                                              Tem certeza que deseja excluir o registro?
-                                                          </p>
-                                                            <input type="hidden" name="category_id" id="cat_id" value="">
-                                          
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                      <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa fa-times"></i> Não, Cancelar</button>
-                                                      <button type="submit" class="btn btn-warning"><i class="fa fa-check"></i> Sim, Deletar</button>
-                                                    </div>
-                                                </form>
-                                              </div>
-                                            </div>
-                                    </div>
                                     @endforeach
                                 </tbody>        
                                     <tfoot>

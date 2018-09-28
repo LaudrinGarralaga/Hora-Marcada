@@ -4,9 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model {
-
-    protected $fillable = array('nome', 'telefone', 'email', 'pontos');
-    public $timestamps = false;
-
+class Cliente extends Model
+{
+    protected $fillable = array('nome', 'telefone', 'email', 'pontos', 'senha');
+     public $timestamps = false;
 }
