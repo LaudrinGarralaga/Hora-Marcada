@@ -3,7 +3,7 @@
 @section('title', 'Hora Marcada')
 
 @section('content_header')
-<div class="container" style="background-color: white; margin-inline-start: -15px; margin-inline-end: -20px; margin-top: -15px; height: 55px">
+<div class="row" style="background-color: white; margin-inline-start: -15px; margin-inline-end: -20px; margin-top: -15px; height: 55px">
     <div class="bred">
         <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Início</p> 
     </div>
