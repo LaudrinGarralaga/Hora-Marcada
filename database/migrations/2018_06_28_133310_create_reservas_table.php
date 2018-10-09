@@ -14,8 +14,9 @@ class CreateReservasTable extends Migration {
     public function up() {
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('data', 20);
-            $table->decimal('valor', 9, 2);
+            $table->date('data', 20);
+            $table->string('semana', 50);
+            $table->decimal('preco', 9, 2);
             $table->enum('status',['reservado', 'cancelado', 'concluido']);
             $table->enum('permanente',['sim', 'nao']);
             $table->unsignedInteger('horario_id');

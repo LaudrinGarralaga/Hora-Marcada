@@ -95,6 +95,11 @@ return [
             'url' => 'home',
         ],
         [
+            'text' => 'Meu Local',
+            'icon' => 'map-marker',
+            'url' => 'locais',
+        ],
+        [
             'text' => 'Reservar',
             'icon' => 'calendar-plus-o',
             'submenu' => [
@@ -140,40 +145,6 @@ return [
         [
             'text' => 'Relatórios',
             'icon' => 'print',
-            'submenu' => [
-                [
-                    'text' => 'Clientes',
-                    'icon' => 'user',
-                    'submenu' => [
-                        [
-                            'text' => 'Relatório de clientes',
-                            'icon' => 'user',
-                            'url' => 'horarios',
-                        ],
-                        [
-                            'text' => 'Relatório de cliente/reservas',
-                            'icon' => 'print',
-                            'url' => 'horarios',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Opcionais',
-                    'icon' => 'list',
-                    'url' => 'opcionais',
-                ],
-                [
-                    'text' => 'Horários',
-                    'icon' => 'clock-o',
-                    'url' => 'horarios',
-                ],
-                [
-                    'text' => 'Quadras',
-                    'icon' => 'square',
-                    'url' => 'quadras',
-                ],
-            
-            ],
         ],
     ],
     /*

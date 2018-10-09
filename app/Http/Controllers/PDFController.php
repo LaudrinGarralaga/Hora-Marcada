@@ -7,8 +7,10 @@ use App\Horario;
 use App\Opcional;
 use App\Quadra;
 use App\Reserva;
+use App\Local;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use PDF;
 
 class PDFController extends Controller
@@ -34,7 +36,11 @@ class PDFController extends Controller
         
         // Recupera todos os clientes do banco
         $customers = Cliente::all();
-        $pdf = PDF::loadView('pdf.clientes', ['customers' => $customers], ['data' => $data, 'hora' => $hora]);
+        $usuario = Auth::id();
+        
+        // Recupera todos os clientes do banco
+        $locais = DB::table('local')->where('user_id', '=', $usuario)->get();
+        $pdf = PDF::loadView('pdf.clientes', ['customers' => $customers], ['data' => $data, 'hora' => $hora, 'locais' => $locais]);
         //dd($customers);
         return $pdf->download('Lista de clientes.pdf');
     }
@@ -54,7 +60,17 @@ class PDFController extends Controller
 
         // Recupera todos os horarios do banco
         $customers = Horario::all();
-        $pdf = PDF::loadView('pdf.horarios', ['customers' => $customers], ['data' => $data, 'hora' => $hora]);
+        $usuario = Auth::id();
+        
+        // Recupera todos os locais do do usuário logado
+        $locais = DB::table('local')->where('user_id', '=', $usuario)->get();
+       
+        $pdf = PDF::loadView('pdf.horarios', ['customers' => $customers], ['data' => $data, 'hora' => $hora, 'locais' => $locais]);
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(500, 15, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+      
         return $pdf->download('Lista de horarios.pdf');
     }
 

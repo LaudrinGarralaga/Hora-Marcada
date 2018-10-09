@@ -55,4 +55,5 @@ Route::get('disponibilidade', 'HomeController@pesquisa');
 Route::post('horarios-filtro', 'HomeController@filtro')->name('horarios.filtro');
         
 Route::resource('relatorios', 'PDFController');
+Route::resource('locais', 'LocalController');
 
