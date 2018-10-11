@@ -57,3 +57,7 @@ Route::post('horarios-filtro', 'HomeController@filtro')->name('horarios.filtro')
 Route::resource('relatorios', 'PDFController');
 Route::resource('locais', 'LocalController');
 
+Route::get('graficos-gerenciais', 'GraficoController@Graficos');
+
+
+

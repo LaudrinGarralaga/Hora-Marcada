@@ -145,6 +145,18 @@ return [
         [
             'text' => 'Relatórios',
             'icon' => 'print',
+            'submenu' => [
+                [
+                    'text' => 'Estatísticos',
+                    'icon' => 'pie-chart',
+                    'url' => 'graficos-gerenciais',
+                ],
+                [
+                    'text' => 'Gerenciais',
+                    'icon' => 'file-text',
+                    'url' => 'relatorios',
+                ],
+            ],
         ],
     ],
     /*
