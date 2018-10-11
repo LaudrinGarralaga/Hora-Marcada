@@ -13,8 +13,8 @@
 @stop
 
 @section('content')
-    <section class="col-sm-4">
-        @foreach ($locais as $local) 
+    <section class="col-sm-12">
+        @forelse ($locais as $local) 
         <ul class="list-group">
             
             <li class="list-group-item">
@@ -50,12 +50,20 @@
             </li>
            
         </ul>
-        @endforeach
         <a href="{{route('locais.create')}}" 
+            class="btn btn-success" 
+            role="button"><i class="fa fa-plus"></i> Novo</a>
+        <a href="{{route('locais.edit', $local->id)}}" 
+            class="btn btn-warning" 
+            role="button"><i class="fa fa-pencil"></i> Alterar</a>
+        @empty
+    
+                <h1>Não há local cadastrado, cadastre um novo local.</h1>
+                <a href="{{route('locais.create')}}" 
                 class="btn btn-success" 
                 role="button"><i class="fa fa-plus"></i> Novo</a>
-        <a href="{{route('locais.edit', $local->id)}}" 
-                class="btn btn-warning" 
-                role="button"><i class="fa fa-pencil"></i> Alterar</a>
+                 
+        @endforelse
+        
     </section>
 @stop
