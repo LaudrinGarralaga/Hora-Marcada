@@ -35,32 +35,32 @@ class HomeController extends Controller
         $data = Carbon::parse($data)->format('Y/m/d');
         $data2 = Carbon::parse($data)->format('d/m/Y');
         $today = Carbon::now()->dayOfWeek;
-
+        
         // verifica qual dia da semana é e adiciona o dia a variavel $today
         switch ($today) {
-            case 0:
+            case 1:
                 $today = 'domingo';
                 break;
-            case 1:
+            case 2:
                 $today = 'segunda';
                 break;
-            case 2:
+            case 3:
                 $today = 'terça';
                 break;
-            case 3:
+            case 4:
                 $today = 'quarta';
                 break;
-            case 4:
+            case 5:
                 $today = 'quinta';
                 break;
-            case 5:
+            case 6:
                 $today = 'sexta';
                 break;
-            case 6:
+            case 7:
                 $today = 'sabado';
                 break;
         }
-
+        
         // exibe as reservas do dia atual
         $dias = DB::table('reservas')
             ->join('quadras', 'quadra_id', '=', 'quadras.id')
@@ -71,11 +71,13 @@ class HomeController extends Controller
             ->orWhere(function ($query) use ($data, $today) {
                 $query->where('data', '<=', $data)
                     ->where('semana', '=', $today)
-                    ->where('permanente', '=', 'sim')
-                    ->where('status', '<>', 'cancelado');
+                    ->where('permanente', '=', 'Sim')
+                    ->where('status', '<>', 'cancelado')
+                    ->where('status', '<>', 'concluido');                   
             })
             ->orderBy('horario')
             ->get();
+            //dd($dias);
        
         // recupera o total de clientes, reservas, horários e opcionais
         $totalClientes = Cliente::count();
