@@ -32,7 +32,7 @@
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-red">
+            <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>{{$totalClientes}}</h3>
                     <p>Total de clientes</p>
@@ -47,7 +47,7 @@
             </div>
     </div>
     <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-green">
+        <div class="small-box bg-aqua">
             <div class="inner">
                 <h3>{{$totalHorarios}}</h3>
                 <p>Total de horários</p>
@@ -62,7 +62,7 @@
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
-        <div class="small-box bg-yellow">
+        <div class="small-box bg-aqua">
             <div class="inner">
                 <h3>{{$totalOpcionais}}</h3>
                 <p>Total de opcionais</p>
@@ -107,7 +107,7 @@
             </div>
         </article>
         @empty
-          <h1 style="text-align: center; color: red"> <b><u>Não há horários reservados para o dia de hoje!</u></b></h1>
+          <h1 style="text-align: center; color: steelblue"> <b><u>Não há horários reservados para o dia de hoje!</u></b></h1>
         @endforelse
     </div>
 </div>
