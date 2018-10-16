@@ -13,94 +13,35 @@
 
 @section('content')
 
-<div class="row" >
-    <br>
-    <br>
-        <div class="col-lg-4 col-xs-8">
-            <div class="small-box bg-aqua">
-                <div class="inner">
-                    <br>
-                    <p style="font-size: 20px">Reservas</p>
-                    <br>
-                    <br>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <a href='{{route('reservas.index')}}' class="small-box-footer">
-                   Filtrar
-                    <i class="fa fa-filter"></i>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xs-6">
-                <div class="small-box bg-red">
-                    <div class="inner"> 
-                            <br>
-                            <p style="font-size: 20px">Clientes</p>
-                            <br>
-                            <br>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-user"></i>
-                    </div>
-                    <a href='{{route('clientes.index')}}' class="small-box-footer">
-                            Filtrar
-                        <i class="fa fa-filter"></i>
-                    </a>
-                </div>
-        </div>
-        <div class="col-lg-4 col-xs-6">
-            <div class="small-box bg-green">
-                <div class="inner">
-                        <br>
-                        <p style="font-size: 20px">Horários</p>
-                        <br>
-                        <br>
-                 </div>
-                <div class="icon">
-                    <i class="fa fa-clock-o"></i>
-                </div>
-                <a href='{{route('horarios.index')}}' class="small-box-footer">
-                        Filtrar
-                    <i class="fa fa-filter"></i>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xs-6">
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                        <br>
-                        <p style="font-size: 20px">Opcionais</p>
-                        <br>
-                        <br>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-list"></i>
-                </div>
-                <a href='{{route('opcionais.index')}}' class="small-box-footer">
-                        Filtrar
-                    <i class="fa fa-filter"></i>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-4 col-xs-6">
-                <div class="small-box bg-green">
-                    <div class="inner">
-                            <br>
-                            <p style="font-size: 20px">Quadras</p>
-                            <br>
-                            <br>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-square"></i>
-                    </div>
-                    <a href='{{route('opcionais.index')}}' class="small-box-footer">
-                            Filtrar
-                        <i class="fa fa-filter"></i>
-                    </a>
+
+<div class="container" style="background: white">
+    <form method="post" action="{{route('graficos.filtro')}}">
+        {{ csrf_field() }}          
+        <div class="col-sm-10">
+            <div class="form-group">
+                <label for="tipo"> Selecione o tipo de relatório: </label>
+                <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                    <select class="form-control" id="tipo" name="tipo">
+                        <option value="financeiro"> Financeiro</option>
+                        <option value="cliente"> Cliente</option>
+                        <option value="data"> Data</option>
+                        <option value="quadra"> Quadra</option>
+                        <option value="horario"> Horário</option>
+                    </select>
                 </div>
             </div>
-        
-    </div>
+        </div>
+            
+        <div class="col-sm-1">
+            <div class="form-group">
+                <label> &nbsp; </label>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-mouse-pointer"></i> Selecionar</button>
+            </div>            
+        </div>
+    </form>        
+</div>
+
 @stop

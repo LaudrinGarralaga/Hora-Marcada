@@ -8,22 +8,71 @@
         <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Gráficos Estatísticos</p> 
     </div>
 </div>
-    
 @stop
 
 @section('content')
-<div class="row">
-<div class='col-sm-12'>
-    <div class="col-sm-6">
-        <div id="piechart_3d" style="width: auto; height: 500px;"></div>
+@if (isset($dataIni))
+    <div class="alert alert-success">
+       <p>
+            <a href="#" data-dismiss="alert" aria-label="close"><i class="fa fa-close" ></i></a>
+           Período da pesquisa: De {{$dataIni}} a {{$dataFin}}
+       </p>
     </div>
-    <div class="col-sm-6">
-        <div id="piechart_3d1" style="width: auto; height: 500px;"></div>
-    </div>
-    <div class="col-sm-6">
-        <div id="piechart_3d2" style="width: auto; height: 500px; margin-top: 30px"></div>
-    </div>
+@endif
+
+<div class="container" style="background: white">
+    <form method="post" action="{{route('graficos.filtro')}}">
+        {{ csrf_field() }}
+
+        <div class="col-sm-6">
+                <div class="form-group">
+                        <label for="dataIni"> Data inicial: </label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" id="dataIni" name="dataIni" class="form-control" value="{{old('dataIni')}}">
+                        </div>
+                </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="dataFin"> Data final: </label>
+                <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                    <input type="text" id="dataFin" name="dataFin" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label> &nbsp; </label>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Pesquisar</button>
+                <a href="{{route('graficos.graficos')}}" class="btn btn-success" 
+                role="button"><i class="fa fa-pie-chart"></i> Ver Todos</a> 
+            </div>
+           
+        </div>
+    </form>
+    
 </div>
+
+<div class="row">
+    <div class='col-sm-12'>
+        <div class="col-sm-6">
+            <div id="piechart_3d" style="width: auto; height: 500px; margin-top: 20px"></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="piechart_3d1" style="width: auto; height: 500px; margin-top: 20px"></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="piechart_3d2" style="width: auto; height: 500px; margin-top: 30px"></div>
+        </div>
+    </div>
 </div>
 @stop
 
@@ -83,4 +132,33 @@
             chart.draw(data, options);
         }
     </script>
+
+
+
+<script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
+<script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>  
+<script src="{{asset('js/bootstrap-datepicker.pt-BR.min.js')}}" charset="UTF-8"></script>
+
+<script>
+$('#dataIni').datepicker({     
+    format: "yyyy/mm/dd",
+    language: "pt-BR",
+    //startDate: '+0d',
+    orientation: "bottom",
+    autoclose: true,
+});
+$('#dataFin').datepicker({     
+    format: "yyyy/mm/dd",
+    language: "pt-BR",
+    //startDate: '+0d',
+    orientation: "bottom",
+    autoclose: true,
+});
+</script>
+
+@stop
+
+@section('css')
+<link href="{{asset('css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
 @stop
