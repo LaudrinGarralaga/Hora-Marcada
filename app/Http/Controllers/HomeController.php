@@ -38,25 +38,25 @@ class HomeController extends Controller
         
         // verifica qual dia da semana é e adiciona o dia a variavel $today
         switch ($today) {
-            case 1:
+            case 0:
                 $today = 'domingo';
                 break;
-            case 2:
+            case 1:
                 $today = 'segunda';
                 break;
-            case 3:
+            case 2:
                 $today = 'terça';
                 break;
-            case 4:
+            case 3:
                 $today = 'quarta';
                 break;
-            case 5:
+            case 4:
                 $today = 'quinta';
                 break;
-            case 6:
+            case 5:
                 $today = 'sexta';
                 break;
-            case 7:
+            case 6:
                 $today = 'sabado';
                 break;
         }

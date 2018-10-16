@@ -57,7 +57,6 @@ Route::post('horarios-filtro', 'HomeController@filtro')->name('horarios.filtro')
 Route::resource('relatorios', 'PDFController');
 Route::resource('locais', 'LocalController');
 
-<<<<<<< HEAD
 Route::get('graficos-gerenciais', 'GraficoController@Graficos')
         ->name('graficos.graficos');
 
@@ -66,5 +65,3 @@ Route::post('graficosfiltro', 'GraficoController@filtro')
 
 
 
-=======
->>>>>>> parent of 4668d01... Gráficos Gerenciais
