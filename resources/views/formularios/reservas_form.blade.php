@@ -204,7 +204,7 @@ var opcionais = [];
 
 function carregarHorarios() {
 
-  var url = "http://localhost/cpte.laudrin/WebServiceTCC/SisWeb/lista_horarios.php";
+  var url = "http://localhost/WebServiceTCC/SisWeb/lista_horarios.php";
 
   fetch(url)
     .then(resp => resp.json())
@@ -243,7 +243,7 @@ Preco.value = (obterValor() + verOp()).toFixed(2);
 
 function carregarOpcionais() {
 
-  var url = "http://localhost/cpte.laudrin/WebServiceTCC/SisWeb/lista_opcionais.php";
+  var url = "http://localhost/WebServiceTCC/SisWeb/lista_opcionais.php";
 
   fetch(url)
     .then(resp => resp.json())

@@ -15,10 +15,12 @@ class CreateLocalTable extends Migration
     {
         Schema::create('local', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nome', 100);
             $table->string('endereco', 100);
             $table->integer('numero');
             $table->string('complemento', 100);
             $table->string('cidade', 100);
+            $table->string('telefone', 20);
             $table->string('bairro', 100);
             $table->string('cep', 20);
             $table->unsignedInteger('user_id');
