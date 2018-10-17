@@ -13,7 +13,7 @@
 @stop
 
 @section('content')
-    <section class="col-sm-12">
+    <section class="col-sm-4">
         @forelse ($locais as $local) 
         <ul class="list-group">
             

@@ -70,7 +70,7 @@
             <div id="piechart_3d1" style="width: auto; height: 500px; margin-top: 20px"></div>
         </div>
         <div class="col-sm-6">
-            <div id="piechart_3d2" style="width: auto; height: 500px; margin-top: 30px"></div>
+            <div id="piechart_3d3" style="width: auto; height: 500px; margin-top: 30px"></div>
         </div>
     </div>
 </div>
@@ -115,26 +115,34 @@
             chart.draw(data, options);
         }
     </script>
+
     <script type="text/javascript">
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Horário', 'Nº Reservas'],
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable([
+            ['Dia da Semana', 'Nº de Reservas'],
                 @foreach ($semanas as $semana)
                 {!! "['$semana->semana', $semana->num]," !!}          
                 @endforeach
+                
             ]);
-            var options = {
-            title: 'Total de reservas por dia da semana',
-            is3D: true, 
-            };
-            var chart = new google.visualization.PieChart(document.getElementById('piechart_3d2'));
-            chart.draw(data, options);
-        }
+
+        var options = {
+          legend: { position: 'none' },
+          chart: {
+                title: 'Total de reservas por dia da semana',
+                
+            },
+        
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('piechart_3d3'));
+        // Convert the Classic options to Material options.
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
     </script>
-
-
 
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
