@@ -11,6 +11,7 @@ use App\Local;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use PDF;
 
 class PDFController extends Controller
@@ -18,7 +19,22 @@ class PDFController extends Controller
 
     public function index()
     {
+        
         return view('outros.escolhe_relatorios');
+    }
+
+    public function formularios(Request $request) {
+        $tipo = $request->tipo;
+        //dd($tipo);
+        if ($tipo == 0){
+            $acao = 1;
+        } elseif ($tipo == 1){
+            $acao = 2;
+        } else {
+            $acao = 3;
+        }
+        //dd($acao);
+       return view('outros.escolhe_relatorios', compact('acao'));
     }
 
     public function getPDFClientes()

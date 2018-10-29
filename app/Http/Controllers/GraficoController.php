@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use ConsoleTVs\Charts\Facades\Charts;
+use App\User;
+use App\Reserva;
 
 class GraficoController extends Controller
 {
@@ -61,4 +64,5 @@ class GraficoController extends Controller
         $dataFin = Carbon::parse($dataFin)->format('d/m/Y');
         return view('graficos.graficos_graf', compact('quadras', 'horarios', 'semanas','dataIni', 'dataFin'));
     }
+
 }

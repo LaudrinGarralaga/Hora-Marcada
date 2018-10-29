@@ -1,14 +1,14 @@
 <?php
 
 /*
-  |--------------------------------------------------------------------------
-  | Web Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where you can register web routes for your application. These
-  | routes are loaded by the RouteServiceProvider within a group which
-  | contains the "web" middleware group. Now create something great!
-  |
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
  */
 
 Auth::routes();
@@ -45,7 +45,7 @@ Route::get('/getPDFHorarios', 'PDFController@getPDFHorarios');
 Route::get('/getPDFQuadras', 'PDFController@getPDFQuadras');
 Route::get('/getPDFOpcionais', 'PDFController@getPDFOpcionais');
 Route::get('/getPDFReservas', 'PDFController@getPDFReservas');
-    
+
 Route::get('detalhes-reserva/{id}', 'HomeController@detalhesReservas')->name('detalhes.reserva');
 
 Route::get('reservar-horario/{id}', 'HomeController@reservar')->name('reservar.horario');
@@ -53,15 +53,15 @@ Route::get('reservar-horario/{id}', 'HomeController@reservar')->name('reservar.h
 Route::get('disponibilidade', 'HomeController@pesquisa');
 
 Route::post('horarios-filtro', 'HomeController@filtro')->name('horarios.filtro');
-        
+
 Route::resource('relatorios', 'PDFController');
 Route::resource('locais', 'LocalController');
 
 Route::get('graficos-gerenciais', 'GraficoController@Graficos')
-        ->name('graficos.graficos');
+    ->name('graficos.graficos');
+
+Route::post('formularios', 'PDFController@formularios')
+    ->name('pdf.formularios');
 
 Route::post('graficosfiltro', 'GraficoController@filtro')
-        ->name('graficos.filtro');
-
-
-
+    ->name('graficos.filtro');

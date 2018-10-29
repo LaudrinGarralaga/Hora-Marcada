@@ -71,7 +71,7 @@
         </div>
         <div class="col-sm-6">
             <div id="piechart_3d3" style="width: auto; height: 500px; margin-top: 30px"></div>
-        </div>
+        </div> 
     </div>
 </div>
 @stop
@@ -143,7 +143,7 @@
         chart.draw(data, google.charts.Bar.convertOptions(options));
       };
     </script>
-
+    
 <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')}}"></script>
 <script src="{{asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>  
