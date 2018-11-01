@@ -154,7 +154,18 @@ return [
                 [
                     'text' => 'Relatórios',
                     'icon' => 'list-alt',
-                    'url' => 'relatorios',
+                    'submenu' => [
+                        [
+                            'text' => 'Financeiro',
+                            'url'  => 'relatorios-financeiro',
+                            'icon' => 'usd',
+                        ],
+                        [
+                            'text'    => 'Reservas',
+                            'url'     => '#',
+                            'icon' => 'calendar',
+                        ],
+                    ],
                 ],
             ],
         ],

@@ -41,9 +41,8 @@ Route::resource('reservas_opcionais', 'Reserva_OpcionalController');
 Route::resource('quadras', 'QuadraController');
 
 Route::get('/getPDFClientes', 'PDFController@getPDFClientes');
-Route::get('/getPDFHorarios', 'PDFController@getPDFHorarios');
+Route::get('/getPDFFinanceiro', 'PDFController@getPDFFinanceiro');
 Route::get('/getPDFQuadras', 'PDFController@getPDFQuadras');
-Route::get('/getPDFOpcionais', 'PDFController@getPDFOpcionais');
 Route::get('/getPDFReservas', 'PDFController@getPDFReservas');
 
 Route::get('detalhes-reserva/{id}', 'HomeController@detalhesReservas')->name('detalhes.reserva');
@@ -60,8 +59,10 @@ Route::resource('locais', 'LocalController');
 Route::get('graficos-gerenciais', 'GraficoController@Graficos')
     ->name('graficos.graficos');
 
-Route::post('formularios', 'PDFController@formularios')
-    ->name('pdf.formularios');
+Route::post('relatorioFinanceiro', 'PDFController@getPDFFinanceiro')
+    ->name('relatorio.financeiro');
+
+Route::get('relatorios-financeiro', 'PDFController@relatorioFinanceiro')->name('relatorios.financeiro');
 
 Route::post('graficosfiltro', 'GraficoController@filtro')
     ->name('graficos.filtro');

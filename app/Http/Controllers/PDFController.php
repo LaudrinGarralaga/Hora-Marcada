@@ -7,34 +7,109 @@ use App\Horario;
 use App\Opcional;
 use App\Quadra;
 use App\Reserva;
-use App\Local;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 use PDF;
 
 class PDFController extends Controller
 {
 
-    public function index()
+    public function relatorioFinanceiro()
     {
-        
-        return view('outros.escolhe_relatorios');
+
+        $quadras = Quadra::orderBy('tipo')->get();
+
+        return view('outros.escolhe_relatorios', compact('quadras'));
     }
 
-    public function formularios(Request $request) {
-        $tipo = $request->tipo;
-        //dd($tipo);
-        if ($tipo == 0){
-            $acao = 1;
-        } elseif ($tipo == 1){
-            $acao = 2;
-        } else {
-            $acao = 3;
+    public function getPDFFinanceiro(Request $request)
+    {
+        // Verifica se  está logado
+        if (!Auth::check()) {
+            return redirect('/');
         }
-        //dd($acao);
-       return view('outros.escolhe_relatorios', compact('acao'));
+
+        $data = Carbon::now('America/Sao_Paulo');
+        $data = Carbon::parse($data)->format('d/m/Y h:i');
+        $splitName = explode(' ', $data, 2);
+        $data = $splitName[0];
+        $hora = !empty($splitName[1]) ? $splitName[1] : '';
+
+        $dataIni = $request->dataIni;
+        $dataFin = $request->dataFin;
+        $quadra = $request->quadra_id;
+
+        $customers = DB::table('reservas') 
+            ->join('quadras', 'quadra_id', '=', 'quadras.id')
+            ->select('reservas.id', 'data', 'tipo', 'status', 'permanente', 'reservas.preco', 'quadra_id')
+            ->where('data', '>=', $dataIni)
+            ->where('data', '<=', $dataFin)
+            ->where('quadra_id', '=', $quadra)
+            ->count();
+        if($customers  == 0) {
+            return redirect()->route('relatorios.financeiro')
+            ->with('success', ' Sem reservas para o período informado!');
+        } else {
+
+            if($quadra == 0){
+
+                $customers = DB::table('reservas')
+                    ->join('quadras', 'quadra_id', '=', 'quadras.id')
+                    ->select('reservas.id', 'data', 'tipo', 'status', 'permanente', 'reservas.preco', 'quadra_id')
+                    ->where('data', '>=', $dataIni)
+                    ->where('data', '<=', $dataFin)
+                    ->count();
+
+                $quadras = DB::table('quadras')
+                    ->select('tipo')
+                    ->get();
+
+                $total_preco = DB::table('reservas')
+                    ->where('data', '>=', $dataIni)
+                    ->where('data', '<=', $dataFin)
+                    ->sum('preco');
+
+                $media = $total_preco / $customers;
+            }else {
+
+                $customers = DB::table('reservas')
+                    ->join('quadras', 'quadra_id', '=', 'quadras.id')
+                    ->select('reservas.id', 'data', 'tipo', 'status', 'permanente', 'reservas.preco', 'quadra_id')
+                    ->where('data', '>=', $dataIni)
+                    ->where('data', '<=', $dataFin)
+                    ->where('quadra_id', '=', $quadra)
+                    ->count();
+
+                $quadras = DB::table('quadras')
+                    ->select('tipo')
+                    ->where('id', '=', $quadra)
+                    ->get();
+
+                $total_preco = DB::table('reservas')
+                    ->where('data', '>=', $dataIni)
+                    ->where('data', '<=', $dataFin)
+                    ->where('quadra_id', '=', $quadra)
+                    ->sum('preco');
+
+                $media = $total_preco / $customers;
+            }
+        }   
+
+        // Recupera todos os horarios do banco
+        $usuario = Auth::id();
+
+        // Recupera todos os locais do do usuário logado
+        $locais = DB::table('local')->where('user_id', '=', $usuario)->get();
+
+        $pdf = PDF::loadView('pdf.financeiro', ['customers' => $customers], ['media' => $media, 'quadras' => $quadras, 'total_preco' => $total_preco, 'data' => $data, 'dataIni' => $dataIni, 'dataFin' => $dataFin, 'hora' => $hora, 'locais' => $locais]);
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $canvas->page_text(500, 15, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->download('Relatório Financeiro.pdf');
     }
 
     public function getPDFClientes()
@@ -49,64 +124,16 @@ class PDFController extends Controller
         $splitName = explode(' ', $data, 2);
         $data = $splitName[0];
         $hora = !empty($splitName[1]) ? $splitName[1] : '';
-        
+
         // Recupera todos os clientes do banco
         $customers = Cliente::all();
         $usuario = Auth::id();
-        
+
         // Recupera todos os clientes do banco
         $locais = DB::table('local')->where('user_id', '=', $usuario)->get();
         $pdf = PDF::loadView('pdf.clientes', ['customers' => $customers], ['data' => $data, 'hora' => $hora, 'locais' => $locais]);
         //dd($customers);
         return $pdf->download('Lista de clientes.pdf');
-    }
-
-    public function getPDFHorarios()
-    {
-        // Verifica se  está logado
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        $data = Carbon::now('America/Sao_Paulo');
-        $data = Carbon::parse($data)->format('d/m/Y h:i');
-        $splitName = explode(' ', $data, 2);
-        $data = $splitName[0];
-        $hora = !empty($splitName[1]) ? $splitName[1] : '';
-
-        // Recupera todos os horarios do banco
-        $customers = Horario::all();
-        $usuario = Auth::id();
-        
-        // Recupera todos os locais do do usuário logado
-        $locais = DB::table('local')->where('user_id', '=', $usuario)->get();
-       
-        $pdf = PDF::loadView('pdf.horarios', ['customers' => $customers], ['data' => $data, 'hora' => $hora, 'locais' => $locais]);
-        $pdf->output();
-        $dom_pdf = $pdf->getDomPDF();
-        $canvas = $dom_pdf ->get_canvas();
-        $canvas->page_text(500, 15, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
-      
-        return $pdf->download('Lista de horarios.pdf');
-    }
-
-    public function getPDFOpcionais()
-    {
-        // Verifica se  está logado
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        $data = Carbon::now('America/Sao_Paulo');
-        $data = Carbon::parse($data)->format('d/m/Y h:i');
-        $splitName = explode(' ', $data, 2);
-        $data = $splitName[0];
-        $hora = !empty($splitName[1]) ? $splitName[1] : '';
-
-        // Recupera todos os opcionais do banco
-        $customers = Opcional::all();
-        $pdf = PDF::loadView('pdf.opcionais', ['customers' => $customers], ['data' => $data, 'hora' => $hora]);
-        return $pdf->download('Lista de opcionais.pdf');
     }
 
     public function getPDFQuadras()
