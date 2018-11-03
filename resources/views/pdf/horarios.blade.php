@@ -16,7 +16,7 @@
     
         <p><span style="font-size:12px">Endereço: {{$local->endereco}}, N&ordm; {{$local->numero}}&nbsp;&nbsp;&nbsp; Complemento:  {{$local->complemento}}&nbsp; &nbsp; Bairro: {{$local->bairro}}&nbsp;&nbsp; Cidade: {{$local->cidade}}&nbsp; &nbsp; Telefone: {{$local->telefone}}</span></p>
         
-        <p><span style="font-size:12px">Data: {{$data}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Hor&aacute;rio: {{$hora}} </span></p>
+        <p><span style="font-size:12px">Emitido dia: {{$data}}&nbsp; &nbsp; às: {{$hora}} </span></p>
     
         <hr />
         <h2><span style="font-size:20px"><u><strong>Relat&oacute;rio de Horários</strong></u></span></h2>

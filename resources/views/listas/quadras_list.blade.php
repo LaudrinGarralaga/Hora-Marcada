@@ -55,14 +55,16 @@
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                     <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Tipo</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 50%">Ações</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 40%">Tipo</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 40%">Valor</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 20%">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($quadras as $quadra) 
                                             <tr>
                                                 <td> {{$quadra->tipo}} </td>
+                                                <td> {{$quadra->preco}} </td>
                                                     <td> <a href='{{route('quadras.edit', $quadra->id)}}'
                                                         class='btn btn-warning' 
                                                         role='button'><i class="fa fa-pencil"></i> Alterar </a>

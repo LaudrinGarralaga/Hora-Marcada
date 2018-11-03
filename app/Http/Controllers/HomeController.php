@@ -68,6 +68,7 @@ class HomeController extends Controller
             ->join('clientes', 'cliente_id', '=', 'clientes.id')
             ->select('reservas.id', 'data', 'tipo', 'status', 'horario', 'permanente', 'reservas.preco', 'clientes.nome')
             ->where('data', '=', $data)
+            ->where('status', '<>', 'concluido')
             ->orWhere(function ($query) use ($data, $today) {
                 $query->where('data', '<=', $data)
                     ->where('semana', '=', $today)

@@ -57,18 +57,13 @@
                     <div class="form-group">
                         <label for="quadra_id">Quadra:</label>
                         <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-square"></i>
+                                <div class="input-group-addon">
+                                    <i class="fa fa-square"></i>
+                                </div>
+                                <select class="form-control" id="quadra_id" name="quadra_id">
+                                    
+                                </select>
                             </div>
-                            <select class="form-control" id="quadra_id" name="quadra_id">
-                                @foreach ($quadras as $quadra)
-                                <option value="{{$quadra->id}}"
-                                        @if ((isset($reg) && $reg->quadra_id==$quadra->id) 
-                                        or old('quadra_id') == $quadra->id) selected @endif>
-                                        {{$quadra->tipo}}</option>
-                                @endforeach       
-                            </select>
-                        </div>
                     </div>
                 </div>
             <div class="col-sm-4">
@@ -90,13 +85,18 @@
                 <div class="form-group">
                     <label for="horario_id">Horário:</label>
                     <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-clock-o"></i>
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <select class="custom-select form-control form-control-sm" id="horario_id" name="horario_id">
+                                @foreach ($horarios as $horario)
+                                <option value="{{$horario->id}}"
+                                        @if ((isset($reg) && $reg->horario_id==$horario->id) 
+                                        or old('horario_id') == $horario->id) selected @endif>
+                                        {{$horario->horario}}</option>
+                                @endforeach       
+                            </select>
                         </div>
-                        <select class="form-control" id="horario_id" name="horario_id">
-                            
-                        </select>
-                    </div>
                 </div>
             </div>
 
@@ -195,16 +195,16 @@ $('#data').datepicker({
     autoclose: true,
 });
 
-var horario_id = document.getElementById("horario_id");
+var quadra_id = document.getElementById("quadra_id");
 var Preco = document.getElementById("Preco");
 var selOp = document.getElementById("selOp");
 
 var precos = [];
 var opcionais = [];
 
-function carregarHorarios() {
+function carregarQuadras() {
 
-  var url = "http://localhost/WebServiceTCC/SisWeb/lista_horarios.php";
+  var url = "http://localhost/WebServiceTCC/SisWeb/lista_quadras.php";
 
   fetch(url)
     .then(resp => resp.json())
@@ -212,22 +212,22 @@ function carregarHorarios() {
       for (var d of data) {
         var option = document.createElement("option");
         option.value = d.id;
-        option.text = d.horario;
-        horario_id.appendChild(option);
-        precos.push({ id: d.id, horario: d.horario, preco: d.preco });
+        option.text = d.tipo;
+        quadra_id.appendChild(option);
+        precos.push({ id: d.id, tipo: d.tipo, preco: d.preco });
       }
     });
 }
-window.addEventListener("load", carregarHorarios);
+window.addEventListener("load", carregarQuadras);
 
 function obterValor() {
   // alert(horario_id.value);
   var preco;
-  if (horario_id.value == "") {
+  if (quadra_id.value == "") {
     preco = 0;
   } else {
     for (var p of precos) {
-      if (horario_id.value == p.id) {
+      if (quadra_id.value == p.id) {
         preco = p.preco;
         break;
       }
@@ -235,7 +235,7 @@ function obterValor() {
   }
   return Number(preco);
 }
-horario_id.addEventListener("change", function () {
+quadra_id.addEventListener("change", function () {
  //Preco.value = obterValor().toFixed(2);
 Preco.value = (obterValor() + verOp()).toFixed(2);
 

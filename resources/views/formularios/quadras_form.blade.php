@@ -45,9 +45,8 @@
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
-            <div class="box-body">
-                <div class="form-group">
-                    <div class="form-group">
+                <div class="col-sm-6">
+                        <div class="form-group">
                         <label for="tipo">Tipo:</label>
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -58,9 +57,24 @@
                                    value="{{$reg->tipo or old('tipo')}}">
                         </div>
                     </div>
-
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="tipo">Valor:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-usd"></i>
+                            </div>
+                            <input class="form-control" type="text" id="preco" 
+                                   name="preco" placeholder="Digite o preço da quadra"
+                                   value="{{$reg->preco or old('preco')}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Salvar</button>        
-                    <button type="reset" class="btn btn-warning"><i class="fa fa-eraser"></i> Limpar</button>     
+                    <button type="reset" class="btn btn-warning"><i class="fa fa-eraser"></i> Limpar</button> 
+                </div>    
                 </div> 
             </div>
         </form>    

@@ -111,12 +111,12 @@ class ReservaController extends Controller {
         $acao = 2;
 
         // Obtém os horários, clientes e quadras para exibir no form de cadastro
-        //$horarios = Horario::orderBy('horario')->get();
+        $horarios = Horario::orderBy('horario')->get();
         $clientes = Cliente::orderBy('nome')->get();
         $quadras = Quadra::orderBy('tipo')->get();
         //$opcionais = Opcional::orderBy('descricao')->get();
 
-        return view('formularios.reservas_form', compact('reg', 'acao', 'clientes', 'quadras'));
+        return view('formularios.reservas_form', compact('reg', 'acao', 'clientes', 'quadras', 'horarios'));
     }
 
     public function update(Request $request, $id) {
