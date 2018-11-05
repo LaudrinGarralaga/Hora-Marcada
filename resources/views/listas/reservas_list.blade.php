@@ -60,7 +60,9 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Valor</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Reservado</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Confirmado</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Cancelado</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Permanente</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                         </tr>
@@ -73,21 +75,32 @@
                         <td>{{ Carbon\Carbon::parse($reserva->data)->format('d/m/Y')}}</td>
                         <td>{{$reserva->horario->horario}}</td>
                         <td>{{$reserva->preco}}</td>
-                        <td><span class="label label-primary"> {{$reserva->status}}</span></td>
+                        <td> @if($reserva->reservado == 0)
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                @else
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+                                @endif
+                            </td>
+                            <td> @if($reserva->confirmado == 0)
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    @else
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+                                    @endif
+                                </td>
+                                <td> @if($reserva->cancelado == 0)
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        @else
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
+                                        @endif
+                                    </td>
                         <td><span class="label label-danger"> {{$reserva->permanente}}</span></td></td>
                         <td>
-                            <a href="{{route('reservas.edit', $reserva->id)}}" 
-                               class="btn btn-warning" 
-                               role="button"><i class="fa fa-pencil"></i> Alterar</a>
-                               <form style="display: inline-block"
-                                method="post"
-                                action="{{route('reservas.destroy', $reserva->id)}}"
-                                onsubmit="return confirm('Confirma Exclusão?')">
-                                {{ method_field('delete') }}
-                                {{ csrf_field() }}
-                                <button type="submit"
-                                        class="btn btn-danger"><i class="fa fa-trash"></i> Excluir </button>
-                                </form>  
+                            <a href="{{route('reservas.confirmar', $reserva->id)}}" 
+                               class="btn btn-success" 
+                               role="button"><i class="fa fa-check"></i> Confirmar</a>
+                            <a href="{{route('reservas.cancelar', $reserva->id)}}" 
+                                class="btn btn-danger" 
+                                role="button"><i class="fa fa-times"></i> Cancelar</a>
                         </td>
                     </tr>
                         
@@ -100,7 +113,9 @@
                       <th rowspan="1" colspan="1">Data</th>
                       <th rowspan="1" colspan="1">Horário</th>
                       <th rowspan="1" colspan="1">Valor</th>
-                      <th rowspan="1" colspan="1">Status</th>
+                      <th rowspan="1" colspan="1">Reservado</th>
+                      <th rowspan="1" colspan="1">Confirmado</th>
+                      <th rowspan="1" colspan="1">Cancelado</th>
                       <th rowspan="1" colspan="1">Permanente</th>
                       <th rowspan="1" colspan="1">Ações</th>
                      </tr> 

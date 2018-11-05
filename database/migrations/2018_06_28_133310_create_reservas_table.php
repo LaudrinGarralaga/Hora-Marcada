@@ -17,7 +17,9 @@ class CreateReservasTable extends Migration {
             $table->date('data', 20);
             $table->string('semana', 50);
             $table->decimal('preco', 9, 2);
-            $table->enum('status',['reservado', 'cancelado', 'concluido']);
+            $table->boolean('reservado')->default(1);
+            $table->boolean('confirmado')->default(0);
+            $table->boolean('cancelado')->default(0);
             $table->enum('permanente',['sim', 'nao']);
             $table->unsignedInteger('horario_id');
             $table->unsignedInteger('cliente_id');

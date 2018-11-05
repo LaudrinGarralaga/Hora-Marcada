@@ -15,6 +15,7 @@ class CreateQuadrasTable extends Migration
     {
         Schema::create('quadras', function (Blueprint $table) {
             $table->increments('id');
+            $table->decimal('preco', 9,2);
             $table->string('tipo', 45)->unique();
         });
     }

@@ -66,3 +66,9 @@ Route::get('relatorios-financeiro', 'PDFController@relatorioFinanceiro')->name('
 
 Route::post('graficosfiltro', 'GraficoController@filtro')
     ->name('graficos.filtro');
+
+    Route::get('reservafinalizar/{id}', 'ReservaController@confirmar')
+    ->name('reservas.confirmar');
+
+    Route::get('reservacancelar/{id}', 'ReservaController@cancelar')
+    ->name('reservas.cancelar');

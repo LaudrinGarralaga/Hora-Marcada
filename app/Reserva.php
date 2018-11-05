@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reserva extends Model
 {
 
-    protected $fillable = array('data', 'semana', 'preco', 'status', 'permanente', 'horario_id', 'cliente_id', 'user_id', 'quadra_id');
+    protected $fillable = array('data', 'semana', 'preco', 'reservado', 'cancelado', 'confirmando', 'permanente', 'horario_id', 'cliente_id', 'user_id', 'quadra_id');
     public $timestamps = false;
 
     public function Horario()
@@ -33,18 +33,6 @@ class Reserva extends Model
     public function User()
     {
         return $this->belongsTo('App\User');
-    }
-
-    public function status()
-    {
-
-        $statusAvaliable = [
-            'reservado' => 'Reservado',
-            'cancelado' => 'Cancelado',
-            'concluido' => 'Concluído',
-        ];
-
-        return $statusAvaliable;
     }
 
     public function permanente()

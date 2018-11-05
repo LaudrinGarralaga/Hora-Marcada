@@ -27,7 +27,6 @@ class HorarioStoreUpdateFormRequest extends FormRequest
         $id = Request::segment(2);
         return [
             'horario' => "required|min:4|max:100|unique:horarios,horario,{$id},id",
-            'preco' => 'required',
         ];
     }
 }

@@ -12,11 +12,12 @@ class CreateReservaOpcionalsTable extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('reserva_opcionals', function (Blueprint $table) {
+        Schema::create('reservaop', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('reserva_id');
             $table->unsignedInteger('opcional_id');
         });
-        Schema::table('reserva_opcionals', function (Blueprint $table) {
+        Schema::table('reservaop', function (Blueprint $table) {
             $table->foreign('reserva_id')->references('id')->on('reservas');
             $table->foreign('opcional_id')->references('id')->on('opcionals');
         });
@@ -28,7 +29,7 @@ class CreateReservaOpcionalsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('reserva_opcionals');
+        Schema::dropIfExists('reservaop');
     }
 
 }

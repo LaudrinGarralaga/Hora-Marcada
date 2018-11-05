@@ -45,11 +45,18 @@
             </li>
 
             <li class="list-group-item">
-                Status: <strong>{{$reserva->status}}</strong>
+                Opcionais:
+                @foreach($opcionais as $opcional)
+                 <strong>{{$opcional->nome}},</strong>
+                @endforeach
             </li>
+
         </ul>
-        <a href="{{route('reservas.edit', $reserva->id)}}" 
-                class="btn btn-warning" 
-                role="button"><i class="fa fa-pencil"></i> Alterar</a>
+        <a href="{{route('reservas.confirmar', $reserva->id)}}" 
+                class="btn btn-success" 
+                role="button"><i class="fa fa-check"></i> Confirmar</a>
+                <a href="{{route('reservas.cancelar', $reserva->id)}}" 
+                        class="btn btn-danger" 
+                        role="button"><i class="fa fa-times"></i> Cancelar</a>
     </section>
 @stop

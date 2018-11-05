@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horario extends Model
 {
-    protected $fillable = array('horario', 'preco');
+    protected $fillable = array('horario');
     public $timestamps = false;
 
     public function reservas()

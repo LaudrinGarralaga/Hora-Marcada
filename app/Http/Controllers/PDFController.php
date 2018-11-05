@@ -41,18 +41,6 @@ class PDFController extends Controller
         $dataFin = $request->dataFin;
         $quadra = $request->quadra_id;
 
-        $customers = DB::table('reservas') 
-            ->join('quadras', 'quadra_id', '=', 'quadras.id')
-            ->select('reservas.id', 'data', 'tipo', 'status', 'permanente', 'reservas.preco', 'quadra_id')
-            ->where('data', '>=', $dataIni)
-            ->where('data', '<=', $dataFin)
-            ->where('quadra_id', '=', $quadra)
-            ->count();
-        if($customers  == 0) {
-            return redirect()->route('relatorios.financeiro')
-            ->with('success', ' Sem reservas para o período informado!');
-        } else {
-
             if($quadra == 0){
 
                 $customers = DB::table('reservas')
@@ -62,6 +50,11 @@ class PDFController extends Controller
                     ->where('data', '<=', $dataFin)
                     ->count();
 
+                if($customers  == 0) {
+                    return redirect()->route('relatorios.financeiro')
+                    ->with('success', ' Sem reservas para o período informado!');
+                } else {
+
                 $quadras = DB::table('quadras')
                     ->select('tipo')
                     ->get();
@@ -72,6 +65,7 @@ class PDFController extends Controller
                     ->sum('preco');
 
                 $media = $total_preco / $customers;
+                }   
             }else {
 
                 $customers = DB::table('reservas')
@@ -81,21 +75,26 @@ class PDFController extends Controller
                     ->where('data', '<=', $dataFin)
                     ->where('quadra_id', '=', $quadra)
                     ->count();
+                
+                    if($customers  == 0) {
+                        return redirect()->route('relatorios.financeiro')
+                        ->with('success', ' Sem reservas para o período informado!');
+                    } else {
+                        $quadras = DB::table('quadras')
+                        ->select('tipo')
+                        ->where('id', '=', $quadra)
+                        ->get();
 
-                $quadras = DB::table('quadras')
-                    ->select('tipo')
-                    ->where('id', '=', $quadra)
-                    ->get();
+                        $total_preco = DB::table('reservas')
+                            ->where('data', '>=', $dataIni)
+                            ->where('data', '<=', $dataFin)
+                            ->where('quadra_id', '=', $quadra)
+                            ->sum('preco');
 
-                $total_preco = DB::table('reservas')
-                    ->where('data', '>=', $dataIni)
-                    ->where('data', '<=', $dataFin)
-                    ->where('quadra_id', '=', $quadra)
-                    ->sum('preco');
-
-                $media = $total_preco / $customers;
+                        $media = $total_preco / $customers;
+                    }
+                
             }
-        }   
 
         // Recupera todos os horarios do banco
         $usuario = Auth::id();

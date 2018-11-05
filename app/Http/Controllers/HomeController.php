@@ -7,6 +7,7 @@ use App\Horario;
 use App\Opcional;
 use App\Quadra;
 use App\Reserva;
+use App\Reserva_Opcional;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -66,15 +67,15 @@ class HomeController extends Controller
             ->join('quadras', 'quadra_id', '=', 'quadras.id')
             ->join('horarios', 'horario_id', '=', 'horarios.id')
             ->join('clientes', 'cliente_id', '=', 'clientes.id')
-            ->select('reservas.id', 'data', 'tipo', 'status', 'horario', 'permanente', 'reservas.preco', 'clientes.nome')
+            ->select('reservas.id', 'data', 'tipo', 'horario', 'permanente', 'reservas.preco', 'clientes.nome')
             ->where('data', '=', $data)
-            ->where('status', '<>', 'concluido')
+            ->where('reservado', '=', 1)
             ->orWhere(function ($query) use ($data, $today) {
                 $query->where('data', '<=', $data)
                     ->where('semana', '=', $today)
                     ->where('permanente', '=', 'Sim')
-                    ->where('status', '<>', 'cancelado')
-                    ->where('status', '<>', 'concluido');                   
+                    ->where('cancelado', '=', 0)
+                    ->where('confirmado', '=', 0);                   
             })
             ->orderBy('horario')
             ->get();
@@ -93,8 +94,12 @@ class HomeController extends Controller
     {
         // posiciona no registro a ser visualizado
         $reserva = Reserva::find($id);
+
+        $opcionais = Reserva_Opcional::join('opcionals', 'opcional_id', '=', 'opcionals.id')
+            ->select('opcionals.nome')
+            ->where('reserva_id', '=', $id)->get();
        
-        return view('outros.reserva_detalhes', compact('reserva'));
+        return view('outros.reserva_detalhes', compact('reserva', 'opcionais'));
     }
 
     public function reservar($id)
@@ -139,8 +144,8 @@ class HomeController extends Controller
                 ->orWhere(function ($query) use ($quadra, $first_name) {
                     $query->where('quadra_id', '=', $quadra)
                         ->where('semana', '=', $first_name)
-                        ->where('status', '<>', 'cancelado')
-                        ->where('status', '<>', 'concluido');
+                        ->where('cancelado', '=', 0)
+                        ->where('confirmado', '=', 0); 
                 });
         })
 

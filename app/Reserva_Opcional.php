@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reserva_Opcional extends Model
 {
-    protected $fillable = array('reserva_id', 'opcionai_id');
+    protected $fillable = array('reserva_id', 'opcional_id');
+    protected $table = ('reservaop');
     public $timestamps = false;
 
     public function Reserva()

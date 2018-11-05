@@ -56,7 +56,6 @@
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 30%">Horário</th>
-                                        <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 30%">Valor</th>
                                         <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 30%">Ações</th>
                                     </tr>
                                 </thead>
@@ -64,7 +63,6 @@
                                     @foreach($horarios as $horario)
                                     <tr>
                                         <td>{{$horario->horario}}</td>
-                                        <td>{{$horario->preco}}</td>
                                         <td>
                                             <a href="{{route('horarios.edit', $horario->id)}}" 
                                             class="btn btn-warning" 
@@ -85,7 +83,6 @@
                                     <tfoot>
                                         <tr>
                                           <th rowspan="1" colspan="1">Horário</th>
-                                          <th rowspan="1" colspan="1">Valor</th>
                                           <th rowspan="1" colspan="1">Ações</th>
                                          </tr> 
                                      </tfoot>

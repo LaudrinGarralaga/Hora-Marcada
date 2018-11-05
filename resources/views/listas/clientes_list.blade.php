@@ -58,7 +58,6 @@ role="button" style="margin-left: 85%" ><i class="fa fa-plus"></i> Novo Cliente<
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nome</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Email</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Telefone</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Pontos</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                         </tr>
                                     </thead>
@@ -68,7 +67,6 @@ role="button" style="margin-left: 85%" ><i class="fa fa-plus"></i> Novo Cliente<
                                                 <td> {{$cliente->nome}} </td>
                                                 <td> {{$cliente->email}} </td>
                                                 <td> {{$cliente->telefone}} </td>
-                                                <td> {{$cliente->pontos}} </td>
                                                 <td> <a href='{{route('clientes.edit', $cliente->id)}}'
                                                         class='btn btn-warning' 
                                                         role='button'><i class="fa fa-pencil"></i> Alterar </a>
@@ -91,7 +89,6 @@ role="button" style="margin-left: 85%" ><i class="fa fa-plus"></i> Novo Cliente<
                                          <th rowspan="1" colspan="1">Nome</th>
                                          <th rowspan="1" colspan="1">Email</th>
                                          <th rowspan="1" colspan="1">Telefone</th>
-                                         <th rowspan="1" colspan="1">Pontos</th>
                                          <th rowspan="1" colspan="1">Ações</th>
                                         </tr> 
                                     </tfoot>

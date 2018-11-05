@@ -85,6 +85,7 @@
                                     <tfoot>
                                        <tr>
                                          <th rowspan="1" colspan="1">Tipo</th>
+                                         <th rowspan="1" colspan="1">Valor</th>
                                          <th rowspan="1" colspan="1">Ações</th>
                                         </tr> 
                                     </tfoot>

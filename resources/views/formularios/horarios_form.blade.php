@@ -44,7 +44,7 @@
                 @endif
                 {{ csrf_field() }}
                 
-                    <div class="col-sm-6">
+                    <div class="col-sm-12">
                         <div class="form-group">
                             <label for="hora">Horário:</label>
                             <div class="input-group">
@@ -54,19 +54,6 @@
                                 <input class="form-control" type="text" id="horario" 
                                     name="horario" placeholder="Digite o horário"
                                     value="{{$reg->horario or old('horario')}}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="valor">Valor:</label>
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-usd"></i>
-                                </div>
-                                <input type="number" class="form-control" id="preco"
-                                    name="preco" placeholder="Digite o valor do horário"
-                                    value="{{$reg->preco or old('preco')}}">
                             </div>
                         </div>
                     </div>

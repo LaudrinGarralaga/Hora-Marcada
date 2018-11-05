@@ -107,7 +107,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-list"></i>
                                     </div>
-                      <select class="custom-select mb-3" id="selOp" multiple size=3 style="width: 284px"></select>
+                      <select class="custom-select mb-3" id="selOp" name="opcionais[]" multiple size=3 style="width: 284px"></select>
                     </div>
                 </div>
             </div>
@@ -123,30 +123,6 @@
                                name="Preco" placeholder="Valor da reserva"
                                value="{{$reg->preco or old('preco')}}"
                                required>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="form-group"> 
-                    <label for="status">Status:</label>
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-info"></i>
-                        </div>
-                        <select class="form-control" id="status" name="status">
-                            <option value="concluído" 
-                        @if ((isset($reg) && $reg->status=="concluído") 
-                            or old('status')) selected @endif>
-                                                Concluído</option>
-                                        <option value="reservado"
-                        @if ((isset($reg) && $reg->status=="reservado") 
-                            or old('status')) selected @endif>                        
-                                                Reservado</option>
-                                        <option value="cancelado"
-                        @if ((isset($reg) && $reg->status=="cancelado") 
-                            or old('status')) selected @endif>
-                                                Cancelado</option>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -204,7 +180,7 @@ var opcionais = [];
 
 function carregarQuadras() {
 
-  var url = "http://localhost/WebServiceTCC/SisWeb/lista_quadras.php";
+  var url = "http://localhost/cpte.laudrin/WebServiceTCC/SisWeb/lista_quadras.php";
 
   fetch(url)
     .then(resp => resp.json())
@@ -243,7 +219,7 @@ Preco.value = (obterValor() + verOp()).toFixed(2);
 
 function carregarOpcionais() {
 
-  var url = "http://localhost/WebServiceTCC/SisWeb/lista_opcionais.php";
+  var url = "http://localhost/cpte.laudrin/WebServiceTCC/SisWeb/lista_opcionais.php";
 
   fetch(url)
     .then(resp => resp.json())

@@ -26,7 +26,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                        <input type="text" id="data" name="data" class="form-control">
+                        <input type="text" id="data" name="data" class="form-control" required>
                     </div>
                 </div>
             </div>

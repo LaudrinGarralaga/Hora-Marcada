@@ -8,6 +8,7 @@ use App\Reserva;
 use App\Horario;
 use App\Cliente;
 use App\Quadra;
+use App\Reserva_Opcional;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -53,16 +54,20 @@ class ReservaController extends Controller {
         $splitName = explode(' ', $data, 2); 
         $first_name = $splitName[0];
         $last_name = !empty($splitName[1]) ? $splitName[1] : ''; 
+        $opcionais = $request->opcionais;
+        
         
         $dados2 = DB::table('reservas')
                 ->where('data', '=', $last_name) 
                 ->where('horario_id', '=', $horario)
                 ->where('quadra_id', '=', $quadra)
+                ->where('confirmado', '<>', 1)
                 ->orWhere(function ($query) use ($quadra, $first_name, $horario) {
                     $query->where('quadra_id', '=', $quadra)
                     ->where('semana', '=', $first_name)
                     ->where('permanente', '=', 'sim')
-                    ->where('horario_id', '=', $horario);
+                    ->where('horario_id', '=', $horario)
+                    ->where('confirmado', '<>', 1);
                 })
             ->count();
                 //dd($dados2);
@@ -80,9 +85,17 @@ class ReservaController extends Controller {
             $reserva->cliente_id = $request->cliente_id;
             $reserva->quadra_id = $request->quadra_id;
             $reserva->permanente = $request->permanente;
-            $reserva->status = $request->status;
             $reserva->user_id = \Illuminate\Support\Facades\Auth::id();
             $reserva->save();
+
+            $id = DB::getPdo()->lastInsertId();
+
+            for ($i = 0; $i < count($request->opcionais); $i++) {
+                Reserva_Opcional::create([
+                    'reserva_id' => $id,
+                    'opcional_id' => $request->opcionais[$i],
+                ]);
+            }
 
             // Exibe uma mensagem de sucesso se gravou os dados no bando senão exibe uma de erro
             if ($reserva) {
@@ -136,7 +149,6 @@ class ReservaController extends Controller {
         $quadra_id = $request->quadra_id;
         $permanente = $request->permanente;
         $semana = $request->semana;
-        $status = $request->status;
         $user_id = \Illuminate\Support\Facades\Auth::id();
         
         $dados3 = DB::table('reservas')
@@ -182,5 +194,25 @@ class ReservaController extends Controller {
         } else {
             return redirect()->back()->with('error', 'Falha ao excluir!');
         }
+    }
+
+    public function confirmar(Request $request, $id){
+
+        Reserva::where('id', '=', $id)
+          ->update(['confirmado' => 1,'reservado' => 0, 'cancelado' => 0]);
+
+          //$fluxos = $id; 
+          //dd($fluxos);
+          return redirect()->route('reservas.index');
+    }
+
+    public function cancelar(Request $request, $id){
+
+        Reserva::where('id', '=', $id)
+          ->update(['cancelado' => 1,'reservado' => 0, 'confirmado' => 0]);
+
+          //$fluxos = $id; 
+          //dd($fluxos);
+          return redirect()->route('reservas.index');
     }
 }
