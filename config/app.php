@@ -161,7 +161,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\serviceProvider::class,
-        ConsoleTVs\Charts\ChartsServiceProvider::class,
+       
 
     ],
 

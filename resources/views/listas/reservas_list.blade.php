@@ -59,67 +59,58 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Quadra</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Valor</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Reservado</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Confirmado</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Cancelado</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Permanente</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                         </tr>
                                     </thead>
-        <tbody>
-                    @foreach($reservas as $reserva)
-                    <tr>
-                        <td>{{$reserva->cliente->nome}}</td>
-                        <td>{{$reserva->quadra->tipo}}</td>
-                        <td>{{ Carbon\Carbon::parse($reserva->data)->format('d/m/Y')}}</td>
-                        <td>{{$reserva->horario->horario}}</td>
-                        <td>{{$reserva->preco}}</td>
-                        <td> @if($reserva->reservado == 0)
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                @else
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-                                @endif
-                            </td>
-                            <td> @if($reserva->confirmado == 0)
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    @else
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-                                    @endif
-                                </td>
-                                <td> @if($reserva->cancelado == 0)
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        @else
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" checked>
-                                        @endif
-                                    </td>
-                        <td><span class="label label-danger"> {{$reserva->permanente}}</span></td></td>
-                        <td>
-                            <a href="{{route('reservas.confirmar', $reserva->id)}}" 
-                               class="btn btn-success" 
-                               role="button"><i class="fa fa-check"></i> Confirmar</a>
-                            <a href="{{route('reservas.cancelar', $reserva->id)}}" 
-                                class="btn btn-danger" 
-                                role="button"><i class="fa fa-times"></i> Cancelar</a>
-                        </td>
-                    </tr>
-                        
-                    @endforeach        
-                </tbody>
-                <tfoot>
-                    <tr>
-                      <th rowspan="1" colspan="1">Cliente</th>
-                      <th rowspan="1" colspan="1">Quadra</th>
-                      <th rowspan="1" colspan="1">Data</th>
-                      <th rowspan="1" colspan="1">Horário</th>
-                      <th rowspan="1" colspan="1">Valor</th>
-                      <th rowspan="1" colspan="1">Reservado</th>
-                      <th rowspan="1" colspan="1">Confirmado</th>
-                      <th rowspan="1" colspan="1">Cancelado</th>
-                      <th rowspan="1" colspan="1">Permanente</th>
-                      <th rowspan="1" colspan="1">Ações</th>
-                     </tr> 
-                 </tfoot>
+                                    <tbody>
+                                        @foreach($reservas as $reserva)
+                                        <tr>
+                                            <td style="width: 20%">{{$reserva->cliente->nome}}</td>
+                                            <td>{{$reserva->quadra->tipo}}</td>
+                                            <td>{{ Carbon\Carbon::parse($reserva->data)->format('d/m/Y')}}</td>
+                                            <td>{{$reserva->horario->horario}}</td>
+                                            <td > 
+                                                @if($reserva->reservado == 0 && $reserva->confirmado == 0)
+                                                    <span class="label label-danger"> Cancelado</span>
+                                                @elseif($reserva->confirmado == 0 && $reserva->cancelado == 0)
+                                                    <span class="label label-info"> Reservado</span>
+                                                @elseif($reserva->cancelado == 0 && $reserva->reservado == 0)
+                                                    <span class="label label-success"> Confirmado</span>
+                                                @endif
+                                            </td>
+                                            <td style="width: 5%">
+                                                @if($reserva->permanente == 'nao')
+                                                    <span class="label label-danger"> Não</span>
+                                                @elseif($reserva->permanente == 'sim')
+                                                    <span class="label label-danger"> Sim</span>
+                                                @endif
+                                            </td>
+                                            <td style="text-align: center; width: 10%">
+                                                @if($reserva->confirmado == 0 && $reserva->cancelado == 0)
+                                                <span data-tooltip1="Confirmar"><a href="{{route('reservas.confirmar', $reserva->id)}}" 
+                                                class="btn btn-success" role="button"><i class="fa fa-check"></i></a></span>
+                                                <span data-tooltip2="Cancelar"><a href="{{route('reservas.cancelar', $reserva->id)}}" 
+                                                    class="btn btn-danger" role="button"><i class="fa fa-times"></i></a></span>
+                                                @else
+                                                    
+                                                @endif
+                                            </td>
+                                        </tr>      
+                                        @endforeach        
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                        <th rowspan="1" colspan="1">Cliente</th>
+                                        <th rowspan="1" colspan="1">Quadra</th>
+                                        <th rowspan="1" colspan="1">Data</th>
+                                        <th rowspan="1" colspan="1">Horário</th>
+                                        <th rowspan="1" colspan="1">Status</th>
+                                        <th rowspan="1" colspan="1">Permanente</th>
+                                        <th rowspan="1" colspan="1">Ações</th>
+                                        </tr> 
+                                    </tfoot>
          </table>
  </div>
 </div>
@@ -177,4 +168,5 @@ $('#example1').DataTable( {
 @section('css')
 <link rel="stylesheet" href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <link rel="stylesheet" href='https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css'>
+<link rel="stylesheet" href='css/botao.css'>
 @stop

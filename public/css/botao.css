@@ -1,0 +1,43 @@
+[data-tooltip1] {
+    position: relative;
+    font-weight: bold;
+  }
+  
+  [data-tooltip1]:after {
+    display: none;
+    position: absolute;
+    top: -38px;
+    padding: 5px;
+    border-radius: 3px;
+    left: -15px;
+    content: attr(data-tooltip1);
+    white-space: nowrap;
+    background-color: darkgreen;
+    color: White;
+  }
+  
+  [data-tooltip1]:hover:after {
+    display: block;
+  }
+
+  [data-tooltip2] {
+    position: relative;
+    font-weight: bold;
+  }
+  
+  [data-tooltip2]:after {
+    display: none;
+    position: absolute;
+    top: -38px;
+    padding: 5px;
+    border-radius: 3px;
+    left: -15px;
+    content: attr(data-tooltip2);
+    white-space: nowrap;
+    background-color:firebrick;
+    color: White;
+  }
+  
+  [data-tooltip2]:hover:after {
+    display: block;
+  }
