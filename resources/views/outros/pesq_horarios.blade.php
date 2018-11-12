@@ -13,13 +13,12 @@
 
 @section('content')
 
-<div class='box'>
     <div class="box box-primary">
             <div class="box-body">
         <form method="post" action="{{route('horarios.filtro')}}">
             {{ csrf_field() }}
 
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="form-group">
                     <label for="data" style="font-family: Arial, Helvetica, sans-serif"> Selecione a data para verificar a disponibilidade </label>
                     <div class="input-group">
@@ -31,7 +30,7 @@
                 </div>
             </div>
             
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="form-group">
                     <label for="quadra_id"style="font-family: Arial, Helvetica, sans-serif">Selecione a quadra:</label>
                     <div class="input-group">
@@ -50,15 +49,14 @@
                 </div>
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-sm-2">
                 <br>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Pesquisar</button>
                 </div>
             </div>
         </form>
     </div>
-</div>
 
 <div class="box">
     <div class="box-header">

@@ -57,12 +57,9 @@
             class="btn btn-warning" 
             role="button"><i class="fa fa-pencil"></i> Alterar</a>
         @empty
-    
-                <h1>Não há local cadastrado, cadastre um novo local.</h1>
-                <a href="{{route('locais.create')}}" 
-                class="btn btn-success" 
-                role="button"><i class="fa fa-plus"></i> Novo</a>
-                 
+            <h1>Não há local cadastrado, cadastre um novo local.</h1>
+            <a href="{{route('locais.create')}}" class="btn btn-success" 
+            role="button"><i class="fa fa-plus"></i> Novo</a>            
         @endforelse
         
     </section>

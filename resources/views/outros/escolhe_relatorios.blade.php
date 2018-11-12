@@ -18,8 +18,9 @@
     {{ session('success') }}
     </div>
 @endif  
-
-<div class="container" style="background: white">
+<div class="box box-primary">
+    <div class="box-body">
+<div class="col-sm-12" style="background: white">
     <form method="post" action="{{route('relatorio.financeiro')}}">
         {{ csrf_field() }}
 
@@ -76,6 +77,7 @@
         </div>
     </form>
     
+</div>
 </div>
 
 @stop

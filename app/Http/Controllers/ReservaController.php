@@ -67,7 +67,8 @@ class ReservaController extends Controller {
                     ->where('semana', '=', $first_name)
                     ->where('permanente', '=', 'sim')
                     ->where('horario_id', '=', $horario)
-                    ->where('confirmado', '<>', 1);
+                    ->where('confirmado', '<>', 1)
+                    ->where('cancelado', '<>', 1);
                 })
             ->count();
                 //dd($dados2);
