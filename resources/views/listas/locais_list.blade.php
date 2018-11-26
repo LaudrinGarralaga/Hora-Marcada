@@ -50,9 +50,6 @@
             </li>
            
         </ul>
-        <a href="{{route('locais.create')}}" 
-            class="btn btn-success" 
-            role="button"><i class="fa fa-plus"></i> Novo</a>
         <a href="{{route('locais.edit', $local->id)}}" 
             class="btn btn-warning" 
             role="button"><i class="fa fa-pencil"></i> Alterar</a>

@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Lista de Reservas')
+@section('title', 'Lista de Permanentes')
 
 @section('content_header')
 <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
         <div class="bred">
-            <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Reservas</p> 
+            <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Permanentes</p> 
         </div>
     </div>
     <br>
-    <a href="{{route('reservas.create')}}" class="btn btn-primary" 
-        role="button" style="margin-left: 85%"><i class="fa fa-plus"></i> Nova Reserva</a> 
+    <a href="{{route('permanentes.create')}}" class="btn btn-primary" 
+        role="button" style="margin-left: 85%"><i class="fa fa-plus"></i> Nova Permanente</a> 
 @stop
 
 @section('content')
@@ -34,7 +34,7 @@
    
 <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Lista de Reservas</h3>
+            <h3 class="box-title">Lista de Permanentes</h3>
         </div>
         <div class="box-body">
             <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -59,31 +59,27 @@
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Quadra</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Data</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Horário</th>
-                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Status</th>
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ativo</th>
                                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($reservas as $reserva)
+                                        @foreach($permanentes as $permanente)
                                         <tr>
-                                            <td style="width: 20%">{{$reserva->cliente->nome}}</td>
-                                            <td>{{$reserva->quadra->tipo}}</td>
-                                            <td>{{ Carbon\Carbon::parse($reserva->data)->format('d/m/Y')}}</td>
-                                            <td>{{$reserva->horario->horario}}</td>
+                                            <td style="width: 20%">{{$permanente->cliente->nome}}</td>
+                                            <td>{{$permanente->quadra->tipo}}</td>
+                                            <td>{{ Carbon\Carbon::parse($permanente->data)->format('d/m/Y')}}</td>
+                                            <td>{{$permanente->horario->horario}}</td>
                                             <td > 
-                                                @if($reserva->reservado == 0 && $reserva->confirmado == 0)
-                                                    <span class="label label-danger"> Cancelado</span>
-                                                @elseif($reserva->confirmado == 0 && $reserva->cancelado == 0)
-                                                    <span class="label label-info"> Reservado</span>
-                                                @elseif($reserva->cancelado == 0 && $reserva->reservado == 0)
-                                                    <span class="label label-success"> Confirmado</span>
+                                                @if($permanente->ativo == 1)
+                                                    <span class="label label-success"> Sim</span>
+                                                @elseif($permanente->ativo == 0)
+                                                    <span class="label label-danger"> Não</span>
                                                 @endif
                                             </td>
                                             <td style="text-align: center; width: 10%">
-                                                @if($reserva->confirmado == 0 && $reserva->cancelado == 0)
-                                                <span data-tooltip1="Confirmar"><a href="{{route('reservas.confirmar', $reserva->id)}}" 
-                                                class="btn btn-success" role="button"><i class="fa fa-check"></i></a></span>
-                                                <span data-tooltip2="Cancelar"><a href="{{route('reservas.cancelar', $reserva->id)}}" 
+                                                @if($permanente->ativo == 1)
+                                                <span data-tooltip2="Cancelar"><a href="{{route('permanentes.cancelar', $permanente->id)}}" 
                                                     class="btn btn-danger" role="button"><i class="fa fa-times"></i></a></span>
                                                 @else
                                                     
@@ -98,7 +94,7 @@
                                         <th rowspan="1" colspan="1">Quadra</th>
                                         <th rowspan="1" colspan="1">Data</th>
                                         <th rowspan="1" colspan="1">Horário</th>
-                                        <th rowspan="1" colspan="1">Status</th>
+                                        <th rowspan="1" colspan="1">Ativo</th>
                                         <th rowspan="1" colspan="1">Ações</th>
                                         </tr> 
                                     </tfoot>

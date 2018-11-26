@@ -1,19 +1,19 @@
 @extends('adminlte::page')
 
-@section('title', 'Cadastro de Reservas')
+@section('title', 'Cadastro de Permanentes')
 
 @section('content_header')
 
     @if ($acao == 1)
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Reserva</p> 
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Permanente</p> 
             </div>
         </div>
     @else
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Reserva</p> 
+                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Permanente</p> 
             </div>
         </div>
     @endif
@@ -27,11 +27,11 @@
     @if ($acao == 1)
     <div class="box box-primary">
             <div class="box-body">
-    <form method="post" action="{{route('reservas.store')}}">
+    <form method="post" action="{{route('permanentes.store')}}">
         @else
         <div class="box box-primary">
                 <div class="box-body">
-        <form method="post" action="{{route('reservas.update', $reg->id)}}">
+        <form method="post" action="{{route('permanentes.update', $reg->id)}}">
             {!! method_field('put') !!}
             @endif
             {{ csrf_field() }}
@@ -126,6 +126,7 @@
                     </div>
                 </div>
             </div>
+           
             <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-floppy-o"></i> Salvar</button>        
                 <button type="reset" class="btn btn-warning"><i class="fa fa-eraser"></i> Limpar</button>  

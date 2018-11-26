@@ -108,6 +108,11 @@ return [
                     'icon' => 'calendar',
                     'url' => 'reservas',
                 ],
+                [
+                    'text' => 'Permanente',
+                    'icon' => 'calendar',
+                    'url' => 'permanentes',
+                ],
 
             ],
         ],

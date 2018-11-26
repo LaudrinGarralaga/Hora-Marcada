@@ -17,6 +17,9 @@ Route::get('/', 'HomeController@index');
 // Rotas Reservas
 Route::resource('reservas', 'ReservaController');
 
+// Rotas Permanentes
+Route::resource('permanentes', 'PermanenteController');
+
 //Rotas Opcionais
 Route::resource('opcionais', 'OpcionalController');
 
@@ -47,6 +50,8 @@ Route::get('/getPDFReservas', 'PDFController@getPDFReservas');
 
 Route::get('detalhes-reserva/{id}', 'HomeController@detalhesReservas')->name('detalhes.reserva');
 
+Route::get('detalhes-permanente/{id}', 'HomeController@detalhesPermanentes')->name('detalhes.permanente');
+
 Route::get('reservar-horario/{id}', 'HomeController@reservar')->name('reservar.horario');
 
 Route::get('disponibilidade', 'HomeController@pesquisa');
@@ -72,8 +77,11 @@ Route::get('relatorios-reserva', 'PDFController@relatorioReserva')->name('relato
 Route::post('graficosfiltro', 'GraficoController@filtro')
     ->name('graficos.filtro');
 
-    Route::get('reservafinalizar/{id}', 'ReservaController@confirmar')
+Route::get('reservafinalizar/{id}', 'ReservaController@confirmar')
     ->name('reservas.confirmar');
 
-    Route::get('reservacancelar/{id}', 'ReservaController@cancelar')
+Route::get('reservacancelar/{id}', 'ReservaController@cancelar')
     ->name('reservas.cancelar');
+
+Route::get('permanentecancelar/{id}', 'PermanenteController@cancelar')
+    ->name('permanentes.cancelar');

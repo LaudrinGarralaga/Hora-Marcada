@@ -32,6 +32,21 @@
         </div>
     </div>
     <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>{{$totalPermanentes}}</h3>
+                <p>Total de Permanentes</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <a href='{{route('permanentes.index')}}' class="small-box-footer">
+                Mais Infomações
+                <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>{{$totalClientes}}</h3>
@@ -78,28 +93,23 @@
     </div>
     
 </div>
-    <h2 style="font-size: 25px">Reservas do dia {{$data2}}</h2>
+    @if($dias->isEmpty() && $dias2->isEmpty())
+    <h1 style="text-align: center; color: steelblue"> <b><u>Não há reservas para o dia de hoje!</u></b></h1>
+    @else 
+        <h2 style="font-size: 25px">Reservas do dia {{$data2}}</h2>
      <div class="row">
         <br>
         @forelse($dias as $dia)
-        <article class="result col-lg-3 col-md-4 col-sm-6 col-12">
+        <article class="result col-lg-2 col-md-2 col-sm-6 col-12">
             <div class="well well-lg" style="background-color: white">
                 <img src="{{url('imagens/quadra.png')}}" style="width: 100%">
 
                 <div class="legend">
-                    @if($dia->permanente == 'sim')
-                        <p>Cliente: {{$dia->nome}}</p>
-                        <p>Data da reserva: {{Carbon\Carbon::parse($dia->data)->format('d/m/Y')}}</p>
-                        <p>Quadra:  {{$dia->tipo}}</p>
-                        <p>Horário: {{$dia->horario}}</p>
-                        <p>Valor: {{$dia->preco}}</p>                   
-                    @else
                         <p>Cliente: {{$dia->nome}}</p>
                         <p>Data: {{Carbon\Carbon::parse($dia->data)->format('d/m/Y')}}</p>
                         <p>Quadra:  {{$dia->tipo}}</p>
                         <p>Horário: {{$dia->horario}}</p>
                         <p>Valor: {{$dia->preco}}</p>
-                    @endif
                 </div>
                 <a href='{{route('detalhes.reserva', $dia->id)}}' class="btn btn-primary" style="width: 100%">
                         Detalhes
@@ -110,5 +120,31 @@
           <h1 style="text-align: center; color: steelblue"> <b><u>Não há horários reservados para o dia de hoje!</u></b></h1>
         @endforelse
     </div>
+    <h2 style="font-size: 25px">Permanentes do dia {{$data2}}</h2>
+    <div class="row">
+        <br>
+        @forelse($dias2 as $dia2)
+        <article class="result col-lg-2 col-md-2 col-sm-6 col-12">
+            <div class="well well-lg" style="background-color: white">
+                <img src="{{url('imagens/quadra.png')}}" style="width: 100%">
+
+                <div class="legend">
+                        <p>Cliente: {{$dia2->nome}}</p>
+                        <p>Data: {{Carbon\Carbon::parse($dia2->data)->format('d/m/Y')}}</p>
+                        <p>Quadra:  {{$dia2->tipo}}</p>
+                        <p>Horário: {{$dia2->horario}}</p>
+                        <p>Valor: {{$dia2->preco}}</p>
+                </div>
+                <a href='{{route('detalhes.permanente', $dia2->id)}}' class="btn btn-primary" style="width: 100%">
+                        Detalhes
+                    </a>
+            </div>
+        </article>
+        @empty
+        <h1 style="text-align: center; color: steelblue"> <b><u>Não há permanentes para o dia de hoje!</u></b></h1>
+        @endforelse
+    </div>    
+    @endif
+    
 </div>
 @stop

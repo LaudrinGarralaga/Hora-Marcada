@@ -96,7 +96,7 @@
 
 <script>
 $('#data').datepicker({     
-    format: "DD dd/mm/yyyy",
+    format: "DD yyyy/mm/dd",
     language: "pt-BR",
     startDate: '+0d',
     orientation: "bottom",

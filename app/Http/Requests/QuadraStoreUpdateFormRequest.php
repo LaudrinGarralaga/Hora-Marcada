@@ -27,7 +27,7 @@ class QuadraStoreUpdateFormRequest extends FormRequest
         $id = Request::segment(2);
         return [
             'tipo' => "required|min:4|max:100|unique:quadras,tipo,{$id},id",
-            'preço' => "required"
+            'preco' => "required"
         ];
     }
 }

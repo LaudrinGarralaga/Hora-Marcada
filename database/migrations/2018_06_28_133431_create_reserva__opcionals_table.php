@@ -15,10 +15,12 @@ class CreateReservaOpcionalsTable extends Migration {
         Schema::create('reservaop', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('reserva_id');
+            $table->unsignedInteger('permanente_id');
             $table->unsignedInteger('opcional_id');
         });
         Schema::table('reservaop', function (Blueprint $table) {
             $table->foreign('reserva_id')->references('id')->on('reservas');
+            $table->foreign('permanente_id')->references('id')->on('permanentes');
             $table->foreign('opcional_id')->references('id')->on('opcionals');
         });
     }
