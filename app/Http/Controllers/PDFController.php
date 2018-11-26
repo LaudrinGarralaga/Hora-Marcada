@@ -154,17 +154,30 @@ class PDFController extends Controller
         return $pdf->download('Lista de quadras.pdf');
     }
 
-    public function getPDFReservas()
+    public function relatorioReserva()
+    {
+
+        return view('outros.relatorio_reservas');
+    }
+
+    public function getPDFReserva(Request $request)
     {
         // Verifica se  está logado
         if (!Auth::check()) {
             return redirect('/');
         }
 
-        // Recupera todos as reservas do banco
-        $customers = Reserva::all();
-        $pdf = PDF::loadView('pdf.reservas', ['customers' => $customers]);
-        return $pdf->download('Lista de reservas.pdf');
+        $dataIni = $request->dataIni;
+        $dataFin = $request->dataFin;
+
+        $reservas = Reserva::select('data', 'semana', DB::raw('count(*) as total'), DB::raw('count(case when confirmado = 1 then 1 end) as confirmados'))
+                ->Where('data', '>=', $dataIni)
+                ->Where('data', '<=', $dataFin)
+                ->groupBy('data','semana')
+                ->get();
+
+        
+        dd($reservas);
     }
 
 }

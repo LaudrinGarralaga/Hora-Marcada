@@ -171,5 +171,6 @@ return [
         'title'                 => 'título',
         'username'              => 'usuário',
         'year'                  => 'ano',
+        'recaptcha'             => 'O campo :attribute não está correto.',
     ],
 ];

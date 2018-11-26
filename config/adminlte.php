@@ -162,7 +162,7 @@ return [
                         ],
                         [
                             'text'    => 'Reservas',
-                            'url'     => '#',
+                            'url'     => 'relatorios-reserva',
                             'icon' => 'calendar',
                         ],
                     ],

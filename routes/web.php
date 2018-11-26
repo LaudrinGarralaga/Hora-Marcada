@@ -64,6 +64,11 @@ Route::post('relatorioFinanceiro', 'PDFController@getPDFFinanceiro')
 
 Route::get('relatorios-financeiro', 'PDFController@relatorioFinanceiro')->name('relatorios.financeiro');
 
+Route::post('relatorioReserva', 'PDFController@getPDFReserva')
+    ->name('relatorio.reserva');
+
+Route::get('relatorios-reserva', 'PDFController@relatorioReserva')->name('relatorios.reserva');
+
 Route::post('graficosfiltro', 'GraficoController@filtro')
     ->name('graficos.filtro');
 

@@ -166,7 +166,7 @@
 $('#data').datepicker({     
     format: "DD yyyy/mm/dd",
     language: "pt-BR",
-    //startDate: '+0d',
+    startDate: '+0d',
     orientation: "bottom",
     autoclose: true,
 });

@@ -28,6 +28,7 @@ class ClienteStoreUpdateFormRequest extends FormRequest
         return [
             'nome' => "required|min:3|max:100|unique:clientes,nome,{$id},id",
             'telefone' => 'required',
+            'email' => "unique:clientes,email,{$id},id"
         ];
     }
 }

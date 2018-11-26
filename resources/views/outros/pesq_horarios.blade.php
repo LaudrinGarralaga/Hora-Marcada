@@ -69,8 +69,7 @@
                 <img src="{{url('imagens/relogio.png')}}" style="width: 100%">
 
                 <div class="legend">
-                    <p>Horário: {{$horario->horario}}</p>
-                    <p>Valor: {{$horario->preco}}</p>                   
+                    <p>Horário: {{$horario->horario}}</p>             
                 </div>
                 <a href='{{route('reservar.horario', $horario->id)}}' class="btn btn-primary" style="width: 100%">
                         Reservar
