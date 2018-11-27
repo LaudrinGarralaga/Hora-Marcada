@@ -69,27 +69,6 @@ class PDFController extends Controller
                     ->with('success', ' Sem reservas para o período informado!');
             } else {
 
-                /*DB::insert(DB::raw("CREATE TEMPORARY TABLE reservasValor (valor float"));
-
-                $r = Reserva::where('data', '>=', $dataIni)
-                    ->where('data', '<=', $dataFin)
-                    ->get();
-
-                $p = Permanente::where('data', '>=', $dataIni)
-                    ->where('data', '<=', $dataFin)
-                    ->get();
-
-                foreach ($r as $row) {
-                    DB::insert(DB::raw("INSERT INTO reservastemp (data, semana) values (?, ?)"),
-                        array($row['data'], $row['semana']));
-
-                }
-
-                foreach ($p as $row1) {
-                    DB::insert(DB::raw("INSERT INTO reservastemp (data, semana) values (?, ?)"),
-                        array($row['data'], $row['semana']));
-                }*/
-
                 $quadras = DB::table('quadras')
                     ->select('tipo')
                     ->get();
@@ -158,49 +137,6 @@ class PDFController extends Controller
         return $pdf->download('Relatório Financeiro.pdf');
     }
 
-    public function getPDFClientes()
-    {
-        // Verifica se  está logado
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        $data = Carbon::now('America/Sao_Paulo');
-        $data = Carbon::parse($data)->format('d/m/Y h:i');
-        $splitName = explode(' ', $data, 2);
-        $data = $splitName[0];
-        $hora = !empty($splitName[1]) ? $splitName[1] : '';
-
-        // Recupera todos os clientes do banco
-        $customers = Cliente::all();
-        $usuario = Auth::id();
-
-        // Recupera todos os clientes do banco
-        $locais = DB::table('local')->where('user_id', '=', $usuario)->get();
-        $pdf = PDF::loadView('pdf.clientes', ['customers' => $customers], ['data' => $data, 'hora' => $hora, 'locais' => $locais]);
-        //dd($customers);
-        return $pdf->download('Lista de clientes.pdf');
-    }
-
-    public function getPDFQuadras()
-    {
-        // Verifica se  está logado
-        if (!Auth::check()) {
-            return redirect('/');
-        }
-
-        $data = Carbon::now('America/Sao_Paulo');
-        $data = Carbon::parse($data)->format('d/m/Y h:i');
-        $splitName = explode(' ', $data, 2);
-        $data = $splitName[0];
-        $hora = !empty($splitName[1]) ? $splitName[1] : '';
-
-        // Recupera todos as quadras do banco
-        $customers = Quadra::all();
-        $pdf = PDF::loadView('pdf.quadras', ['customers' => $customers], ['data' => $data, 'hora' => $hora]);
-        return $pdf->download('Lista de quadras.pdf');
-    }
-
     public function relatorioReserva()
     {
 
@@ -213,17 +149,34 @@ class PDFController extends Controller
         if (!Auth::check()) {
             return redirect('/');
         }
+        $data = Carbon::now('America/Sao_Paulo');
+        $data = Carbon::parse($data)->format('d/m/Y h:i');
+        $splitName = explode(' ', $data, 2);
+        $data = $splitName[0];
+        $hora = !empty($splitName[1]) ? $splitName[1] : '';
 
         $dataIni = $request->dataIni;
         $dataFin = $request->dataFin;
 
-        $reservas = Reserva::select('data', 'semana', DB::raw('count(*) as total'), DB::raw('count(case when confirmado = 1 then 1 end) as confirmados'))
+        DB::insert(DB::raw("CREATE TEMPORARY TABLE tempReservas (data varchar(45), semana varchar(45))"));
+
+
+        $customers = Reserva::select('data', 'semana', DB::raw('count(*) as total'), DB::raw('count(case when confirmado = 1 then 1 end) as confirmados'))
             ->Where('data', '>=', $dataIni)
             ->Where('data', '<=', $dataFin)
             ->groupBy('data', 'semana')
             ->get();
 
-        dd($reservas);
+        $locais = DB::table('local')->get();
+
+        $pdf = PDF::loadView('pdf.reservas', ['customers' => $customers], ['locais' => $locais,'data' => $data, 'dataIni' => $dataIni, 'dataFin' => $dataFin, 'hora' => $hora,]);
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $canvas->page_text(500, 15, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->download('Lista de reservas.pdf');
+
     }
 
 }

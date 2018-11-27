@@ -162,14 +162,37 @@ return [
                     'submenu' => [
                         [
                             'text' => 'Financeiro',
-                            'url'  => 'relatorios-financeiro',
                             'icon' => 'usd',
+                            'submenu' => [
+                                [
+                                    'text' => 'Quadras',
+                                    'url'  => 'relatorios-financeiro',
+                                    'icon' => 'square'
+                                ],
+                                [
+                                    'text' => 'Opcionais',
+                                    'url'  => 'relatorios-financeiro',
+                                    'icon' => 'list'
+                                ]
+                            ],
                         ],
                         [
-                            'text'    => 'Reservas',
-                            'url'     => 'relatorios-reserva',
+                            'text' => 'Reservas',
                             'icon' => 'calendar',
+                            'submenu' => [
+                                [
+                                    'text' => 'Dia',
+                                    'url'  => 'relatorios-reserva',
+                                    'icon' => 'calendar'
+                                ],
+                                [
+                                    'text' => 'Permanente',
+                                    'url'  => 'relatorios-financeiro',
+                                    'icon' => 'calendar'
+                                ]
+                            ],
                         ],
+                        
                     ],
                 ],
             ],
