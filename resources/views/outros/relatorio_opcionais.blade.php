@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Relatório de Reservas')
+@section('title', 'Relatório Opcionais')
 
 @section('content_header')
 <div class="row" style="background-color: white; margin-inline-start: -15px; margin-inline-end: -20px; margin-top: -15px; height: 55px">
         <div class="bred">
-            <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Relatório de Reservas</p> 
+            <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Relatório Opcionais</p> 
         </div>
 </div>
 
@@ -21,10 +21,10 @@
 <div class="box box-success">
     <div class="box-body">
 <div class="col-sm-12" style="background: white">
-    <form method="post" action="{{route('relatorio.reserva')}}">
+    <form method="post" action="{{route('relatorio.opcional')}}">
         {{ csrf_field() }}
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
                 <div class="form-group">
                         <label for="dataIni"> Data inicial: </label>
                         <div class="input-group">
@@ -36,7 +36,7 @@
                 </div>
         </div>
 
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="form-group">
                 <label for="dataFin"> Data final: </label>
                 <div class="input-group">
@@ -44,6 +44,26 @@
                             <i class="fa fa-calendar"></i>
                         </div>
                     <input type="text" id="dataFin" name="dataFin" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="quadra_id">Opcional:</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-square"></i>
+                    </div>
+                    <select class="form-control" id="opcional_id" name="opcional_id">
+                        <option value="0">Todos</option>
+                        @foreach ($opcionais as $opcional)
+                        <option value="{{$opcional->id}}"
+                                @if ((isset($reg) && $reg->opcional_id==$opcional->id) 
+                                or old('opcional_id') == $opcional->id) selected @endif>
+                                {{$opcional->nome}}</option>
+                        @endforeach       
+                    </select>
                 </div>
             </div>
         </div>

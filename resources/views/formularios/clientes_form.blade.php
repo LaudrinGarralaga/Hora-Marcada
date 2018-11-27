@@ -6,13 +6,13 @@
     @if ($acao == 1)
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Cliente</p> 
+                <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Cadastro de Cliente</p> 
             </div>
         </div>
     @else
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Cliente</p> 
+                <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Alteração de Cliente</p> 
             </div>
         </div>
     @endif
@@ -32,11 +32,11 @@
         @endif    
 
         @if ($acao == 1)
-        <div class="box box-primary">
+        <div class="box box-success">
                 <div class="box-body">
             <form method="post" action="{{route('clientes.store')}}">
                 @else
-                <div class="box box-primary">
+                <div class="box box-success">
                         <div class="box-body">
                     <form method="post" action="{{route('clientes.update', $reg->id)}}">
                         {!! method_field('put') !!}

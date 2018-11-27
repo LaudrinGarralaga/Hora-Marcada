@@ -1,11 +1,11 @@
 @extends('adminlte::page')
 
-@section('title', 'Relatório de Reservas')
+@section('title', 'Relatório de Permanentes')
 
 @section('content_header')
 <div class="row" style="background-color: white; margin-inline-start: -15px; margin-inline-end: -20px; margin-top: -15px; height: 55px">
         <div class="bred">
-            <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Relatório de Reservas</p> 
+            <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Relatório de Permanentes</p> 
         </div>
 </div>
 
@@ -21,7 +21,7 @@
 <div class="box box-success">
     <div class="box-body">
 <div class="col-sm-12" style="background: white">
-    <form method="post" action="{{route('relatorio.reserva')}}">
+    <form method="post" action="{{route('relatorio.permanente')}}">
         {{ csrf_field() }}
 
         <div class="col-sm-6">

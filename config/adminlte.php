@@ -37,7 +37,7 @@ return [
       | ligth variant: blue-light, purple-light, purple-light, etc.
       |
      */
-    'skin' => 'blue-light',
+    'skin' => 'green',
     /*
       |--------------------------------------------------------------------------
       | Layout
@@ -171,7 +171,7 @@ return [
                                 ],
                                 [
                                     'text' => 'Opcionais',
-                                    'url'  => 'relatorios-financeiro',
+                                    'url'  => 'relatorios-opcional',
                                     'icon' => 'list'
                                 ]
                             ],
@@ -187,7 +187,7 @@ return [
                                 ],
                                 [
                                     'text' => 'Permanente',
-                                    'url'  => 'relatorios-financeiro',
+                                    'url'  => 'relatorios-permanente',
                                     'icon' => 'calendar'
                                 ]
                             ],

@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="row" style="background-color: white; margin-top: -35px; height: 55px">
     <div class="bred">
-        <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Disponibilidade de Horários</p> 
+        <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Disponibilidade de Horários</p> 
     </div>
 </div>
 
@@ -14,7 +14,7 @@
 @section('content')
 
 <div class='box'>
-    <div class="box box-primary">
+    <div class="box box-success">
             <div class="box-body">
         <form method="post" action="{{route('horarios.filtro')}}">
             {{ csrf_field() }}

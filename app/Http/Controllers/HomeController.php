@@ -161,7 +161,7 @@ class HomeController extends Controller
             $r = Reserva::where('data', '=', $last_name)
                 ->where('quadra_id', '=', $quadra)
                 ->get();
-
+                            
             $p = Permanente::where('data', '<=', $last_name)
                 ->where('quadra_id', '=', $quadra)
                 ->where('ativo', '=', 1)

@@ -5,7 +5,7 @@
 @section('content_header')
 <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
     <div class="bred">
-        <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Gráficos Estatísticos</p> 
+        <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Gráficos Estatísticos</p> 
     </div>
 </div>
 @stop
@@ -20,7 +20,9 @@
     </div>
 @endif
 
-<div class="container" style="background: white">
+<div class="box box-success">
+    <div class="box-body">
+<div class="col-sm-12" style="background: white">
     <form method="post" action="{{route('graficos.filtro')}}">
         {{ csrf_field() }}
 
@@ -58,7 +60,8 @@
            
         </div>
     </form>
-    
+</div>
+    </div>   
 </div>
 
 <div class="row">

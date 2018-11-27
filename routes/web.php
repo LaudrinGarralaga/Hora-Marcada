@@ -74,6 +74,16 @@ Route::post('relatorioReserva', 'PDFController@getPDFReserva')
 
 Route::get('relatorios-reserva', 'PDFController@relatorioReserva')->name('relatorios.reserva');
 
+Route::post('relatorioPermanente', 'PDFController@getPDFPermanente')
+    ->name('relatorio.permanente');
+
+Route::get('relatorios-permanente', 'PDFController@relatorioPermanente')->name('relatorios.permanente');
+
+Route::post('relatoriOpcional', 'PDFController@getPDFOpcional')
+    ->name('relatorio.opcional');
+
+Route::get('relatorios-opcional', 'PDFController@relatorioOpcional')->name('relatorios.opcional');
+
 Route::post('graficosfiltro', 'GraficoController@filtro')
     ->name('graficos.filtro');
 

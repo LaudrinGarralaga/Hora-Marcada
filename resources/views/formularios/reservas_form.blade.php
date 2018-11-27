@@ -7,13 +7,13 @@
     @if ($acao == 1)
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Cadastro de Reserva</p> 
+                <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Cadastro de Reserva</p> 
             </div>
         </div>
     @else
         <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
             <div class="bred">
-                <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Alteração de Reserva</p> 
+                <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Alteração de Reserva</p> 
             </div>
         </div>
     @endif
@@ -25,11 +25,11 @@
     @include('includes.alerts')  
     
     @if ($acao == 1)
-    <div class="box box-primary">
+    <div class="box box-success">
             <div class="box-body">
     <form method="post" action="{{route('reservas.store')}}">
         @else
-        <div class="box box-primary">
+        <div class="box box-success">
                 <div class="box-body">
         <form method="post" action="{{route('reservas.update', $reg->id)}}">
             {!! method_field('put') !!}

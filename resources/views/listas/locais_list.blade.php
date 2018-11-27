@@ -6,7 +6,7 @@
 
 <div class="row" style="background-color: white; margin-top: -15px; height: 55px">
         <div class="bred">
-            <p style="font-family: Arial; font-size: 20px; color: steelblue; margin-left: 20px; margin-top: 15px">Detalhes da Local</p> 
+            <p style="font-family: Arial; font-size: 20px; color: green; margin-left: 20px; margin-top: 15px">Detalhes da Local</p> 
         </div>
     </div>
     
