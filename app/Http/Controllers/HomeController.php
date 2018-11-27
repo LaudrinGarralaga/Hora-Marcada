@@ -147,39 +147,66 @@ class HomeController extends Controller
     {
         // obtém dados do form de pesquisa
         $data = $request->data;
+        $permanente = $request->permanente;
         $quadra = $request->quadra_id;
         $splitName = explode(' ', $data, 2);
         $first_name = $splitName[0];
         $last_name = !empty($splitName[1]) ? $splitName[1] : '';
 
-        $reservas = DB::insert(DB::raw("CREATE TEMPORARY TABLE totalreservas (data varchar(45), horario_id int, confirmado boolean,
-        semana varchar(45), ativo boolean, quadra_id int)"));
+        if ($permanente == "nao") {
 
-        $r = Reserva::where('data', '=', $last_name)
-            ->where('quadra_id', '=', $quadra)
-            ->get();
+            $reservas = DB::insert(DB::raw("CREATE TEMPORARY TABLE totalreservas (data varchar(45), horario_id int, confirmado boolean,
+                semana varchar(45), ativo boolean, quadra_id int)"));
 
-        foreach ($r as $row) {
-            $b = DB::insert(DB::raw("INSERT INTO totalreservas (data, horario_id, quadra_id) values (?, ?, ?)"),
-                array($row['data'], $row['horario_id'], $row['quadra_id']));
-        }
-
-        $a = DB::table('totalreservas')->get();
-
-        // exibe os horários que não possuem registro em outra tabela de acordo com os dados informados na pesquisa
-        $horarios = Horario::doesntHave('reservas', 'or', function ($q) use ($data, $quadra, $first_name) {
-            $q->where('data', '=', $data)
+            $r = Reserva::where('data', '=', $last_name)
                 ->where('quadra_id', '=', $quadra)
-                ->orWhere(function ($query) use ($quadra, $first_name) {
-                    $query->where('quadra_id', '=', $quadra)
-                        ->where('semana', '=', $first_name)
-                        ->where('cancelado', '=', 0)
-                        ->where('confirmado', '=', 0);
-                });
-        })
+                ->get();
 
-            ->orderBy('horario')
-            ->get();
+            $p = Permanente::where('data', '<=', $last_name)
+                ->where('quadra_id', '=', $quadra)
+                ->where('ativo', '=', 1)
+                ->where('semana', '=', $first_name)
+                ->get();
+
+            foreach ($r as $row) {
+                    $b = DB::insert(DB::raw("INSERT INTO totalreservas (data, horario_id, quadra_id, confirmado) values (?, ?, ?, ?)"),
+                        array($row['data'], $row['horario_id'], $row['quadra_id'], $row['confirmado']));
+                }
+
+            foreach ($p as $row1) {
+                    $x = DB::insert(DB::raw("INSERT INTO totalreservas (data, horario_id, quadra_id, ativo, semana) values (?, ?, ?, ?, ?)"),
+                        array($row1['data'], $row1['horario_id'], $row1['quadra_id'], $row1['ativo'], $row1['semana']));
+                }
+
+            $horarios = DB::select(DB::raw("SELECT * FROM horarios WHERE NOT EXISTS (SELECT * FROM totalreservas WHERE totalreservas.horario_id = horarios.id)"));
+                
+        } else {
+
+            $reservas = DB::insert(DB::raw("CREATE TEMPORARY TABLE totalreservas (data varchar(45), horario_id int, confirmado boolean,
+                semana varchar(45), ativo boolean, quadra_id int)"));
+
+            $r = Reserva::where('data', '=', $last_name)
+                ->where('quadra_id', '=', $quadra)
+                ->get();
+
+            $p = Permanente::where('quadra_id', '=', $quadra)
+                ->where('ativo', '=', 1)
+                ->where('semana', '=', $first_name)
+                ->get();
+
+            foreach ($r as $row) {
+                    $b = DB::insert(DB::raw("INSERT INTO totalreservas (data, horario_id, quadra_id, confirmado) values (?, ?, ?, ?)"),
+                        array($row['data'], $row['horario_id'], $row['quadra_id'], $row['confirmado']));
+                }
+
+            foreach ($p as $row1) {
+                    $x = DB::insert(DB::raw("INSERT INTO totalreservas (data, horario_id, quadra_id, ativo, semana) values (?, ?, ?, ?, ?)"),
+                        array($row1['data'], $row1['horario_id'], $row1['quadra_id'], $row1['ativo'], $row1['semana']));
+                }
+            
+            $horarios = DB::select(DB::raw("SELECT * FROM horarios WHERE NOT EXISTS (SELECT * FROM totalreservas WHERE totalreservas.horario_id = horarios.id)"));
+            
+        }
 
         // Obtém clientes e quadras para exibir no formulário de pesquisa
         $quadras = Quadra::orderBy('tipo')->get();

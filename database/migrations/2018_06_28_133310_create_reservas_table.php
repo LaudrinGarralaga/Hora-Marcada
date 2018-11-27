@@ -15,7 +15,7 @@ class CreateReservasTable extends Migration {
         Schema::create('reservas', function (Blueprint $table) {
             $table->increments('id');
             $table->date('data', 20);
-            //$table->string('semana', 50);
+            $table->string('semana', 50);
             $table->decimal('preco', 9, 2);
             $table->boolean('reservado')->default(1);
             $table->boolean('confirmado')->default(0);

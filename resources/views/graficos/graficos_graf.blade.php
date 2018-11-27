@@ -116,10 +116,9 @@
         }
     </script>
 
-    <script type="text/javascript">
+   <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawStuff);
-
       function drawStuff() {
         var data = new google.visualization.arrayToDataTable([
             ['Dia da Semana', 'Nº de Reservas'],
@@ -128,7 +127,6 @@
                 @endforeach
                 
             ]);
-
         var options = {
           legend: { position: 'none' },
           chart: {
@@ -137,7 +135,6 @@
             },
         
         };
-
         var chart = new google.charts.Bar(document.getElementById('piechart_3d3'));
         // Convert the Classic options to Material options.
         chart.draw(data, google.charts.Bar.convertOptions(options));

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
-use App\Horario;
-use App\Opcional;
+use App\Permanente;
 use App\Quadra;
 use App\Reserva;
 use Carbon\Carbon;
@@ -41,60 +40,108 @@ class PDFController extends Controller
         $dataFin = $request->dataFin;
         $quadra = $request->quadra_id;
 
-            if($quadra == 0){
+        if ($quadra == 0) {
+            DB::insert(DB::raw("CREATE TEMPORARY TABLE reservastemp (data varchar(45), semana varchar(45), preco float)"));
 
-                $customers = DB::table('reservas')
-                    ->join('quadras', 'quadra_id', '=', 'quadras.id')
-                    ->select('reservas.id', 'data', 'tipo', 'status', 'permanente', 'reservas.preco', 'quadra_id')
-                    ->where('data', '>=', $dataIni)
-                    ->where('data', '<=', $dataFin)
-                    ->count();
+            $r = Reserva::where('data', '>=', $dataIni)
+                ->where('data', '<=', $dataFin)
+                ->get();
 
-                if($customers  == 0) {
-                    return redirect()->route('relatorios.financeiro')
+            $p = Permanente::where('data', '>=', $dataIni)
+                ->where('data', '<=', $dataFin)
+                ->get();
+
+            foreach ($r as $row) {
+                DB::insert(DB::raw("INSERT INTO reservastemp (data, semana, preco) values (?, ?, ?)"),
+                    array($row['data'], $row['semana'], $row['preco']));
+
+            }
+
+            foreach ($p as $row1) {
+                DB::insert(DB::raw("INSERT INTO reservastemp (data, semana, preco) values (?, ?, ?)"),
+                    array($row['data'], $row['semana'], $row['preco']));
+            }
+
+            $customers = DB::table('reservastemp')->count();
+
+            if ($customers == 0) {
+                return redirect()->route('relatorios.financeiro')
                     ->with('success', ' Sem reservas para o período informado!');
-                } else {
+            } else {
+
+                /*DB::insert(DB::raw("CREATE TEMPORARY TABLE reservasValor (valor float"));
+
+                $r = Reserva::where('data', '>=', $dataIni)
+                    ->where('data', '<=', $dataFin)
+                    ->get();
+
+                $p = Permanente::where('data', '>=', $dataIni)
+                    ->where('data', '<=', $dataFin)
+                    ->get();
+
+                foreach ($r as $row) {
+                    DB::insert(DB::raw("INSERT INTO reservastemp (data, semana) values (?, ?)"),
+                        array($row['data'], $row['semana']));
+
+                }
+
+                foreach ($p as $row1) {
+                    DB::insert(DB::raw("INSERT INTO reservastemp (data, semana) values (?, ?)"),
+                        array($row['data'], $row['semana']));
+                }*/
 
                 $quadras = DB::table('quadras')
                     ->select('tipo')
                     ->get();
 
-                $total_preco = DB::table('reservas')
-                    ->where('data', '>=', $dataIni)
-                    ->where('data', '<=', $dataFin)
+                $total_preco = DB::table('reservastemp')
                     ->sum('preco');
 
                 $media = $total_preco / $customers;
-                }   
-            }else {
-
-                $customers = DB::table('reservas')
-                    ->join('quadras', 'quadra_id', '=', 'quadras.id')
-                    ->select('reservas.id', 'data', 'tipo', 'status', 'permanente', 'reservas.preco', 'quadra_id')
-                    ->where('data', '>=', $dataIni)
-                    ->where('data', '<=', $dataFin)
-                    ->where('quadra_id', '=', $quadra)
-                    ->count();
-                
-                    if($customers  == 0) {
-                        return redirect()->route('relatorios.financeiro')
-                        ->with('success', ' Sem reservas para o período informado!');
-                    } else {
-                        $quadras = DB::table('quadras')
-                        ->select('tipo')
-                        ->where('id', '=', $quadra)
-                        ->get();
-
-                        $total_preco = DB::table('reservas')
-                            ->where('data', '>=', $dataIni)
-                            ->where('data', '<=', $dataFin)
-                            ->where('quadra_id', '=', $quadra)
-                            ->sum('preco');
-
-                        $media = $total_preco / $customers;
-                    }
                 
             }
+        } else {
+            DB::insert(DB::raw("CREATE TEMPORARY TABLE reservastemp (data varchar(45), semana varchar(45), preco float)"));
+
+            $r = Reserva::where('data', '>=', $dataIni)
+                ->where('data', '<=', $dataFin)
+                ->where('quadra_id', '=', $quadra)
+                ->get();
+
+            $p = Permanente::where('data', '>=', $dataIni)
+                ->where('data', '<=', $dataFin)
+                ->where('quadra_id', '=', $quadra)
+                ->get();
+
+            foreach ($r as $row) {
+                DB::insert(DB::raw("INSERT INTO reservastemp (data, semana, preco) values (?, ?, ?)"),
+                    array($row['data'], $row['semana'], $row['preco']));
+
+            }
+
+            foreach ($p as $row1) {
+                DB::insert(DB::raw("INSERT INTO reservastemp (data, semana, preco) values (?, ?, ?)"),
+                    array($row['data'], $row['semana'], $row['preco']));
+            }
+
+            $customers = DB::table('reservastemp')->count();
+
+            if ($customers == 0) {
+                return redirect()->route('relatorios.financeiro')
+                    ->with('success', ' Sem reservas para o período informado!');
+            } else {
+                $quadras = DB::table('quadras')
+                    ->select('tipo')
+                    ->where('id', '=', $quadra)
+                    ->get();
+
+                $total_preco = DB::table('reservastemp')
+                    ->sum('preco');
+
+                $media = $total_preco / $customers;
+            }
+
+        }
 
         // Recupera todos os horarios do banco
         $usuario = Auth::id();
@@ -171,12 +218,11 @@ class PDFController extends Controller
         $dataFin = $request->dataFin;
 
         $reservas = Reserva::select('data', 'semana', DB::raw('count(*) as total'), DB::raw('count(case when confirmado = 1 then 1 end) as confirmados'))
-                ->Where('data', '>=', $dataIni)
-                ->Where('data', '<=', $dataFin)
-                ->groupBy('data','semana')
-                ->get();
+            ->Where('data', '>=', $dataIni)
+            ->Where('data', '<=', $dataFin)
+            ->groupBy('data', 'semana')
+            ->get();
 
-        
         dd($reservas);
     }
 

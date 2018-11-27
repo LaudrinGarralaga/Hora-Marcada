@@ -18,7 +18,7 @@
         <form method="post" action="{{route('horarios.filtro')}}">
             {{ csrf_field() }}
 
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="data" style="font-family: Arial, Helvetica, sans-serif"> Selecione a data para verificar a disponibilidade </label>
                     <div class="input-group">
@@ -30,7 +30,7 @@
                 </div>
             </div>
             
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <div class="form-group">
                     <label for="quadra_id"style="font-family: Arial, Helvetica, sans-serif">Selecione a quadra:</label>
                     <div class="input-group">
@@ -44,6 +44,20 @@
                                     or old('quadra_id') == $quadra->id) selected @endif>
                                     {{$quadra->tipo}}</option>
                             @endforeach       
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <label for="quadra_id"style="font-family: Arial, Helvetica, sans-serif">É permanente?</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-square"></i>
+                        </div>
+                        <select class="form-control" id="permanente" name="permanente">
+                            <option value=sim>Sim</option>
+                            <option value=nao>Não</option>
                         </select>
                     </div>
                 </div>

@@ -64,7 +64,7 @@ class ReservaController extends Controller
         $query1 = Reserva::where('data', '=', $last_name)
             ->where('horario_id', '=', $horario)
             ->where('quadra_id', '=', $quadra)
-            ->where('confirmado', '<>', 1)
+            ->where('reservado', '=', 1)
             ->count();
 
         $query2 = Permanente::where('data', '<=', $last_name)
@@ -82,6 +82,7 @@ class ReservaController extends Controller
             // Recupera todos os dados do formulário
             $reserva = new Reserva;
             $reserva->data = $last_name;
+            $reserva->semana = $first_name;
             $reserva->preco = $request->Preco;
             $reserva->horario_id = $request->horario_id;
             $reserva->cliente_id = $request->cliente_id;
