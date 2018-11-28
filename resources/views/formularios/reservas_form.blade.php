@@ -159,7 +159,7 @@ var opcionais = [];
 
 function carregarQuadras() {
 
-  var url = "http://horamarcada.site/lista_quadras.php";
+  var url = "http://localhost/webservicetcc/SisWeb/lista_quadras.php";
 
   fetch(url)
     .then(resp => resp.json())
@@ -198,7 +198,7 @@ Preco.value = (obterValor() + verOp()).toFixed(2);
 
 function carregarOpcionais() {
 
-  var url = "http://horamarcada.site/lista_opcionais.php";
+  var url = "http://localhost/webservicetcc/SisWeb/lista_opcionais.php";
 
   fetch(url)
     .then(resp => resp.json())

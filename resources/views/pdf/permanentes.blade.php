@@ -28,7 +28,7 @@
         <thead class="thead-dark">
             <tr>
                 <th>Dia da Semana</th>
-                <th>Nº de Reservas</th>
+                <th>Nº de Permanentes</th>
             </tr>
         </thead>
         <tbody>
