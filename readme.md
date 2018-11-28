@@ -29,6 +29,6 @@
  
  Para testar o aplicativo acesse o link a baixo e baixe o apk, caso seja um novo usuário basta se registrar.
  
- -[Hora Marcada Aplicativo](http://horamarcada.site/hora-marcada.apk)
+ - [Hora Marcada Aplicativo](http://horamarcada.site/hora-marcada.apk)
   
 
