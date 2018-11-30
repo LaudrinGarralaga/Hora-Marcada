@@ -23,7 +23,12 @@
   
   ## **Acesso ao Sistema**
   
-  Para acessar o sistema acesse o link a baixo, caso seja um novo usuário basta se registrar.
+  Para testar o sistema web acesse o link a baixo, caso seja um novo usuário basta se registrar.
   
- - [Hora Marcada](http://horamarcada.ga/)
+ - [Hora Marcada](http://horamarcada.site/Hora-Marcada/public)
+ 
+ Para testar o aplicativo acesse o link a baixo e baixe o apk, caso seja um novo usuário basta se registrar.
+ 
+ - [Hora Marcada Aplicativo](http://horamarcada.site/hora-marcada.apk)
+  
 
