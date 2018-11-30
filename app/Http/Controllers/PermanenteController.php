@@ -84,21 +84,28 @@ class PermanenteController extends Controller
 
             $id = DB::getPdo()->lastInsertId();
 
-            //dd($id);
-
-            for ($i = 0; $i < count($request->opcionais); $i++) {
-                Reserva_Opcional::create([
-                    'permanente_id' => $id,
-                    'opcional_id' => $request->opcionais[$i],
-                ]);
-            }
-
-            if ($permanente) {
-                return redirect()->route('permanentes.index')
-                    ->with('success', Carbon::parse($permanente->data)->format('d/m/Y') . ' Incluído(a) com sucesso!');
-            } else {
-                return redirect()->back()->with('error', 'Falha ao cadastrar!');
-            }
+            if (empty($opcionais)) {
+                // Exibe uma mensagem de sucesso se gravou os dados no bando senão exibe uma de erro
+                if ($permanente) {
+                    return redirect()->route('permanentes.index')
+                        ->with('success', Carbon::parse($permanente->data)->format('d/m/Y') . ' Incluído(a) com sucesso!');
+                } else {
+                    return redirect()->back()->with('error', 'Falha ao cadastrar!');
+                }
+            } else{
+                for ($i = 0; $i < count($request->opcionais); $i++) {
+                    Reserva_Opcional::create([
+                        'permanente_id' => $id,
+                        'opcional_id' => $request->opcionais[$i],
+                    ]);
+                }
+                if ($permanente) {
+                    return redirect()->route('permanentes.index')
+                        ->with('success', Carbon::parse($permanente->data)->format('d/m/Y') . ' Incluído(a) com sucesso!');
+                } else {
+                    return redirect()->back()->with('error', 'Falha ao cadastrar!');
+                }
+            }   
         }
 
     }
